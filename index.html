@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Luz Diária - Devocional Completo</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" referrerpolicy="no-referrer">
     <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
 
     <style>
@@ -58,10 +58,15 @@
 
         .bible-book {
             transition: all 0.2s;
-            font-size: 0.7rem; 
+            font-size: 0.65rem; 
             text-align: center;
             line-height: 1.1;
-            padding: 2px;
+            padding: 4px 2px;
+            min-height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            word-break: break-word;
         }
         .bible-book.read {
             background-color: #d97706; /* amber-600 */
@@ -132,9 +137,11 @@
         </div>
         
         <h1 class="text-4xl font-bold text-amber-800 serif mb-2">Luz Diária</h1>
-        <p id="status" class="text-gray-500 mb-12 font-light">Carregando...</p> <!-- ID STATUS AQUI -->
+        
+        <!-- Elemento de Status Requisitado -->
+        <p id="status" class="text-gray-500 mb-12 font-light">Carregando...</p>
 
-        <!-- BOTÃO LOGIN COM ID REQUISITADO -->
+        <!-- Botão de Login Requisitado -->
         <button id="btnLogin" class="flex items-center justify-center gap-3 bg-white border border-gray-300 text-gray-700 px-8 py-3 rounded-full shadow-sm hover:bg-gray-50 hover:shadow-md transition w-full max-w-xs font-medium">
             <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google" class="w-5 h-5">
             Entrar com Google
@@ -146,7 +153,6 @@
     <!-- CONTEÚDO DO APP (Escondido até Login) -->
     <div id="app-content" class="w-full flex flex-col items-center hidden pb-[90px]">
         
-        <!-- Header Fixo -->
         <header class="w-full bg-white/90 backdrop-blur-md shadow-sm py-4 px-4 text-center sticky top-0 z-40 transition-all duration-300">
             <div class="max-w-md mx-auto flex justify-between items-center">
                 <div class="text-left">
@@ -163,8 +169,8 @@
                     <!-- Avatar do Usuário -->
                     <div id="user-profile" class="relative group cursor-pointer">
                         <img id="user-avatar" src="https://via.placeholder.com/32" alt="User" class="w-8 h-8 rounded-full border border-amber-200 object-cover">
-                        <!-- BOTÃO LOGOUT COM ID REQUISITADO -->
-                        <div id="btnLogout" class="absolute right-0 top-10 bg-white shadow-lg rounded-lg p-2 text-xs text-red-500 hidden group-hover:block whitespace-nowrap border border-gray-100 z-50">
+                        <!-- Botão de Logout Requisitado -->
+                        <div id="btnLogout" style="display:none;" class="absolute right-0 top-10 bg-white shadow-lg rounded-lg p-2 text-xs text-red-500 hidden group-hover:block whitespace-nowrap border border-gray-100 z-50">
                             Sair <i class="fas fa-sign-out-alt ml-1"></i>
                         </div>
                     </div>
@@ -242,14 +248,12 @@
                 <audio id="audio-rain" loop preload="none"><source src="https://actions.google.com/sounds/v1/weather/rain_heavy_loud.ogg" type="audio/ogg"></audio> 
             </div>
 
-            <!-- TAB: LEITURA (API Integrada) -->
+            <!-- TAB: LEITURA -->
             <div id="tab-reading" class="tab-content hidden fade-in pb-10">
                 <div class="flex justify-between items-center mb-4">
                     <h2 class="text-lg font-semibold text-gray-700 serif">Bíblia Sagrada</h2>
                     <div class="text-xs text-amber-600 font-bold bg-amber-50 px-3 py-1 rounded-full"><span id="reading-progress">0</span>% Lido</div>
                 </div>
-
-                <!-- Lista de Livros -->
                 <div class="space-y-6">
                     <div class="bg-white rounded-xl shadow-sm p-4">
                         <h3 class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-3">Antigo Testamento</h3>
@@ -282,7 +286,6 @@
 
         </main>
 
-        <!-- NAVIGATION -->
         <nav class="fixed bottom-0 w-full bg-white border-t border-gray-200 py-2 px-6 flex justify-between items-center z-50 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)] text-gray-400 text-[10px] font-medium max-w-md mx-auto left-0 right-0 md:rounded-t-2xl">
             <button onclick="switchTab('home')" class="nav-btn active flex flex-col items-center gap-1 p-2 w-16 text-amber-600" data-target="home"><i class="fas fa-home text-lg mb-0.5"></i> Início</button>
             <button onclick="switchTab('meditate')" class="nav-btn flex flex-col items-center gap-1 p-2 w-16 hover:text-amber-500" data-target="meditate"><i class="fas fa-spa text-lg mb-0.5"></i> Meditar</button>
@@ -291,8 +294,7 @@
         </nav>
     </div>
 
-    <!-- MODAIS E OVERLAYS -->
-    <!-- MODAL: LEITOR BÍBLICO -->
+    <!-- MODAL LEITOR -->
     <div id="bible-modal" class="fixed inset-0 bg-white z-[60] hidden flex flex-col overflow-hidden">
         <div class="flex justify-between items-center p-4 border-b border-gray-100 bg-white shadow-sm">
             <h2 id="reader-title" class="text-lg font-bold text-amber-800 serif">Gênesis</h2>
@@ -322,7 +324,7 @@
         </div>
     </div>
 
-    <!-- Outros Modais -->
+    <!-- OUTROS MODAIS -->
     <div id="favorites-modal" onclick="if(event.target === this) toggleFavoritesModal()" class="fixed inset-0 bg-black/50 z-[60] hidden flex justify-end transition-opacity cursor-pointer">
         <div class="bg-white w-3/4 max-w-sm h-full shadow-2xl p-6 overflow-y-auto transform translate-x-full transition-transform duration-300 cursor-default" id="favorites-content">
             <div class="flex justify-between items-center mb-6">
@@ -372,7 +374,6 @@
         import { getFirestore, collection, addDoc, getDocs, query, where, setDoc, doc, deleteDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
         import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-analytics.js";
 
-        // CONFIGURAÇÃO DO FIREBASE FORNECIDA
         const firebaseConfig = {
             apiKey: "AIzaSyCanRiUCjD-yliLR1Xxc0JzSzlI-ZNPZSg",
             authDomain: "luz-diaria-a3372.firebaseapp.com",
@@ -383,310 +384,414 @@
             measurementId: "G-6MMDFP1ELL"
         };
 
-        // Initialize Firebase
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
-        const db = getFirestore(app);
-        const analytics = getAnalytics(app);
-        const provider = new GoogleAuthProvider();
+        let app, auth, db, analytics, provider;
+        let isFirebaseActive = false;
 
-        // ELEMENTOS UI (IDs Requisitados Mapeados)
+        try {
+            app = initializeApp(firebaseConfig);
+            auth = getAuth(app);
+            db = getFirestore(app);
+            analytics = getAnalytics(app);
+            provider = new GoogleAuthProvider();
+            isFirebaseActive = true;
+        } catch (e) {
+            console.error("Erro Firebase Init:", e);
+            document.getElementById('status').textContent = "Erro de conexão. Verifique o console.";
+        }
+
         const btnLogin = document.getElementById('btnLogin');
         const btnLogout = document.getElementById('btnLogout');
         const statusTxt = document.getElementById('status');
 
-        // VARIÁVEIS GLOBAIS
         let currentUser = null;
         let currentVerse = null;
-        // Estado local (sincronizado com nuvem)
         let favorites = [];
         let prayers = [];
         let journal = [];
         let readBooks = [];
+        let timerInterval;
+        let timeLeft = 300; 
+        let isTimerRunning = false;
+        let currentAudioElement = null;
+        let currentSound = null;
+        let activeBookId = null;
+        let activeBookName = null;
+        let activeChapter = 1;
+        let activeBookTotalChapters = 0;
 
-        // --- AUTH LOGIC ---
-        if (btnLogin) {
-            btnLogin.addEventListener('click', async () => {
-                try {
-                    statusTxt.textContent = "Conectando com Google...";
-                    await signInWithPopup(auth, provider);
-                } catch (error) {
-                    console.error("Login falhou", error);
-                    statusTxt.textContent = "Erro ao entrar. Tente novamente.";
-                }
-            });
-        }
-
-        if (btnLogout) {
-            btnLogout.addEventListener('click', async () => {
-                try {
-                    await signOut(auth);
-                    location.reload();
-                } catch (error) {
-                    console.error("Logout falhou", error);
-                }
-            });
-        }
-
-        // --- MONITOR DE ESTADO ---
-        onAuthStateChanged(auth, async (user) => {
-            if (user) {
-                currentUser = user;
-                statusTxt.textContent = `Olá, ${user.displayName.split(' ')[0]}!`;
-                
-                // Animação de transição
-                setTimeout(async () => {
-                    document.getElementById('login-screen').classList.add('hidden');
-                    document.getElementById('app-content').classList.remove('hidden');
-                    document.getElementById('user-avatar').src = user.photoURL || "https://via.placeholder.com/32";
-                    
-                    // CARREGAR DADOS DO FIRESTORE
-                    await loadUserData(user.uid);
-                    
-                    // Inicializa UI com dados carregados
-                    renderPrayers();
-                    renderBibleTracker();
-                    renderJournal();
-                    loadRandomVerse(); // Load initial verse
-                }, 800);
-            } else {
-                currentUser = null;
-                document.getElementById('login-screen').classList.remove('hidden');
-                document.getElementById('app-content').classList.add('hidden');
-                statusTxt.textContent = "Seu momento de paz e conexão.";
-            }
-        });
-
-        // --- FIRESTORE SYNC ---
-        async function loadUserData(uid) {
-            try {
-                const docRef = doc(db, "users", uid);
-                const docSnap = await getDoc(docRef);
-
-                if (docSnap.exists()) {
-                    const data = docSnap.data();
-                    favorites = data.favorites || [];
-                    prayers = data.prayers || [];
-                    journal = data.journal || [];
-                    readBooks = data.readBooks || [];
-                    localStorage.setItem('dl_favorites', JSON.stringify(favorites)); // Backup local
-                } else {
-                    // Novo usuário? Tenta pegar do localStorage antigo para migrar
-                    favorites = JSON.parse(localStorage.getItem('dl_favorites') || '[]');
-                    prayers = JSON.parse(localStorage.getItem('dl_prayers') || '[]');
-                    journal = JSON.parse(localStorage.getItem('dl_journal') || '[]');
-                    readBooks = JSON.parse(localStorage.getItem('dl_read_books') || '[]');
-                    saveUserData(); // Salva inicial na nuvem
-                }
-            } catch (e) {
-                console.error("Erro ao carregar dados:", e);
-                showToast("Erro de sincronização");
-            }
-        }
-
-        async function saveUserData() {
-            if (!currentUser) return;
-            try {
-                await setDoc(doc(db, "users", currentUser.uid), {
-                    favorites,
-                    prayers,
-                    journal,
-                    readBooks,
-                    lastUpdate: new Date()
-                }, { merge: true });
-            } catch (e) {
-                console.error("Erro ao salvar:", e);
-            }
-        }
-
-        // --- LÓGICA DO APP (INTEGRADA COM FIRESTORE) ---
-        
-        // Classes Utilitárias
-        const btnActionClass = "flex items-center justify-center w-10 h-10 rounded-full shadow-sm hover:opacity-90 transition";
-        const inputBaseClass = "bg-gray-50 border border-gray-200 text-gray-700 text-sm rounded-lg focus:ring-amber-500 focus:border-amber-500 block w-full p-2.5 outline-none transition";
-        document.querySelectorAll('.btn-action').forEach(el => el.className += " " + btnActionClass);
-        document.querySelectorAll('.input-base').forEach(el => el.className = inputBaseClass);
-
+        // BANCO DE DADOS (60 Versículos)
         const verses = [
             { id: 1, text: "Tudo posso naquele que me fortalece.", ref: "Filipenses 4:13", tag: "força" },
             { id: 12, text: "Seja forte e corajoso! Não se apavore nem desanime.", ref: "Josué 1:9", tag: "força" },
+            { id: 16, text: "O Senhor é a minha força e o meu escudo; nele o meu coração confia.", ref: "Salmos 28:7", tag: "força" },
+            { id: 17, text: "Deus é o nosso refúgio e fortaleza, socorro bem presente na angústia.", ref: "Salmos 46:1", tag: "força" },
+            { id: 18, text: "Mas os que esperam no Senhor renovarão as forças.", ref: "Isaías 40:31", tag: "força" },
+            { id: 19, text: "Fortaleçam as mãos cansadas, firmem os joelhos vacilantes.", ref: "Isaías 35:3", tag: "força" },
+            { id: 20, text: "O Senhor dá força ao seu povo; o Senhor abençoa com paz ao seu povo.", ref: "Salmos 29:11", tag: "força" },
+            { id: 21, text: "A alegria do Senhor é a nossa força.", ref: "Neemias 8:10", tag: "força" },
             { id: 2, text: "Entregue o seu caminho ao Senhor; confie nele, e ele agirá.", ref: "Salmos 37:5", tag: "confiança" },
+            { id: 22, text: "Confie no Senhor de todo o seu coração e não se apoie em seu próprio entendimento.", ref: "Provérbios 3:5", tag: "confiança" },
+            { id: 23, text: "Bendito o homem que confia no Senhor, e cuja confiança é o Senhor.", ref: "Jeremias 17:7", tag: "confiança" },
+            { id: 24, text: "Em qualquer tempo em que eu temer, confiarei em ti.", ref: "Salmos 56:3", tag: "confiança" },
+            { id: 25, text: "O Senhor é bom, um refúgio em tempos de angústia. Ele protege os que nele confiam.", ref: "Naum 1:7", tag: "confiança" },
+            { id: 26, text: "Elevo os meus olhos para os montes; de onde me vem o socorro? O meu socorro vem do Senhor.", ref: "Salmos 121:1-2", tag: "confiança" },
+            { id: 27, text: "Aquietai-vos, e sabei que eu sou Deus.", ref: "Salmos 46:10", tag: "confiança" },
             { id: 3, text: "Não andem ansiosos por coisa alguma.", ref: "Filipenses 4:6", tag: "ansiedade" },
+            { id: 6, text: "Lancem sobre ele toda a sua ansiedade, porque ele tem cuidado de vocês.", ref: "1 Pedro 5:7", tag: "ansiedade" },
+            { id: 28, text: "Busquei o Senhor, e ele me respondeu; livrou-me de todos os meus temores.", ref: "Salmos 34:4", tag: "ansiedade" },
+            { id: 29, text: "Quando a ansiedade já me dominava no íntimo, o teu consolo trouxe alívio à minha alma.", ref: "Salmos 94:19", tag: "ansiedade" },
+            { id: 30, text: "Portanto, não se preocupem com o amanhã, pois o amanhã trará as suas próprias preocupações.", ref: "Mateus 6:34", tag: "ansiedade" },
+            { id: 31, text: "A ansiedade no coração do homem o abate, mas uma boa palavra o alegra.", ref: "Provérbios 12:25", tag: "ansiedade" },
+            { id: 32, text: "Vinde a mim, todos os que estais cansados e oprimidos, e eu vos aliviarei.", ref: "Mateus 11:28", tag: "ansiedade" },
             { id: 5, text: "O Senhor é o meu pastor; nada me faltará.", ref: "Salmos 23:1", tag: "paz" },
+            { id: 14, text: "Pela manhã ouvirás a minha voz, ó Senhor.", ref: "Salmos 5:3", tag: "paz" },
+            { id: 33, text: "Deixo-lhes a paz; a minha paz lhes dou. Não a dou como o mundo a dá.", ref: "João 14:27", tag: "paz" },
+            { id: 34, text: "Tu guardarás em perfeita paz aquele cujo propósito está firme, porque em ti confia.", ref: "Isaías 26:3", tag: "paz" },
+            { id: 35, text: "Em paz também me deitarei e dormirei, porque só tu, Senhor, me fazes habitar em segurança.", ref: "Salmos 4:8", tag: "paz" },
+            { id: 36, text: "E a paz de Deus, que excede todo o entendimento, guardará os vossos corações.", ref: "Filipenses 4:7", tag: "paz" },
+            { id: 37, text: "O Senhor te abençoe e te guarde; o Senhor faça resplandecer o seu rosto sobre ti.", ref: "Números 6:24-25", tag: "paz" },
             { id: 7, text: "Deem graças ao Senhor porque ele é bom.", ref: "Salmos 107:1", tag: "gratidão" },
+            { id: 38, text: "Em tudo dai graças, porque esta é a vontade de Deus em Cristo Jesus para convosco.", ref: "1 Tessalonicenses 5:18", tag: "gratidão" },
+            { id: 39, text: "Este é o dia que o Senhor fez; regozijemo-nos e alegremo-nos nele.", ref: "Salmos 118:24", tag: "gratidão" },
+            { id: 40, text: "Bendize, ó minha alma, ao Senhor, e não te esqueças de nenhum de seus benefícios.", ref: "Salmos 103:2", tag: "gratidão" },
+            { id: 41, text: "Entrai pelas portas dele com gratidão, e em seus átrios com louvor.", ref: "Salmos 100:4", tag: "gratidão" },
+            { id: 42, text: "Tudo o que fizerem, seja em palavra ou em ação, façam-no em nome do Senhor Jesus.", ref: "Colossenses 3:17", tag: "gratidão" },
+            { id: 43, text: "Graças a Deus pelo seu dom inefável!", ref: "2 Coríntios 9:15", tag: "gratidão" },
             { id: 8, text: "Mas os que esperam no Senhor renovarão as forças.", ref: "Isaías 40:31", tag: "cansaço" },
+            { id: 9, text: "Venham a mim, todos os que estão cansados.", ref: "Mateus 11:28", tag: "cansaço" },
+            { id: 44, text: "Ele fortalece o cansado e dá grande vigor ao que está sem forças.", ref: "Isaías 40:29", tag: "cansaço" },
+            { id: 45, text: "Não nos cansemos de fazer o bem.", ref: "Gálatas 6:9", tag: "cansaço" },
+            { id: 46, text: "A minha carne e o meu coração desfalecem; mas Deus é a fortaleza do meu coração.", ref: "Salmos 73:26", tag: "cansaço" },
+            { id: 47, text: "Lançando sobre ele toda a vossa ansiedade, porque ele tem cuidado de vós.", ref: "1 Pedro 5:7", tag: "cansaço" },
             { id: 10, text: "Ainda que eu ande pelo vale da sombra da morte, não temerei.", ref: "Salmos 23:4", tag: "medo" },
+            { id: 48, text: "O Senhor é a minha luz e a minha salvação; a quem temerei?", ref: "Salmos 27:1", tag: "medo" },
+            { id: 49, text: "Não temas, porque eu sou contigo; não te assombres, porque eu sou o teu Deus.", ref: "Isaías 41:10", tag: "medo" },
+            { id: 50, text: "Porque Deus não nos deu o espírito de temor, mas de fortaleza, e de amor, e de moderação.", ref: "2 Timóteo 1:7", tag: "medo" },
+            { id: 51, text: "Quando eu estiver com medo, confiarei em ti.", ref: "Salmos 56:3", tag: "medo" },
+            { id: 52, text: "O anjo do Senhor acampa-se ao redor dos que o temem, e os livra.", ref: "Salmos 34:7", tag: "medo" },
             { id: 11, text: "O amor é paciente, o amor é bondoso.", ref: "1 Coríntios 13:4", tag: "amor" },
-            { id: 56, text: "Porque sou eu que conheço os planos que tenho para vocês.", ref: "Jeremias 29:11", tag: "esperança" }
-            // (Adicionei uma seleção reduzida aqui para brevidade, mas a lógica suporta os 60)
+            { id: 13, text: "Porque Deus amou o mundo de tal maneira.", ref: "João 3:16", tag: "amor" },
+            { id: 53, text: "Nós o amamos a ele porque ele nos amou primeiro.", ref: "1 João 4:19", tag: "amor" },
+            { id: 54, text: "Acima de tudo, porém, revistam-se do amor, que é o elo da perfeição.", ref: "Colossenses 3:14", tag: "amor" },
+            { id: 55, text: "Ainda que eu falasse as línguas dos homens e dos anjos, e não tivesse amor, seria como o metal que soa.", ref: "1 Coríntios 13:1", tag: "amor" },
+            { id: 56, text: "Porque sou eu que conheço os planos que tenho para vocês... planos de dar a vocês esperança.", ref: "Jeremias 29:11", tag: "esperança" },
+            { id: 57, text: "Ora, a fé é a certeza daquilo que esperamos e a prova das coisas que não vemos.", ref: "Hebreus 11:1", tag: "esperança" },
+            { id: 58, text: "Mas, quanto a mim, ficarei atento ao Senhor, esperando em Deus, o meu Salvador.", ref: "Miqueias 7:7", tag: "esperança" },
+            { id: 59, text: "Alegrem-se na esperança, sejam pacientes na tribulação, perseverem na oração.", ref: "Romanos 12:12", tag: "esperança" },
+            { id: 60, text: "O Senhor é a minha porção; por isso, esperarei nele.", ref: "Lamentações 3:24", tag: "esperança" }
         ];
 
         const bibleData = {
-            ot: [ { id: 'gn', name: 'Gênesis', chapters: 50 }, { id: 'ex', name: 'Êxodo', chapters: 40 }, { id: 'sl', name: 'Salmos', chapters: 150 }, { id: 'pv', name: 'Provérbios', chapters: 31 } ],
-            nt: [ { id: 'mt', name: 'Mateus', chapters: 28 }, { id: 'mc', name: 'Marcos', chapters: 16 }, { id: 'lc', name: 'Lucas', chapters: 24 }, { id: 'jo', name: 'João', chapters: 21 } ]
+            ot: [
+                { id: 'gn', name: 'Gênesis', chapters: 50 }, { id: 'ex', name: 'Êxodo', chapters: 40 }, { id: 'lv', name: 'Levítico', chapters: 27 }, { id: 'nm', name: 'Números', chapters: 36 }, { id: 'dt', name: 'Deuteronômio', chapters: 34 },
+                { id: 'js', name: 'Josué', chapters: 24 }, { id: 'jz', name: 'Juízes', chapters: 21 }, { id: 'rt', name: 'Rute', chapters: 4 }, { id: '1sm', name: '1 Samuel', chapters: 31 }, { id: '2sm', name: '2 Samuel', chapters: 24 },
+                { id: '1rs', name: '1 Reis', chapters: 22 }, { id: '2rs', name: '2 Reis', chapters: 25 }, { id: '1cr', name: '1 Crônicas', chapters: 29 }, { id: '2cr', name: '2 Crônicas', chapters: 36 }, { id: 'ed', name: 'Esdras', chapters: 10 },
+                { id: 'ne', name: 'Neemias', chapters: 13 }, { id: 'et', name: 'Ester', chapters: 10 }, { id: 'job', name: 'Jó', chapters: 42 }, { id: 'sl', name: 'Salmos', chapters: 150 }, { id: 'pv', name: 'Provérbios', chapters: 31 },
+                { id: 'ec', name: 'Eclesiastes', chapters: 12 }, { id: 'ct', name: 'Cantares', chapters: 8 }, { id: 'is', name: 'Isaías', chapters: 66 }, { id: 'jr', name: 'Jeremias', chapters: 52 }, { id: 'lm', name: 'Lamentações', chapters: 5 },
+                { id: 'ez', name: 'Ezequiel', chapters: 48 }, { id: 'dn', name: 'Daniel', chapters: 12 }, { id: 'os', name: 'Oseias', chapters: 14 }, { id: 'jl', name: 'Joel', chapters: 3 }, { id: 'am', name: 'Amós', chapters: 9 },
+                { id: 'ob', name: 'Obadias', chapters: 1 }, { id: 'jn', name: 'Jonas', chapters: 4 }, { id: 'mq', name: 'Miqueias', chapters: 7 }, { id: 'na', name: 'Naum', chapters: 3 }, { id: 'hc', name: 'Habacuque', chapters: 3 },
+                { id: 'sf', name: 'Sofonias', chapters: 3 }, { id: 'ag', name: 'Ageu', chapters: 2 }, { id: 'zc', name: 'Zacarias', chapters: 14 }, { id: 'ml', name: 'Malaquias', chapters: 4 }
+            ],
+            nt: [
+                { id: 'mt', name: 'Mateus', chapters: 28 }, { id: 'mc', name: 'Marcos', chapters: 16 }, { id: 'lc', name: 'Lucas', chapters: 24 }, { id: 'jo', name: 'João', chapters: 21 }, { id: 'at', name: 'Atos', chapters: 28 },
+                { id: 'rm', name: 'Romanos', chapters: 16 }, { id: '1co', name: '1 Coríntios', chapters: 16 }, { id: '2co', name: '2 Coríntios', chapters: 13 }, { id: 'gl', name: 'Gálatas', chapters: 6 }, { id: 'ef', name: 'Efésios', chapters: 6 },
+                { id: 'fp', name: 'Filipenses', chapters: 4 }, { id: 'cl', name: 'Colossenses', chapters: 4 }, { id: '1ts', name: '1 Tessalonicenses', chapters: 5 }, { id: '2ts', name: '2 Tessalonicenses', chapters: 3 }, { id: '1tm', name: '1 Timóteo', chapters: 6 },
+                { id: '2tm', name: '2 Timóteo', chapters: 4 }, { id: 'tt', name: 'Tito', chapters: 3 }, { id: 'fm', name: 'Filemom', chapters: 1 }, { id: 'hb', name: 'Hebreus', chapters: 13 }, { id: 'tg', name: 'Tiago', chapters: 5 },
+                { id: '1pe', name: '1 Pedro', chapters: 5 }, { id: '2pe', name: '2 Pedro', chapters: 3 }, { id: '1jo', name: '1 João', chapters: 5 }, { id: '2jo', name: '2 João', chapters: 1 }, { id: '3jo', name: '3 João', chapters: 1 },
+                { id: 'jd', name: 'Judas', chapters: 1 }, { id: 'ap', name: 'Apocalipse', chapters: 22 }
+            ]
         };
-        // Nota: Mantive a lista curta para o código não ficar gigante, mas você pode colar a lista completa de volta.
 
         const moods = [
             { label: "Todos", tag: "all", icon: "fa-random", color: "bg-gray-100 text-gray-600" },
-            { label: "Paz", tag: "paz", icon: "fa-dove", color: "bg-teal-100 text-teal-700" }
+            { label: "Ansioso", tag: "ansiedade", icon: "fa-wind", color: "bg-blue-100 text-blue-700" },
+            { label: "Cansado", tag: "cansaço", icon: "fa-battery-quarter", color: "bg-orange-100 text-orange-700" },
+            { label: "Grato", tag: "gratidão", icon: "fa-heart", color: "bg-pink-100 text-pink-700" },
+            { label: "Medo", tag: "medo", icon: "fa-shield-alt", color: "bg-purple-100 text-purple-700" },
+            { label: "Paz", tag: "paz", icon: "fa-dove", color: "bg-teal-100 text-teal-700" },
+            { label: "Amor", tag: "amor", icon: "fa-heartbeat", color: "bg-red-100 text-red-700" },
+            { label: "Esperança", tag: "esperança", icon: "fa-sun", color: "bg-yellow-100 text-yellow-700" }
         ];
 
-        // UI Helpers
-        function renderDate() {
-            const dateStr = new Date().toLocaleDateString('pt-BR', { weekday: 'long', day: 'numeric', month: 'long' });
-            document.getElementById('current-date').textContent = dateStr;
-        }
-
-        // Funções Globais (Window)
-        window.switchTab = (tabId) => {
-            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
-            document.getElementById(`tab-${tabId}`).classList.remove('hidden');
-            document.querySelectorAll('.nav-btn').forEach(btn => {
-                btn.classList.remove('text-amber-600', 'active');
-                btn.classList.add('text-gray-400');
-                if (btn.dataset.target === tabId) {
-                    btn.classList.remove('text-gray-400');
-                    btn.classList.add('text-amber-600', 'active');
-                }
-            });
+        // CONFIGURAÇÃO DOS EVENTOS (Funções na Window para serem acessíveis pelo HTML)
+        
+        window.renderMoodButtons = () => {
+            const container = document.getElementById('mood-buttons');
+            if (container) {
+                container.innerHTML = moods.map(m => `
+                    <button onclick="filterVerse('${m.tag}')" class="${m.color || 'bg-gray-100 text-gray-600'} px-3 py-1.5 rounded-full text-[10px] font-bold uppercase transition hover:opacity-80 flex items-center gap-1 shadow-sm">
+                        <i class="fas ${m.icon || 'fa-star'}"></i> ${m.label}
+                    </button>
+                `).join('');
+            }
         };
 
-        window.toggleTheme = () => showToast("Paz seja convosco.");
-        
+        window.renderDate = () => {
+            const dateStr = new Date().toLocaleDateString('pt-BR', { weekday: 'long', day: 'numeric', month: 'long' });
+            document.getElementById('current-date').textContent = dateStr;
+        };
+
         window.loadRandomVerse = () => {
             currentVerse = verses[Math.floor(Math.random() * verses.length)];
-            updateVerseUI();
+            window.updateVerseUI();
         };
 
         window.filterVerse = (tag) => {
             let list = tag === 'all' ? verses : verses.filter(v => v.tag === tag);
             if(list.length === 0) list = verses;
             currentVerse = list[Math.floor(Math.random() * list.length)];
-            updateVerseUI();
+            const card = document.getElementById('verse-card');
+            card.classList.remove('fade-in'); void card.offsetWidth; card.classList.add('fade-in');
+            window.updateVerseUI();
         };
 
-        function updateVerseUI() {
+        window.updateVerseUI = () => {
             document.getElementById('verse-text').textContent = `"${currentVerse.text}"`;
             document.getElementById('verse-ref').textContent = currentVerse.ref;
             const btn = document.getElementById('btn-favorite');
             const isFav = favorites.some(f => f.id === currentVerse.id);
             btn.className = isFav ? "absolute top-4 right-4 text-red-500 transition text-lg z-10" : "absolute top-4 right-4 text-gray-300 hover:text-red-500 transition text-lg z-10";
-        }
+        };
 
         window.toggleFavoriteCurrent = () => {
             const idx = favorites.findIndex(f => f.id === currentVerse.id);
-            if (idx === -1) { favorites.push(currentVerse); showToast("Salvo!"); }
-            else { favorites.splice(idx, 1); showToast("Removido."); }
-            saveUserData(); // Salva no Firebase
-            updateVerseUI(); renderFavoritesList();
+            if (idx === -1) { favorites.push(currentVerse); window.showToast("Salvo!"); }
+            else { favorites.splice(idx, 1); window.showToast("Removido."); }
+            window.saveUserData(); window.updateVerseUI(); window.renderFavoritesList();
+        };
+
+        window.renderFavoritesList = () => {
+            const list = document.getElementById('favorites-list');
+            if (favorites.length === 0) list.innerHTML = '<li class="text-xs text-gray-400 italic">Lista vazia.</li>';
+            else list.innerHTML = favorites.map(f => `<li class="bg-amber-50 p-3 rounded-lg border border-amber-100 text-sm"><p class="text-gray-700 italic mb-1">"${f.text}"</p><span class="text-amber-700 font-bold text-xs">${f.ref}</span></li>`).join('');
         };
 
         window.toggleFavoritesModal = () => {
             const modal = document.getElementById('favorites-modal');
             const content = document.getElementById('favorites-content');
             if(modal.classList.contains('hidden')) { 
-                renderFavoritesList(); 
+                window.renderFavoritesList(); 
                 modal.classList.remove('hidden'); 
+                document.body.style.overflow = 'hidden'; 
                 setTimeout(() => content.classList.remove('translate-x-full'), 10); 
             } else { 
                 content.classList.add('translate-x-full'); 
-                setTimeout(() => modal.classList.add('hidden'), 300); 
+                setTimeout(() => { modal.classList.add('hidden'); document.body.style.overflow = ''; }, 300); 
             }
         };
 
-        function renderFavoritesList() {
-            const list = document.getElementById('favorites-list');
-            if (favorites.length === 0) list.innerHTML = '<li class="text-xs text-gray-400 italic">Lista vazia.</li>';
-            else list.innerHTML = favorites.map(f => `<li class="bg-amber-50 p-3 rounded-lg border border-amber-100 text-sm"><p class="text-gray-700 italic mb-1">"${f.text}"</p><span class="text-amber-700 font-bold text-xs">${f.ref}</span></li>`).join('');
-        }
+        window.showToast = (m) => { 
+            const t = document.getElementById('toast'); document.getElementById('toast-msg').textContent = m; t.classList.remove('opacity-0', 'pointer-events-none'); setTimeout(() => t.classList.add('opacity-0', 'pointer-events-none'), 3000); 
+        };
 
-        // Adicionando a função que faltava
-        function renderMoodButtons() {
-            document.getElementById('mood-buttons').innerHTML = moods.map(m => `
-                <button onclick="filterVerse('${m.tag}')" class="${m.color || 'bg-gray-100 text-gray-600'} px-3 py-1.5 rounded-full text-[10px] font-bold uppercase transition hover:opacity-80 flex items-center gap-1 shadow-sm">
-                    <i class="fas ${m.icon || 'fa-star'}"></i> ${m.label}
-                </button>
-            `).join('');
-        }
+        window.toggleTheme = () => window.showToast("Paz seja convosco.");
 
-        // PRAYERS & JOURNAL
-        window.addPrayer = () => {
-            const val = document.getElementById('prayer-input').value.trim();
-            if(val) { 
-                prayers.push({id:Date.now(), text:val, done:false}); 
-                saveUserData(); 
-                document.getElementById('prayer-input').value=''; 
-                renderPrayers(); 
-            }
-        };
-        window.togglePrayer = (id) => { 
-            const p = prayers.find(x => x.id === id); 
-            if(p) { p.done = !p.done; saveUserData(); renderPrayers(); } 
-        };
-        window.deletePrayer = (id) => { 
-            prayers = prayers.filter(x => x.id !== id); 
-            saveUserData(); 
-            renderPrayers(); 
-        };
-        function renderPrayers() {
-            const list = document.getElementById('prayer-list');
-            if (prayers.length === 0) list.innerHTML = '<li class="text-xs text-center text-gray-400 italic">Nenhum pedido ainda.</li>';
-            else list.innerHTML = prayers.slice().reverse().map(p => `<li class="flex items-center justify-between bg-gray-50 p-2 rounded border border-gray-100"><div class="flex items-center gap-2 overflow-hidden"><input type="checkbox" id="p-${p.id}" class="custom-checkbox w-3 h-3 text-amber-600 rounded" ${p.done ? 'checked' : ''} onchange="togglePrayer(${p.id})"><label for="p-${p.id}" class="cursor-pointer truncate"><span class="text-gray-700">${p.text}</span></label></div><button onclick="deletePrayer(${p.id})" class="text-gray-300 hover:text-red-400 px-2"><i class="fas fa-trash-alt text-[10px]"></i></button></li>`).join('');
-        }
-
-        window.addJournalEntry = () => { 
-            const val = document.getElementById('journal-input').value.trim(); 
-            if(val) { 
-                const date = new Date().toLocaleDateString('pt-BR'); 
-                journal.push({id:Date.now(), text:val, date:date}); 
-                saveUserData(); 
-                document.getElementById('journal-input').value=''; 
-                renderJournal(); 
-                showToast("Gratidão registrada."); 
-            } 
-        };
-        window.deleteJournal = (id) => { 
-            journal = journal.filter(x => x.id !== id); 
-            saveUserData(); 
-            renderJournal(); 
-        };
-        function renderJournal() {
-            const list = document.getElementById('journal-list');
-            if (journal.length === 0) list.innerHTML = '<div class="text-center py-8"><i class="fas fa-book-open text-gray-200 text-4xl mb-2"></i><p class="text-xs text-gray-400">Comece seu diário hoje.</p></div>';
-            else list.innerHTML = journal.slice().reverse().map(j => `<div class="bg-white p-3 rounded-lg shadow-sm border-l-4 border-pink-300"><div class="flex justify-between items-start"><span class="text-[10px] text-gray-400 font-bold uppercase tracking-wider">${j.date}</span><button onclick="deleteJournal(${j.id})" class="text-gray-300 hover:text-red-400"><i class="fas fa-times"></i></button></div><p class="text-sm text-gray-600 mt-1 font-serif">"${j.text}"</p></div>`).join('');
-        }
-
-        // BIBLE TRACKER
+        // BIBLE READER
         window.renderBibleTracker = () => {
             const renderGrid = (books, containerId) => {
                 document.getElementById(containerId).innerHTML = books.map(book => {
                     const isRead = readBooks.includes(book.id);
-                    return `<div onclick="toggleBook('${book.id}')" class="bible-book ${isRead ? 'read' : 'bg-gray-100 text-gray-500'} h-10 rounded flex items-center justify-center font-bold cursor-pointer border border-transparent hover:border-amber-300">${book.name.substring(0, 3)}</div>`;
+                    return `<div onclick="openBibleReader('${book.id}', '${book.name}', ${book.chapters})" 
+                        class="bible-book ${isRead ? 'read' : 'bg-gray-100 text-gray-500'} 
+                        h-10 rounded flex items-center justify-center font-bold cursor-pointer border border-transparent hover:border-amber-300">
+                        ${book.name}
+                    </div>`;
                 }).join('');
             };
             renderGrid(bibleData.ot, 'ot-grid');
             renderGrid(bibleData.nt, 'nt-grid');
-        };
-        window.toggleBook = (id) => {
-            if (readBooks.includes(id)) readBooks = readBooks.filter(b => b !== id); else readBooks.push(id);
-            saveUserData(); window.renderBibleTracker();
+            window.updateProgress();
         };
 
-        // Shared Utils
-        function showToast(m) { const t = document.getElementById('toast'); document.getElementById('toast-msg').textContent = m; t.classList.remove('opacity-0', 'pointer-events-none'); setTimeout(() => t.classList.add('opacity-0', 'pointer-events-none'), 3000); }
+        window.updateProgress = () => {
+            const total = bibleData.ot.length + bibleData.nt.length;
+            const read = readBooks.length;
+            document.getElementById('reading-progress').textContent = Math.round((read / total) * 100);
+        };
+
+        window.openBibleReader = (bookId, bookName, totalChapters) => {
+            activeBookId = bookId; activeBookName = bookName; activeBookTotalChapters = totalChapters;
+            document.getElementById('reader-title').textContent = bookName;
+            window.updateReadButtonStatus();
+            const grid = document.getElementById('chapters-grid'); grid.innerHTML = '';
+            for (let i = 1; i <= totalChapters; i++) {
+                const div = document.createElement('div'); div.className = 'chapter-num'; div.textContent = i; div.onclick = () => window.loadChapterText(i); grid.appendChild(div);
+            }
+            window.showChapterSelection(); document.getElementById('bible-modal').classList.remove('hidden'); document.body.style.overflow = 'hidden';
+        };
+
+        window.updateReadButtonStatus = () => {
+            const btn = document.getElementById('btn-mark-read'); const isRead = readBooks.includes(activeBookId);
+            if (isRead) { btn.classList.add('bg-amber-600', 'text-white', 'border-transparent'); btn.classList.remove('text-gray-500', 'border-gray-300'); btn.textContent = "Lido ✓"; } 
+            else { btn.classList.remove('bg-amber-600', 'text-white', 'border-transparent'); btn.classList.add('text-gray-500', 'border-gray-300'); btn.textContent = "Marcar Lido"; }
+        };
+
+        window.toggleBookReadStatus = () => {
+            if (readBooks.includes(activeBookId)) readBooks = readBooks.filter(b => b !== activeBookId); else { readBooks.push(activeBookId); window.showToast("Livro concluído!"); }
+            window.saveUserData(); window.updateReadButtonStatus(); window.renderBibleTracker();
+        };
+
+        window.closeBibleModal = () => { document.getElementById('bible-modal').classList.add('hidden'); document.body.style.overflow = ''; };
+        window.showChapterSelection = () => { document.getElementById('chapter-selection').classList.remove('hidden'); document.getElementById('chapter-text-view').classList.add('hidden'); };
         
-        // Listeners Init
-        window.renderMoodButtons = renderMoodButtons;
-        window.renderDate = renderDate;
-        window.loadRandomVerse();
+        window.loadChapterText = async (chapter) => {
+            activeChapter = chapter; document.getElementById('chapter-selection').classList.add('hidden'); const textView = document.getElementById('chapter-text-view'); textView.classList.remove('hidden');
+            document.getElementById('current-chapter-display').textContent = `Capítulo ${chapter}`;
+            const prevBtn = document.getElementById('btn-prev-chapter'); const nextBtn = document.getElementById('btn-next-chapter');
+            if (activeChapter <= 1) prevBtn.classList.add('hidden'); else prevBtn.classList.remove('hidden');
+            if (activeChapter >= activeBookTotalChapters) nextBtn.classList.add('hidden'); else nextBtn.classList.remove('hidden');
+            const body = document.getElementById('bible-text-body'); body.innerHTML = '<div class="text-center py-10"><i class="fas fa-spinner fa-spin text-amber-500 text-2xl"></i><p class="text-xs text-gray-400 mt-2">Buscando na nuvem...</p></div>'; document.getElementById('bible-content-area').scrollTop = 0;
+            try {
+                const url = `https://bible-api.com/${encodeURIComponent(activeBookName)}+${chapter}?translation=almeida`;
+                const response = await fetch(url);
+                if (!response.ok) throw new Error('Erro na API');
+                const data = await response.json();
+                let html = '';
+                if (data.verses && data.verses.length > 0) html = data.verses.map(v => `<p class="verse-text"><sup class="verse-num">${v.verse}</sup> ${v.text}</p>`).join('');
+                else html = '<p class="text-center text-gray-500 mt-10">Texto indisponível no momento.</p>';
+                body.innerHTML = html;
+            } catch (error) { console.error(error); body.innerHTML = '<div class="text-center py-10 text-red-400"><p>Erro ao carregar.</p><button onclick="loadChapterText('+chapter+')" class="mt-4 text-sm underline">Tentar novamente</button></div>'; }
+        };
+        window.nextChapter = () => { if (activeChapter < activeBookTotalChapters) window.loadChapterText(activeChapter + 1); };
+        window.prevChapter = () => { if (activeChapter > 1) window.loadChapterText(activeChapter - 1); };
+
+        // PRAYERS & JOURNAL
+        window.renderPrayers = () => {
+            const list = document.getElementById('prayer-list');
+            if (prayers.length === 0) list.innerHTML = '<li class="text-xs text-center text-gray-400 italic">Nenhum pedido ainda.</li>';
+            else list.innerHTML = prayers.slice().reverse().map(p => `<li class="flex items-center justify-between bg-gray-50 p-2 rounded border border-gray-100"><div class="flex items-center gap-2 overflow-hidden"><input type="checkbox" id="p-${p.id}" class="custom-checkbox w-3 h-3 text-amber-600 rounded" ${p.done ? 'checked' : ''} onchange="togglePrayer(${p.id})"><label for="p-${p.id}" class="cursor-pointer truncate"><span class="text-gray-700">${p.text}</span></label></div><button onclick="deletePrayer(${p.id})" class="text-gray-300 hover:text-red-400 px-2"><i class="fas fa-trash-alt text-[10px]"></i></button></li>`).join('');
+        };
+        window.addPrayer = () => { const val = document.getElementById('prayer-input').value.trim(); if(val) { prayers.push({id:Date.now(), text:val, done:false}); window.saveUserData(); document.getElementById('prayer-input').value=''; window.renderPrayers(); } };
+        window.togglePrayer = (id) => { const p = prayers.find(x => x.id === id); if(p) { p.done = !p.done; window.saveUserData(); window.renderPrayers(); } };
+        window.deletePrayer = (id) => { prayers = prayers.filter(x => x.id !== id); window.saveUserData(); window.renderPrayers(); };
+
+        window.renderJournal = () => {
+            const list = document.getElementById('journal-list');
+            if (journal.length === 0) list.innerHTML = '<div class="text-center py-8"><i class="fas fa-book-open text-gray-200 text-4xl mb-2"></i><p class="text-xs text-gray-400">Comece seu diário hoje.</p></div>';
+            else list.innerHTML = journal.slice().reverse().map(j => `<div class="bg-white p-3 rounded-lg shadow-sm border-l-4 border-pink-300"><div class="flex justify-between items-start"><span class="text-[10px] text-gray-400 font-bold uppercase tracking-wider">${j.date}</span><button onclick="deleteJournal(${j.id})" class="text-gray-300 hover:text-red-400"><i class="fas fa-times"></i></button></div><p class="text-sm text-gray-600 mt-1 font-serif">"${j.text}"</p></div>`).join('');
+        };
+        window.addJournalEntry = () => { const val = document.getElementById('journal-input').value.trim(); if(val) { const date = new Date().toLocaleDateString('pt-BR'); journal.push({id:Date.now(), text:val, date:date}); window.saveUserData(); document.getElementById('journal-input').value=''; window.renderJournal(); window.showToast("Gratidão registrada."); } };
+        window.deleteJournal = (id) => { journal = journal.filter(x => x.id !== id); window.saveUserData(); window.renderJournal(); };
+
+        // MEDITATION & SOUNDS
+        window.setTimer = (min) => { timeLeft = min * 60; window.updateTimerDisplay(); isTimerRunning = false; clearInterval(timerInterval); window.updatePlayBtn(); document.getElementById('breathing-bg').classList.remove('breathing-active'); };
+        window.toggleTimer = () => {
+            if (isTimerRunning) { clearInterval(timerInterval); isTimerRunning = false; document.getElementById('breathing-bg').classList.remove('breathing-active'); } 
+            else {
+                isTimerRunning = true; document.getElementById('breathing-bg').classList.add('breathing-active');
+                timerInterval = setInterval(() => { if (timeLeft > 0) { timeLeft--; window.updateTimerDisplay(); } else { clearInterval(timerInterval); isTimerRunning = false; document.getElementById('breathing-bg').classList.remove('breathing-active'); window.showToast("Tempo finalizado."); } }, 1000);
+            }
+            window.updatePlayBtn();
+        };
+        window.resetTimer = () => { clearInterval(timerInterval); isTimerRunning = false; timeLeft = 300; window.updateTimerDisplay(); window.updatePlayBtn(); document.getElementById('breathing-bg').classList.remove('breathing-active'); };
+        window.updateTimerDisplay = () => { const m = Math.floor(timeLeft / 60).toString().padStart(2, '0'); const s = (timeLeft % 60).toString().padStart(2, '0'); document.getElementById('timer-display').textContent = `${m}:${s}`; };
+        window.updatePlayBtn = () => { document.getElementById('btn-play-pause').innerHTML = isTimerRunning ? '<i class="fas fa-pause"></i>' : '<i class="fas fa-play ml-1"></i>'; };
         
-        // Initial setup calls
-        document.addEventListener('DOMContentLoaded', () => {
-            renderDate();
-            renderMoodButtons();
-            loadRandomVerse();
-        });
+        window.toggleSound = async (type) => {
+            const rain = document.getElementById('audio-rain');
+            if (currentAudioElement) { try { currentAudioElement.pause(); currentAudioElement.currentTime = 0; } catch (e) {} }
+            document.querySelectorAll('.sound-btn').forEach(b => b.classList.add('opacity-50'));
+            if (currentSound === type) { currentSound = null; currentAudioElement = null; return; }
+            if (type !== 'off' && rain) {
+                currentSound = type; currentAudioElement = rain;
+                const activeBtn = document.querySelector(`button[onclick="toggleSound('${type}')"]`); if(activeBtn) activeBtn.classList.remove('opacity-50');
+                try { await rain.play(); } catch (error) { if (error.name !== 'AbortError') window.showToast("Não foi possível tocar o som."); currentSound = null; currentAudioElement = null; document.querySelectorAll('.sound-btn').forEach(b => b.classList.add('opacity-50')); }
+            } else { currentSound = null; currentAudioElement = null; }
+        };
+
+        // CARD GENERATOR
+        window.openShareModal = () => { document.getElementById('modal-verse-text').textContent = `"${currentVerse.text}"`; document.getElementById('modal-verse-ref').textContent = currentVerse.ref; document.getElementById('share-modal').classList.remove('hidden'); document.body.style.overflow = 'hidden'; };
+        window.closeShareModal = () => { document.getElementById('share-modal').classList.add('hidden'); document.body.style.overflow = ''; };
+        window.changeCardBg = (c) => { const el = document.getElementById('status-preview-container'); el.className = el.className.replace(/bg-gradient-\d/g, '') + ' ' + c + ' rounded-lg scale-[0.8] origin-top'; };
+        window.downloadCard = () => { 
+            const btn = document.getElementById('btn-download'); btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> ...'; 
+            html2canvas(document.getElementById('status-preview-container'), { scale:2, useCORS:true, backgroundColor:null }).then(cv => { 
+                const a = document.createElement('a'); a.download = 'luz-diaria.png'; a.href = cv.toDataURL("image/png"); a.click(); 
+                btn.innerHTML = '<i class="fas fa-check"></i> Baixado!'; setTimeout(() => btn.innerHTML = '<i class="fas fa-download"></i> Baixar Imagem', 2000); 
+            }); 
+        };
+        window.copyToClipboard = () => { navigator.clipboard.writeText(`${currentVerse.text} - ${currentVerse.ref}`).then(() => window.showToast("Copiado!")); };
+        window.shareNative = () => { if (navigator.share) navigator.share({ title: 'Luz Diária', text: `${currentVerse.text} - ${currentVerse.ref}` }); else window.copyToClipboard(); };
+
+        // --- AUTH & DATA LOGIC ---
+        if (isFirebaseActive) {
+            if (btnLogin) {
+                btnLogin.addEventListener('click', async () => {
+                    try {
+                        statusTxt.textContent = "Conectando com Google...";
+                        await signInWithPopup(auth, provider);
+                    } catch (error) {
+                        console.error("Login falhou", error);
+                        statusTxt.textContent = "Erro ao entrar. Tente novamente.";
+                    }
+                });
+            }
+
+            if (btnLogout) {
+                btnLogout.addEventListener('click', async () => {
+                    try {
+                        await signOut(auth);
+                        location.reload();
+                    } catch (error) {
+                        console.error("Logout falhou", error);
+                    }
+                });
+            }
+
+            onAuthStateChanged(auth, async (user) => {
+                if (user) {
+                    currentUser = user;
+                    statusTxt.textContent = `Olá, ${user.displayName.split(' ')[0]}!`;
+                    setTimeout(async () => {
+                        document.getElementById('login-screen').classList.add('hidden');
+                        document.getElementById('app-content').classList.remove('hidden');
+                        const avatar = document.getElementById('user-avatar');
+                        if(avatar) avatar.src = user.photoURL || "https://via.placeholder.com/32";
+                        await window.loadUserData(user.uid);
+                        window.renderPrayers(); window.renderBibleTracker(); window.renderJournal(); window.loadRandomVerse();
+                    }, 800);
+                } else {
+                    currentUser = null;
+                    document.getElementById('login-screen').classList.remove('hidden');
+                    document.getElementById('app-content').classList.add('hidden');
+                    statusTxt.textContent = "Seu momento de paz e conexão.";
+                }
+            });
+        }
+
+        window.loadUserData = async (uid) => {
+            try {
+                const docRef = doc(db, "users", uid);
+                const docSnap = await getDoc(docRef);
+                if (docSnap.exists()) {
+                    const data = docSnap.data();
+                    favorites = data.favorites || []; prayers = data.prayers || []; journal = data.journal || []; readBooks = data.readBooks || [];
+                    localStorage.setItem('dl_favorites', JSON.stringify(favorites));
+                } else {
+                    favorites = JSON.parse(localStorage.getItem('dl_favorites') || '[]');
+                    prayers = JSON.parse(localStorage.getItem('dl_prayers') || '[]');
+                    journal = JSON.parse(localStorage.getItem('dl_journal') || '[]');
+                    readBooks = JSON.parse(localStorage.getItem('dl_read_books') || '[]');
+                    window.saveUserData();
+                }
+            } catch (e) { console.error(e); window.showToast("Erro de sincronização"); }
+        };
+
+        window.saveUserData = async () => {
+            if (!currentUser) return;
+            try {
+                await setDoc(doc(db, "users", currentUser.uid), { favorites, prayers, journal, readBooks, lastUpdate: new Date() }, { merge: true });
+            } catch (e) { console.error(e); }
+        };
+
+        // Init
+        window.renderDate();
+        window.renderMoodButtons();
+        // Listeners for inputs
+        const pInput = document.getElementById('prayer-input'); if(pInput) pInput.addEventListener('keypress', (e) => { if(e.key==='Enter') window.addPrayer(); });
+        const jInput = document.getElementById('journal-input'); if(jInput) jInput.addEventListener('keypress', (e) => { if(e.key==='Enter') window.addJournalEntry(); });
+
     </script>
 </body>
 </html>
+
