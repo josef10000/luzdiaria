@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Luz Diária - Devocional Completo</title>
+    <title>Luz Diária - Devocional</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" referrerpolicy="no-referrer">
     <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
 
     <style>
@@ -16,12 +15,13 @@
             font-family: 'Montserrat', sans-serif;
             background-color: #fdfbf7;
             color: #4a4a4a;
+            -webkit-tap-highlight-color: transparent;
         }
 
         .serif { font-family: 'Lora', serif; }
         .script-font { font-family: 'Dancing Script', cursive; }
 
-        .fade-in { animation: fadeIn 0.5s ease-in-out; }
+        .fade-in { animation: fadeIn 0.4s ease-out forwards; }
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
@@ -38,6 +38,7 @@
             color: #9ca3af;
         }
 
+        /* Animação de Respiração */
         .breathing-circle {
             width: 200px;
             height: 200px;
@@ -58,63 +59,33 @@
 
         .bible-book {
             transition: all 0.2s;
-            font-size: 0.65rem; 
+            font-size: 0.75rem; 
             text-align: center;
-            line-height: 1.1;
-            padding: 4px 2px;
-            min-height: 36px;
+            padding: 6px 2px;
+            min-height: 40px;
             display: flex;
             align-items: center;
             justify-content: center;
             word-break: break-word;
+            line-height: 1.1;
         }
         .bible-book.read {
-            background-color: #d97706; /* amber-600 */
+            background-color: #d97706;
             color: white;
             border-color: #d97706;
         }
 
         .chapter-num {
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 8px;
-            background-color: #f3f4f6;
-            color: #4b5563;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s;
+            width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;
+            border-radius: 8px; background-color: #f3f4f6; color: #4b5563; font-weight: 600; cursor: pointer;
         }
-        .chapter-num:hover, .chapter-num.active {
-            background-color: #d97706;
-            color: white;
-        }
-        .verse-text {
-            font-family: 'Lora', serif;
-            line-height: 1.8;
-            margin-bottom: 12px;
-        }
-        .verse-num {
-            font-size: 0.7em;
-            color: #d97706;
-            font-weight: bold;
-            vertical-align: super;
-            margin-right: 4px;
-        }
+        .chapter-num.active { background-color: #d97706; color: white; }
 
+        /* Preview Card */
         #status-preview-container {
-            width: 320px;
-            height: 568px;
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 2rem;
-            text-align: center;
-            background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
+            width: 320px; height: 568px;
+            position: relative; display: flex; flex-direction: column; justify-content: center; align-items: center;
+            padding: 2rem; text-align: center; background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
         }
         .bg-gradient-1 { background: linear-gradient(135deg, #f6d365 0%, #fda085 100%); }
         .bg-gradient-2 { background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%); }
@@ -123,6 +94,11 @@
         .bg-gradient-5 { background: linear-gradient(45deg, #ff9a9e 0%, #fad0c4 99%, #fad0c4 100%); }
         
         .hidden { display: none !important; }
+        
+        /* Botões de Ação Ícones SVG */
+        .icon-btn svg { width: 1.2rem; height: 1.2rem; fill: currentColor; }
+        .nav-btn.active { color: #d97706; }
+        .nav-btn svg { width: 1.5rem; height: 1.5rem; fill: currentColor; margin-bottom: 2px; }
     </style>
 </head>
 <body class="min-h-screen flex flex-col items-center bg-[#fdfbf7]">
@@ -132,25 +108,21 @@
         <div class="mb-10 relative">
             <div class="breathing-circle breathing-active w-40 h-40 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-50"></div>
             <div class="relative z-10 bg-white p-6 rounded-full shadow-sm border border-amber-100">
-                <i class="fas fa-dove text-5xl text-amber-500"></i>
+                <!-- Ícone Pomba SVG -->
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-amber-500" viewBox="0 0 512 512" fill="currentColor"><path d="M254.6 374.3c-2.3 0-4.6-.2-6.9-.5-49.8-7.4-89.6-47.5-96.8-97.4-2.1-14.7 10.5-27 25.1-24.9 49.8 7.4 89.6 47.5 96.8 97.4 2.1 14.7-10.5 27-25.1 24.9-.1.1-1.1.5-3.1.5zM226.7 8C218.4 9.3 213.3 17.8 215.3 26c11.3 45.3-15.1 92.2-60.4 103.5-8.2 2-16.7-3.1-18-11.4-1.3-8.3 3.9-16.7 12.1-18.7 27.5-6.9 43.6-35.4 36.7-62.9-2.1-8.3 3-16.8 11.3-18.1 1.7-.3 3.3-.3 5-.3 6.9 0 13.3 4.6 15 11.5-.2-1.6-1.1-1.1-1.3-1.6zm229.4 246.6c-5.8-23.7-22.1-43.2-44.4-53.1-23.9-10.6-51.1-7.3-71.9 8.7l-9.1-39.7c-4.6-20.3-13.8-39.2-26.9-55.2-13.6-16.6-30.8-29.7-50.2-38.3C187 56 109.8 63 60.1 123.5c-30 36.5-43.6 84.1-37.1 130.3 3.3 23.9 11.5 46.5 23.7 66.2l3.4 5.3c23.5 35.8 72.3 45.5 107.8 21.2.7-.5 1.4-1 2.1-1.5l29.4 128.5c4.7 20.6 25 33.3 45.6 28.6l75.4-17.3c20.6-4.7 33.3-25 28.6-45.6l-20.7-90.4c17.5 7.6 37 9.8 56 6.3 36.2-6.6 63.8-37 66.8-73.9.1-1.6.2-3.1.2-4.6z"/></svg>
             </div>
         </div>
         
         <h1 class="text-4xl font-bold text-amber-800 serif mb-2">Luz Diária</h1>
-        
-        <!-- Elemento de Status Requisitado -->
         <p id="status" class="text-gray-500 mb-12 font-light">Carregando...</p>
 
-        <!-- Botão de Login Requisitado -->
         <button id="btnLogin" class="flex items-center justify-center gap-3 bg-white border border-gray-300 text-gray-700 px-8 py-3 rounded-full shadow-sm hover:bg-gray-50 hover:shadow-md transition w-full max-w-xs font-medium">
             <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google" class="w-5 h-5">
             Entrar com Google
         </button>
-        
-        <p class="mt-8 text-xs text-gray-400">Ao entrar, seus dados serão sincronizados<br>para que você nunca perca suas orações.</p>
     </div>
 
-    <!-- CONTEÚDO DO APP (Escondido até Login) -->
+    <!-- CONTEÚDO DO APP -->
     <div id="app-content" class="w-full flex flex-col items-center hidden pb-[90px]">
         
         <header class="w-full bg-white/90 backdrop-blur-md shadow-sm py-4 px-4 text-center sticky top-0 z-40 transition-all duration-300">
@@ -159,26 +131,27 @@
                     <h1 class="text-xl font-bold text-amber-700 tracking-wide serif">Luz Diária</h1>
                     <p class="text-[10px] text-gray-500 uppercase tracking-widest" id="current-date">Carregando...</p>
                 </div>
-                <div class="flex gap-2 items-center">
-                    <button onclick="toggleFavoritesModal()" class="text-amber-700 hover:bg-amber-50 w-8 h-8 flex items-center justify-center rounded-full transition relative">
-                        <i class="fas fa-heart"></i>
+                <div class="flex gap-3 items-center">
+                    <button onclick="toggleFavoritesModal()" class="text-amber-700 hover:bg-amber-50 p-2 rounded-full transition">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" /></svg>
                     </button>
-                    <button onclick="toggleTheme()" class="text-amber-700 hover:bg-amber-50 w-8 h-8 flex items-center justify-center rounded-full transition">
-                        <i class="fas fa-dove"></i>
-                    </button>
-                    <!-- Avatar do Usuário -->
-                    <div id="user-profile" class="relative group cursor-pointer">
-                        <img id="user-avatar" src="https://via.placeholder.com/32" alt="User" class="w-8 h-8 rounded-full border border-amber-200 object-cover">
-                        <!-- Botão de Logout Requisitado -->
-                        <div id="btnLogout" style="display:none;" class="absolute right-0 top-10 bg-white shadow-lg rounded-lg p-2 text-xs text-red-500 hidden group-hover:block whitespace-nowrap border border-gray-100 z-50">
-                            Sair <i class="fas fa-sign-out-alt ml-1"></i>
+                    <!-- Avatar e Menu de Sair -->
+                    <div class="relative">
+                        <button onclick="toggleUserMenu()" class="focus:outline-none">
+                            <img id="user-avatar" src="https://via.placeholder.com/32" alt="User" class="w-8 h-8 rounded-full border border-amber-200 object-cover">
+                        </button>
+                        <!-- Menu Dropdown -->
+                        <div id="user-menu" class="absolute right-0 top-12 bg-white shadow-xl rounded-xl p-2 w-32 border border-gray-100 hidden z-50 transform origin-top-right transition-all">
+                            <button id="btnLogout" class="flex items-center gap-2 w-full text-left px-3 py-2 text-sm text-red-500 hover:bg-red-50 rounded-lg">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" /></svg>
+                                Sair
+                            </button>
                         </div>
                     </div>
                 </div>
             </div>
         </header>
 
-        <!-- ÁREA PRINCIPAL DE CONTEÚDO -->
         <main class="w-full max-w-md px-4 mt-4 relative flex-grow">
 
             <!-- TAB: INÍCIO -->
@@ -189,16 +162,29 @@
                 </section>
 
                 <section id="verse-card" class="glass-card rounded-2xl shadow-lg p-6 text-center relative overflow-hidden border-t-4 border-amber-400 transition-all duration-300">
-                    <button onclick="toggleFavoriteCurrent()" id="btn-favorite" class="absolute top-4 right-4 text-gray-300 hover:text-red-500 transition text-lg z-10"><i class="fas fa-heart"></i></button>
-                    <div class="absolute top-0 left-0 p-3 opacity-10 text-amber-600"><i class="fas fa-quote-left text-3xl"></i></div>
+                    <button onclick="toggleFavoriteCurrent()" id="btn-favorite" class="absolute top-4 right-4 text-gray-300 hover:text-red-500 transition z-10">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24"><path d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" /></svg>
+                    </button>
+                    <div class="absolute top-0 left-0 p-3 opacity-10 text-amber-600">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="currentColor" viewBox="0 0 24 24"><path d="M14.017 21L14.017 18C14.017 16.8954 13.1216 16 12.017 16H9.017C7.91243 16 7.017 16.8954 7.017 18V21H2.017V8.99992C2.017 8.99992 2.017 8.99992 2.017 8.99992V6.00002C2.017 4.89545 2.91243 4.00002 4.017 4.00002H9.017C10.1216 4.00002 11.017 4.89545 11.017 6.00002V9.00002C11.017 10.1046 10.1216 11 9.017 11H4.017V13.9999C4.017 14.2029 4.04359 14.3999 4.09355 14.5879C4.19799 14.9806 4.55523 15.2651 4.9622 15.2651H6.017V18C6.017 18.5523 6.46471 19 7.017 19H12.017C12.5693 19 13.017 18.5523 13.017 18V15H17.017V18C17.017 18.5523 17.4647 19 18.017 19H21.017V12.2323C21.017 11.6983 20.8242 11.1823 20.4727 10.7716L16.4727 6.09636C16.1557 5.726 15.6883 5.51217 15.2001 5.51217H14.017V2.51217C14.017 2.23603 14.2409 2.01217 14.517 2.01217H19.517C20.8977 2.01217 22.017 3.13146 22.017 4.51217V21H14.017Z" /></svg>
+                    </div>
                     <div id="verse-content" class="mt-2 mb-4">
                         <p class="text-lg md:text-xl serif text-gray-800 leading-relaxed italic mb-3" id="verse-text">"..."</p>
                         <p class="text-xs font-bold text-amber-700 uppercase tracking-wide" id="verse-ref">...</p>
                     </div>
+                    <!-- Botões de Ação Repaginados -->
                     <div class="flex flex-wrap justify-center gap-2">
-                        <button onclick="copyToClipboard()" class="btn-action bg-gray-100 text-gray-600"><i class="fas fa-copy"></i></button>
-                        <button onclick="openShareModal()" class="btn-action bg-green-600 text-white"><i class="fab fa-whatsapp"></i></button>
-                        <button onclick="shareNative()" class="btn-action bg-amber-600 text-white"><i class="fas fa-share-alt"></i></button>
+                        <button onclick="copyToClipboard()" class="icon-btn bg-gray-100 text-gray-600 w-10 h-10 rounded-full flex items-center justify-center hover:bg-gray-200 transition">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                        </button>
+                        <button onclick="openShareModal()" class="icon-btn bg-green-500 text-white w-10 h-10 rounded-full flex items-center justify-center hover:bg-green-600 transition shadow-lg shadow-green-200">
+                            <!-- Ícone WhatsApp SVG -->
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                        </button>
+                        <button onclick="shareNative()" class="icon-btn bg-amber-500 text-white w-10 h-10 rounded-full flex items-center justify-center hover:bg-amber-600 transition shadow-lg shadow-amber-200">
+                            <!-- Ícone Share SVG -->
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
+                        </button>
                     </div>
                 </section>
 
@@ -209,8 +195,8 @@
                     </div>
                     <div class="flex gap-2 mb-4">
                         <input type="text" id="prayer-input" placeholder="Novo pedido..." class="input-base flex-1">
-                        <button onclick="addPrayer()" class="text-amber-600 hover:text-amber-800 text-xl px-3 transition transform hover:scale-110">
-                            <i class="fas fa-plus"></i>
+                        <button onclick="addPrayer()" class="text-amber-600 hover:text-amber-800 px-2 transition">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" /></svg>
                         </button>
                     </div>
                     <ul id="prayer-list" class="space-y-2 text-sm"></ul>
@@ -226,22 +212,28 @@
                     <div class="z-10 text-4xl font-light text-gray-700 serif" id="timer-display">05:00</div>
                 </div>
                 <div class="flex justify-center gap-3 mb-8">
-                    <button onclick="setTimer(5)" class="timer-btn px-4 py-2 rounded-full bg-white border border-gray-200 text-sm hover:border-amber-400 transition">5 min</button>
-                    <button onclick="setTimer(10)" class="timer-btn px-4 py-2 rounded-full bg-white border border-gray-200 text-sm hover:border-amber-400 transition">10 min</button>
-                    <button onclick="setTimer(15)" class="timer-btn px-4 py-2 rounded-full bg-white border border-gray-200 text-sm hover:border-amber-400 transition">15 min</button>
+                    <button onclick="setTimer(5)" class="px-4 py-2 rounded-full bg-white border border-gray-200 text-sm hover:border-amber-400 transition">5 min</button>
+                    <button onclick="setTimer(10)" class="px-4 py-2 rounded-full bg-white border border-gray-200 text-sm hover:border-amber-400 transition">10 min</button>
+                    <button onclick="setTimer(15)" class="px-4 py-2 rounded-full bg-white border border-gray-200 text-sm hover:border-amber-400 transition">15 min</button>
                 </div>
                 <div class="flex justify-center items-center gap-6 mb-8">
-                    <button onclick="toggleTimer()" id="btn-play-pause" class="w-16 h-16 bg-amber-600 text-white rounded-full shadow-lg text-2xl hover:bg-amber-700 transition flex items-center justify-center"><i class="fas fa-play ml-1"></i></button>
-                    <button onclick="resetTimer()" class="text-gray-400 hover:text-gray-600 transition"><i class="fas fa-undo"></i></button>
+                    <button onclick="toggleTimer()" id="btn-play-pause" class="w-16 h-16 bg-amber-600 text-white rounded-full shadow-lg text-2xl hover:bg-amber-700 transition flex items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                    </button>
+                    <button onclick="resetTimer()" class="text-gray-400 hover:text-gray-600 transition">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" /></svg>
+                    </button>
                 </div>
                 <div class="bg-white p-4 rounded-xl shadow-sm mx-4">
                     <p class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-3">Som de Fundo</p>
                     <div class="flex justify-center gap-4">
                         <button onclick="toggleSound('rain')" class="sound-btn flex flex-col items-center gap-1 text-gray-400 hover:text-blue-500 transition">
-                            <i class="fas fa-cloud-rain text-xl"></i> <span class="text-[10px]">Chuva</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" /></svg>
+                            <span class="text-[10px]">Chuva</span>
                         </button>
                         <button onclick="toggleSound('off')" class="sound-btn flex flex-col items-center gap-1 text-amber-600 transition font-bold">
-                            <i class="fas fa-volume-mute text-xl"></i> <span class="text-[10px]">Silêncio</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" stroke-miterlimit="10" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2" /></svg>
+                            <span class="text-[10px]">Silêncio</span>
                         </button>
                     </div>
                 </div>
@@ -276,8 +268,8 @@
                     <p class="text-sm text-gray-500 mb-2">Pelo que você é grato hoje?</p>
                     <div class="flex gap-2">
                         <input type="text" id="journal-input" placeholder="Ex: Pelo sorriso do meu filho..." class="input-base flex-1">
-                        <button onclick="addJournalEntry()" class="text-pink-500 hover:text-pink-700 text-xl px-3 transition transform hover:scale-110">
-                            <i class="fas fa-heart"></i>
+                        <button onclick="addJournalEntry()" class="text-pink-500 hover:text-pink-700 px-2 transition">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" /></svg>
                         </button>
                     </div>
                 </div>
@@ -286,11 +278,20 @@
 
         </main>
 
+        <!-- MENU INFERIOR COM ÍCONES SVG -->
         <nav class="fixed bottom-0 w-full bg-white border-t border-gray-200 py-2 px-6 flex justify-between items-center z-50 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)] text-gray-400 text-[10px] font-medium max-w-md mx-auto left-0 right-0 md:rounded-t-2xl">
-            <button onclick="switchTab('home')" class="nav-btn active flex flex-col items-center gap-1 p-2 w-16 text-amber-600" data-target="home"><i class="fas fa-home text-lg mb-0.5"></i> Início</button>
-            <button onclick="switchTab('meditate')" class="nav-btn flex flex-col items-center gap-1 p-2 w-16 hover:text-amber-500" data-target="meditate"><i class="fas fa-spa text-lg mb-0.5"></i> Meditar</button>
-            <button onclick="switchTab('reading')" class="nav-btn flex flex-col items-center gap-1 p-2 w-16 hover:text-amber-500" data-target="reading"><i class="fas fa-book-open text-lg mb-0.5"></i> Bíblia</button>
-            <button onclick="switchTab('journal')" class="nav-btn flex flex-col items-center gap-1 p-2 w-16 hover:text-amber-500" data-target="journal"><i class="fas fa-pen-fancy text-lg mb-0.5"></i> Gratidão</button>
+            <button onclick="switchTab('home')" class="nav-btn active flex flex-col items-center gap-1 p-2 w-16 text-amber-600" data-target="home">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 3L4 9v12h5v-7h6v7h5V9z"/></svg> Início
+            </button>
+            <button onclick="switchTab('meditate')" class="nav-btn flex flex-col items-center gap-1 p-2 w-16 hover:text-amber-500" data-target="meditate">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2a10 10 0 1010 10A10 10 0 0012 2zm0 18a8 8 0 118-8 8 8 0 01-8 8zm1-13h-2v6l5.25 3.15.75-1.23-4-2.37z"/></svg> Meditar
+            </button>
+            <button onclick="switchTab('reading')" class="nav-btn flex flex-col items-center gap-1 p-2 w-16 hover:text-amber-500" data-target="reading">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H8V4h12v12z"/></svg> Bíblia
+            </button>
+            <button onclick="switchTab('journal')" class="nav-btn flex flex-col items-center gap-1 p-2 w-16 hover:text-amber-500" data-target="journal">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg> Gratidão
+            </button>
         </nav>
     </div>
 
@@ -300,7 +301,7 @@
             <h2 id="reader-title" class="text-lg font-bold text-amber-800 serif">Gênesis</h2>
             <div class="flex items-center gap-3">
                 <button onclick="toggleBookReadStatus()" id="btn-mark-read" class="text-xs font-semibold px-3 py-1 rounded-full border border-gray-300 text-gray-500 transition">Marcar Lido</button>
-                <button onclick="closeBibleModal()" class="text-gray-500 p-2"><i class="fas fa-times text-xl"></i></button>
+                <button onclick="closeBibleModal()" class="text-gray-500 p-2"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg></button>
             </div>
         </div>
         <div class="flex-grow overflow-y-auto p-4 bg-[#fdfbf7]" id="bible-content-area">
@@ -310,15 +311,15 @@
             </div>
             <div id="chapter-text-view" class="hidden fade-in">
                 <div class="flex justify-between items-center mb-6">
-                    <button onclick="showChapterSelection()" class="text-amber-600 text-sm"><i class="fas fa-arrow-left"></i> Voltar</button>
+                    <button onclick="showChapterSelection()" class="text-amber-600 text-sm flex items-center gap-1"><svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg> Voltar</button>
                     <span id="current-chapter-display" class="text-sm font-bold text-gray-400">Cap. 1</span>
                 </div>
                 <div id="bible-text-body" class="text-gray-800 text-lg leading-relaxed serif pb-20">
                     <div class="text-center py-10"><i class="fas fa-spinner fa-spin text-amber-500 text-2xl"></i><p class="text-xs text-gray-400 mt-2">Carregando...</p></div>
                 </div>
                 <div class="flex justify-center gap-4 mt-8 pb-8">
-                     <button onclick="prevChapter()" id="btn-prev-chapter" class="bg-gray-100 text-gray-600 px-4 py-3 rounded-full font-semibold hover:bg-gray-200 transition hidden"><i class="fas fa-arrow-left mr-2"></i> Anterior</button>
-                     <button onclick="nextChapter()" id="btn-next-chapter" class="bg-amber-100 text-amber-800 px-6 py-3 rounded-full font-semibold hover:bg-amber-200 transition">Próximo <i class="fas fa-arrow-right ml-2"></i></button>
+                     <button onclick="prevChapter()" id="btn-prev-chapter" class="bg-gray-100 text-gray-600 px-4 py-3 rounded-full font-semibold hover:bg-gray-200 transition hidden">Anterior</button>
+                     <button onclick="nextChapter()" id="btn-next-chapter" class="bg-amber-100 text-amber-800 px-6 py-3 rounded-full font-semibold hover:bg-amber-200 transition">Próximo</button>
                 </div>
             </div>
         </div>
@@ -329,7 +330,7 @@
         <div class="bg-white w-3/4 max-w-sm h-full shadow-2xl p-6 overflow-y-auto transform translate-x-full transition-transform duration-300 cursor-default" id="favorites-content">
             <div class="flex justify-between items-center mb-6">
                 <h2 class="text-lg font-bold text-amber-800 serif">Versículos Salvos</h2>
-                <button onclick="toggleFavoritesModal()" class="text-gray-400 hover:text-gray-600 p-2"><i class="fas fa-times text-xl"></i></button>
+                <button onclick="toggleFavoritesModal()" class="text-gray-400 hover:text-gray-600 p-2"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg></button>
             </div>
             <ul id="favorites-list" class="space-y-4"></ul>
         </div>
@@ -337,7 +338,7 @@
 
     <div id="share-modal" onclick="if(event.target === this) closeShareModal()" class="fixed inset-0 bg-black bg-opacity-90 z-[70] hidden flex flex-col items-center justify-center p-4 overflow-y-auto backdrop-blur-sm cursor-pointer">
         <div class="bg-white rounded-xl p-4 w-full max-w-sm relative cursor-default">
-            <button onclick="closeShareModal()" class="absolute top-2 right-2 text-gray-400 p-2 hover:bg-gray-100 rounded-full transition"><i class="fas fa-times text-xl"></i></button>
+            <button onclick="closeShareModal()" class="absolute top-2 right-2 text-gray-400 p-2 hover:bg-gray-100 rounded-full transition"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg></button>
             <h3 class="text-center font-bold text-gray-700 mb-4 text-sm uppercase tracking-wide">Prévia para Status</h3>
             <div class="flex justify-center gap-2 mb-4">
                 <button onclick="changeCardBg('bg-gradient-1')" class="w-6 h-6 rounded-full bg-gradient-1 border border-gray-200"></button>
@@ -348,7 +349,7 @@
             </div>
             <div class="flex justify-center mb-4 overflow-hidden rounded-lg bg-gray-100 p-1">
                 <div id="status-preview-container" class="bg-gradient-1 rounded-lg scale-[0.8] origin-top">
-                    <div class="absolute top-8 left-0 w-full text-center opacity-30 text-white"><i class="fas fa-cross text-4xl"></i></div>
+                    <div class="absolute top-8 left-0 w-full text-center opacity-30 text-white"><svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="currentColor" viewBox="0 0 24 24"><path d="M14.017 21L14.017 18C14.017 16.8954 13.1216 16 12.017 16H9.017C7.91243 16 7.017 16.8954 7.017 18V21H2.017V8.99992C2.017 8.99992 2.017 8.99992 2.017 8.99992V6.00002C2.017 4.89545 2.91243 4.00002 4.017 4.00002H9.017C10.1216 4.00002 11.017 4.89545 11.017 6.00002V9.00002C11.017 10.1046 10.1216 11 9.017 11H4.017V13.9999C4.017 14.2029 4.04359 14.3999 4.09355 14.5879C4.19799 14.9806 4.55523 15.2651 4.9622 15.2651H6.017V18C6.017 18.5523 6.46471 19 7.017 19H12.017C12.5693 19 13.017 18.5523 13.017 18V15H17.017V18C17.017 18.5523 17.4647 19 18.017 19H21.017V12.2323C21.017 11.6983 20.8242 11.1823 20.4727 10.7716L16.4727 6.09636C16.1557 5.726 15.6883 5.51217 15.2001 5.51217H14.017V2.51217C14.017 2.23603 14.2409 2.01217 14.517 2.01217H19.517C20.8977 2.01217 22.017 3.13146 22.017 4.51217V21H14.017Z" /></svg></div>
                     <div class="z-10 px-6 mt-20">
                         <p id="modal-verse-text" class="text-white text-2xl serif font-bold leading-relaxed drop-shadow-md">"..."</p>
                         <div class="w-12 h-1 bg-white mx-auto my-6 opacity-70 rounded"></div>
@@ -359,13 +360,13 @@
                     </div>
                 </div>
             </div>
-            <button onclick="downloadCard()" id="btn-download" class="w-full py-3 bg-amber-600 hover:bg-amber-700 text-white font-bold rounded-lg shadow-lg text-sm flex justify-center items-center gap-2 transition"><i class="fas fa-download"></i> Baixar Imagem</button>
+            <button onclick="downloadCard()" id="btn-download" class="w-full py-3 bg-amber-600 hover:bg-amber-700 text-white font-bold rounded-lg shadow-lg text-sm flex justify-center items-center gap-2 transition">Baixar Imagem</button>
             <button onclick="closeShareModal()" class="w-full py-3 mt-2 text-gray-500 hover:bg-gray-100 hover:text-gray-700 font-medium rounded-lg text-sm transition">Voltar</button>
         </div>
     </div>
 
     <div id="toast" class="fixed bottom-24 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white px-5 py-2 rounded-full shadow-lg text-xs font-medium opacity-0 pointer-events-none transition-opacity duration-300 z-[80] flex items-center gap-2">
-        <i class="fas fa-check-circle text-green-400"></i> <span id="toast-msg">Mensagem</span>
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg> <span id="toast-msg">Mensagem</span>
     </div>
 
     <script type="module">
@@ -503,24 +504,43 @@
         };
 
         const moods = [
-            { label: "Todos", tag: "all", icon: "fa-random", color: "bg-gray-100 text-gray-600" },
-            { label: "Ansioso", tag: "ansiedade", icon: "fa-wind", color: "bg-blue-100 text-blue-700" },
-            { label: "Cansado", tag: "cansaço", icon: "fa-battery-quarter", color: "bg-orange-100 text-orange-700" },
-            { label: "Grato", tag: "gratidão", icon: "fa-heart", color: "bg-pink-100 text-pink-700" },
-            { label: "Medo", tag: "medo", icon: "fa-shield-alt", color: "bg-purple-100 text-purple-700" },
-            { label: "Paz", tag: "paz", icon: "fa-dove", color: "bg-teal-100 text-teal-700" },
-            { label: "Amor", tag: "amor", icon: "fa-heartbeat", color: "bg-red-100 text-red-700" },
-            { label: "Esperança", tag: "esperança", icon: "fa-sun", color: "bg-yellow-100 text-yellow-700" }
+            { label: "Todos", tag: "all", color: "bg-gray-100 text-gray-600" },
+            { label: "Ansioso", tag: "ansiedade", color: "bg-blue-100 text-blue-700" },
+            { label: "Cansado", tag: "cansaço", color: "bg-orange-100 text-orange-700" },
+            { label: "Grato", tag: "gratidão", color: "bg-pink-100 text-pink-700" },
+            { label: "Medo", tag: "medo", color: "bg-purple-100 text-purple-700" },
+            { label: "Paz", tag: "paz", color: "bg-teal-100 text-teal-700" },
+            { label: "Amor", tag: "amor", color: "bg-red-100 text-red-700" },
+            { label: "Esperança", tag: "esperança", color: "bg-yellow-100 text-yellow-700" }
         ];
 
-        // CONFIGURAÇÃO DOS EVENTOS (Funções na Window para serem acessíveis pelo HTML)
+        // FUNÇÕES GLOBAIS DE UI
         
+        // Menu de Usuário (Toggle)
+        window.toggleUserMenu = () => {
+            const menu = document.getElementById('user-menu');
+            if (menu.classList.contains('hidden')) {
+                menu.classList.remove('hidden');
+            } else {
+                menu.classList.add('hidden');
+            }
+        };
+
+        // Fechar menu ao clicar fora
+        document.addEventListener('click', (e) => {
+            const menu = document.getElementById('user-menu');
+            const btn = document.getElementById('user-profile')?.parentNode;
+            if (menu && !menu.classList.contains('hidden') && !e.target.closest('#user-profile') && !e.target.closest('#user-menu')) {
+                menu.classList.add('hidden');
+            }
+        });
+
         window.renderMoodButtons = () => {
             const container = document.getElementById('mood-buttons');
             if (container) {
                 container.innerHTML = moods.map(m => `
-                    <button onclick="filterVerse('${m.tag}')" class="${m.color || 'bg-gray-100 text-gray-600'} px-3 py-1.5 rounded-full text-[10px] font-bold uppercase transition hover:opacity-80 flex items-center gap-1 shadow-sm">
-                        <i class="fas ${m.icon || 'fa-star'}"></i> ${m.label}
+                    <button onclick="filterVerse('${m.tag}')" class="${m.color} px-3 py-1.5 rounded-full text-[10px] font-bold uppercase transition hover:opacity-80 shadow-sm">
+                        ${m.label}
                     </button>
                 `).join('');
             }
@@ -550,7 +570,7 @@
             document.getElementById('verse-ref').textContent = currentVerse.ref;
             const btn = document.getElementById('btn-favorite');
             const isFav = favorites.some(f => f.id === currentVerse.id);
-            btn.className = isFav ? "absolute top-4 right-4 text-red-500 transition text-lg z-10" : "absolute top-4 right-4 text-gray-300 hover:text-red-500 transition text-lg z-10";
+            btn.className = isFav ? "absolute top-4 right-4 text-red-500 transition z-10" : "absolute top-4 right-4 text-gray-300 hover:text-red-500 transition z-10";
         };
 
         window.toggleFavoriteCurrent = () => {
@@ -585,6 +605,22 @@
         };
 
         window.toggleTheme = () => window.showToast("Paz seja convosco.");
+
+        // NAVEGAÇÃO ENTRE ABAS
+        window.switchTab = (tabId) => {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            const target = document.getElementById(`tab-${tabId}`);
+            if(target) target.classList.remove('hidden');
+            
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('text-amber-600', 'active');
+                btn.classList.add('text-gray-400');
+                if (btn.dataset.target === tabId) {
+                    btn.classList.remove('text-gray-400');
+                    btn.classList.add('text-amber-600', 'active');
+                }
+            });
+        };
 
         // BIBLE READER
         window.renderBibleTracker = () => {
@@ -622,7 +658,7 @@
 
         window.updateReadButtonStatus = () => {
             const btn = document.getElementById('btn-mark-read'); const isRead = readBooks.includes(activeBookId);
-            if (isRead) { btn.classList.add('bg-amber-600', 'text-white', 'border-transparent'); btn.classList.remove('text-gray-500', 'border-gray-300'); btn.textContent = "Lido ✓"; } 
+            if (isRead) { btn.classList.add('bg-amber-600', 'text-white', 'border-transparent'); btn.classList.remove('text-gray-500', 'border-gray-300'); btn.textContent = "Lido"; } 
             else { btn.classList.remove('bg-amber-600', 'text-white', 'border-transparent'); btn.classList.add('text-gray-500', 'border-gray-300'); btn.textContent = "Marcar Lido"; }
         };
 
@@ -640,7 +676,7 @@
             const prevBtn = document.getElementById('btn-prev-chapter'); const nextBtn = document.getElementById('btn-next-chapter');
             if (activeChapter <= 1) prevBtn.classList.add('hidden'); else prevBtn.classList.remove('hidden');
             if (activeChapter >= activeBookTotalChapters) nextBtn.classList.add('hidden'); else nextBtn.classList.remove('hidden');
-            const body = document.getElementById('bible-text-body'); body.innerHTML = '<div class="text-center py-10"><i class="fas fa-spinner fa-spin text-amber-500 text-2xl"></i><p class="text-xs text-gray-400 mt-2">Buscando na nuvem...</p></div>'; document.getElementById('bible-content-area').scrollTop = 0;
+            const body = document.getElementById('bible-text-body'); body.innerHTML = '<div class="text-center py-10"><p class="text-xs text-gray-400 mt-2">Carregando...</p></div>'; document.getElementById('bible-content-area').scrollTop = 0;
             try {
                 const url = `https://bible-api.com/${encodeURIComponent(activeBookName)}+${chapter}?translation=almeida`;
                 const response = await fetch(url);
@@ -659,7 +695,7 @@
         window.renderPrayers = () => {
             const list = document.getElementById('prayer-list');
             if (prayers.length === 0) list.innerHTML = '<li class="text-xs text-center text-gray-400 italic">Nenhum pedido ainda.</li>';
-            else list.innerHTML = prayers.slice().reverse().map(p => `<li class="flex items-center justify-between bg-gray-50 p-2 rounded border border-gray-100"><div class="flex items-center gap-2 overflow-hidden"><input type="checkbox" id="p-${p.id}" class="custom-checkbox w-3 h-3 text-amber-600 rounded" ${p.done ? 'checked' : ''} onchange="togglePrayer(${p.id})"><label for="p-${p.id}" class="cursor-pointer truncate"><span class="text-gray-700">${p.text}</span></label></div><button onclick="deletePrayer(${p.id})" class="text-gray-300 hover:text-red-400 px-2"><i class="fas fa-trash-alt text-[10px]"></i></button></li>`).join('');
+            else list.innerHTML = prayers.slice().reverse().map(p => `<li class="flex items-center justify-between bg-gray-50 p-2 rounded border border-gray-100"><div class="flex items-center gap-2 overflow-hidden"><input type="checkbox" id="p-${p.id}" class="custom-checkbox w-3 h-3 text-amber-600 rounded" ${p.done ? 'checked' : ''} onchange="togglePrayer(${p.id})"><label for="p-${p.id}" class="cursor-pointer truncate"><span class="text-gray-700">${p.text}</span></label></div><button onclick="deletePrayer(${p.id})" class="text-gray-300 hover:text-red-400 px-2"><svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg></button></li>`).join('');
         };
         window.addPrayer = () => { const val = document.getElementById('prayer-input').value.trim(); if(val) { prayers.push({id:Date.now(), text:val, done:false}); window.saveUserData(); document.getElementById('prayer-input').value=''; window.renderPrayers(); } };
         window.togglePrayer = (id) => { const p = prayers.find(x => x.id === id); if(p) { p.done = !p.done; window.saveUserData(); window.renderPrayers(); } };
@@ -668,7 +704,7 @@
         window.renderJournal = () => {
             const list = document.getElementById('journal-list');
             if (journal.length === 0) list.innerHTML = '<div class="text-center py-8"><i class="fas fa-book-open text-gray-200 text-4xl mb-2"></i><p class="text-xs text-gray-400">Comece seu diário hoje.</p></div>';
-            else list.innerHTML = journal.slice().reverse().map(j => `<div class="bg-white p-3 rounded-lg shadow-sm border-l-4 border-pink-300"><div class="flex justify-between items-start"><span class="text-[10px] text-gray-400 font-bold uppercase tracking-wider">${j.date}</span><button onclick="deleteJournal(${j.id})" class="text-gray-300 hover:text-red-400"><i class="fas fa-times"></i></button></div><p class="text-sm text-gray-600 mt-1 font-serif">"${j.text}"</p></div>`).join('');
+            else list.innerHTML = journal.slice().reverse().map(j => `<div class="bg-white p-3 rounded-lg shadow-sm border-l-4 border-pink-300"><div class="flex justify-between items-start"><span class="text-[10px] text-gray-400 font-bold uppercase tracking-wider">${j.date}</span><button onclick="deleteJournal(${j.id})" class="text-gray-300 hover:text-red-400"><svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg></button></div><p class="text-sm text-gray-600 mt-1 font-serif">"${j.text}"</p></div>`).join('');
         };
         window.addJournalEntry = () => { const val = document.getElementById('journal-input').value.trim(); if(val) { const date = new Date().toLocaleDateString('pt-BR'); journal.push({id:Date.now(), text:val, date:date}); window.saveUserData(); document.getElementById('journal-input').value=''; window.renderJournal(); window.showToast("Gratidão registrada."); } };
         window.deleteJournal = (id) => { journal = journal.filter(x => x.id !== id); window.saveUserData(); window.renderJournal(); };
@@ -685,7 +721,14 @@
         };
         window.resetTimer = () => { clearInterval(timerInterval); isTimerRunning = false; timeLeft = 300; window.updateTimerDisplay(); window.updatePlayBtn(); document.getElementById('breathing-bg').classList.remove('breathing-active'); };
         window.updateTimerDisplay = () => { const m = Math.floor(timeLeft / 60).toString().padStart(2, '0'); const s = (timeLeft % 60).toString().padStart(2, '0'); document.getElementById('timer-display').textContent = `${m}:${s}`; };
-        window.updatePlayBtn = () => { document.getElementById('btn-play-pause').innerHTML = isTimerRunning ? '<i class="fas fa-pause"></i>' : '<i class="fas fa-play ml-1"></i>'; };
+        window.updatePlayBtn = () => { 
+            const btn = document.getElementById('btn-play-pause');
+            if(isTimerRunning) {
+                btn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/></svg>`;
+            } else {
+                btn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>`;
+            }
+        };
         
         window.toggleSound = async (type) => {
             const rain = document.getElementById('audio-rain');
@@ -695,7 +738,7 @@
             if (type !== 'off' && rain) {
                 currentSound = type; currentAudioElement = rain;
                 const activeBtn = document.querySelector(`button[onclick="toggleSound('${type}')"]`); if(activeBtn) activeBtn.classList.remove('opacity-50');
-                try { await rain.play(); } catch (error) { if (error.name !== 'AbortError') window.showToast("Não foi possível tocar o som."); currentSound = null; currentAudioElement = null; document.querySelectorAll('.sound-btn').forEach(b => b.classList.add('opacity-50')); }
+                try { await rain.play(); } catch (error) { if (error.name !== 'AbortError') window.showToast("Toque para ativar o som"); currentSound = null; currentAudioElement = null; document.querySelectorAll('.sound-btn').forEach(b => b.classList.add('opacity-50')); }
             } else { currentSound = null; currentAudioElement = null; }
         };
 
@@ -704,10 +747,10 @@
         window.closeShareModal = () => { document.getElementById('share-modal').classList.add('hidden'); document.body.style.overflow = ''; };
         window.changeCardBg = (c) => { const el = document.getElementById('status-preview-container'); el.className = el.className.replace(/bg-gradient-\d/g, '') + ' ' + c + ' rounded-lg scale-[0.8] origin-top'; };
         window.downloadCard = () => { 
-            const btn = document.getElementById('btn-download'); btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> ...'; 
+            const btn = document.getElementById('btn-download'); btn.innerHTML = 'Gerando...'; 
             html2canvas(document.getElementById('status-preview-container'), { scale:2, useCORS:true, backgroundColor:null }).then(cv => { 
                 const a = document.createElement('a'); a.download = 'luz-diaria.png'; a.href = cv.toDataURL("image/png"); a.click(); 
-                btn.innerHTML = '<i class="fas fa-check"></i> Baixado!'; setTimeout(() => btn.innerHTML = '<i class="fas fa-download"></i> Baixar Imagem', 2000); 
+                btn.innerHTML = 'Baixado!'; setTimeout(() => btn.innerHTML = 'Baixar Imagem', 2000); 
             }); 
         };
         window.copyToClipboard = () => { navigator.clipboard.writeText(`${currentVerse.text} - ${currentVerse.ref}`).then(() => window.showToast("Copiado!")); };
@@ -718,11 +761,11 @@
             if (btnLogin) {
                 btnLogin.addEventListener('click', async () => {
                     try {
-                        statusTxt.textContent = "Conectando com Google...";
+                        statusTxt.textContent = "Conectando...";
                         await signInWithPopup(auth, provider);
                     } catch (error) {
                         console.error("Login falhou", error);
-                        statusTxt.textContent = "Erro ao entrar. Tente novamente.";
+                        statusTxt.textContent = "Erro ao entrar.";
                     }
                 });
             }
@@ -731,7 +774,7 @@
                 btnLogout.addEventListener('click', async () => {
                     try {
                         await signOut(auth);
-                        location.reload();
+                        window.location.reload();
                     } catch (error) {
                         console.error("Logout falhou", error);
                     }
@@ -754,7 +797,7 @@
                     currentUser = null;
                     document.getElementById('login-screen').classList.remove('hidden');
                     document.getElementById('app-content').classList.add('hidden');
-                    statusTxt.textContent = "Seu momento de paz e conexão.";
+                    statusTxt.textContent = "Seu momento de paz.";
                 }
             });
         }
@@ -768,13 +811,9 @@
                     favorites = data.favorites || []; prayers = data.prayers || []; journal = data.journal || []; readBooks = data.readBooks || [];
                     localStorage.setItem('dl_favorites', JSON.stringify(favorites));
                 } else {
-                    favorites = JSON.parse(localStorage.getItem('dl_favorites') || '[]');
-                    prayers = JSON.parse(localStorage.getItem('dl_prayers') || '[]');
-                    journal = JSON.parse(localStorage.getItem('dl_journal') || '[]');
-                    readBooks = JSON.parse(localStorage.getItem('dl_read_books') || '[]');
                     window.saveUserData();
                 }
-            } catch (e) { console.error(e); window.showToast("Erro de sincronização"); }
+            } catch (e) { console.error(e); }
         };
 
         window.saveUserData = async () => {
@@ -784,10 +823,10 @@
             } catch (e) { console.error(e); }
         };
 
-        // Init
+        // Inicialização
         window.renderDate();
         window.renderMoodButtons();
-        // Listeners for inputs
+        // Enter key handlers
         const pInput = document.getElementById('prayer-input'); if(pInput) pInput.addEventListener('keypress', (e) => { if(e.key==='Enter') window.addPrayer(); });
         const jInput = document.getElementById('journal-input'); if(jInput) jInput.addEventListener('keypress', (e) => { if(e.key==='Enter') window.addJournalEntry(); });
 
