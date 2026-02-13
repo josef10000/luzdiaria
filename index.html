@@ -83,7 +83,6 @@
         }
         .chapter-num.active { background-color: #d97706; color: white; }
 
-        /* Preview Card para Status */
         #status-preview-container {
             width: 320px; height: 568px;
             position: relative; display: flex; flex-direction: column; justify-content: center; align-items: center;
@@ -97,7 +96,6 @@
         
         .hidden { display: none !important; }
         
-        /* Botões de Ação Círculo */
         .btn-circle {
             width: 46px; height: 46px; border-radius: 9999px;
             display: flex; align-items: center; justify-content: center;
@@ -107,7 +105,6 @@
         .btn-circle:active { transform: scale(0.95); }
         .btn-circle svg { width: 1.4rem; height: 1.4rem; }
 
-        /* Barra de Tarefas Bonita */
         .nav-bar-beautiful {
             background: white;
             border-top: 1px solid #f3f4f6;
@@ -128,13 +125,12 @@
     <!-- TELA DE LOGIN -->
     <div id="login-screen" class="fixed inset-0 z-50 flex flex-col items-center justify-center bg-[#fdfbf7] p-6 text-center transition-opacity duration-500">
         <div class="mb-12 relative flex items-center justify-center">
-            <!-- Sol Vibrante Animado (Sem texto dentro) -->
             <div class="breathing-circle breathing-active"></div>
         </div>
         
         <div class="z-10">
-            <h1 class="text-5xl font-bold text-amber-800 serif mb-3">Luz Diária</h1>
-            <p id="status" class="text-gray-500 mb-12 font-medium tracking-wide">Seu momento de paz e conexão.</p>
+            <h1 class="text-5xl font-bold text-amber-800 serif mb-3 tracking-tighter">Luz Diária</h1>
+            <p id="status-login" class="text-gray-500 mb-12 font-medium tracking-wide">Seu momento de paz e conexão.</p>
 
             <button onclick="handleLogin()" id="btnLogin" class="flex items-center justify-center gap-4 bg-white border border-amber-100 text-gray-700 px-10 py-4 rounded-full shadow-lg hover:shadow-xl transition-all w-full max-w-xs font-bold text-lg">
                 <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google" class="w-6 h-6">
@@ -142,17 +138,17 @@
             </button>
         </div>
         
-        <p class="mt-10 text-[10px] text-gray-400 uppercase tracking-widest leading-relaxed">Sincronize sua jornada espiritual<br>com a segurança da nuvem.</p>
+        <p class="mt-10 text-[10px] text-gray-400 uppercase tracking-widest leading-relaxed">Sincronize sua jornada espiritual.</p>
     </div>
 
     <!-- CONTEÚDO DO APP -->
     <div id="app-content" class="w-full flex flex-col items-center hidden pb-[100px]">
         
-        <header class="w-full bg-white/70 backdrop-blur-lg shadow-sm py-4 px-6 text-center sticky top-0 z-40 transition-all duration-300">
+        <header class="w-full bg-white/70 backdrop-blur-lg shadow-sm py-4 px-6 text-center sticky top-0 z-40">
             <div class="max-w-md mx-auto flex justify-between items-center">
                 <div class="text-left">
                     <h1 class="text-xl font-black text-amber-700 tracking-tight serif">Luz Diária</h1>
-                    <p class="text-[10px] text-gray-400 uppercase tracking-widest font-bold" id="current-date">Carregando...</p>
+                    <p class="text-[10px] text-gray-400 uppercase tracking-widest font-bold" id="current-date">Carregando data...</p>
                 </div>
                 <div class="flex gap-4 items-center">
                     <button onclick="toggleFavoritesModal()" class="text-amber-700 hover:scale-110 transition">
@@ -162,10 +158,10 @@
                         <button onclick="toggleUserMenu()" class="focus:outline-none hover:opacity-80 transition">
                             <img id="user-avatar" src="https://via.placeholder.com/32" alt="User" class="w-8 h-8 rounded-full border-2 border-white shadow-sm object-cover">
                         </button>
-                        <div id="user-menu" class="absolute right-0 top-12 bg-white shadow-2xl rounded-3xl p-2 w-40 border border-gray-50 hidden z-50 transition-all">
-                            <button onclick="handleLogout()" id="btnLogout" class="flex items-center gap-3 w-full text-left px-4 py-3 text-sm text-red-500 font-bold hover:bg-red-50 rounded-2xl transition">
+                        <div id="user-menu" class="absolute right-0 top-12 bg-white shadow-2xl rounded-3xl p-2 w-40 border border-gray-50 hidden z-50">
+                            <button onclick="handleLogout()" class="flex items-center gap-3 w-full text-left px-4 py-3 text-sm text-red-500 font-bold hover:bg-red-50 rounded-2xl transition">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" /></svg>
-                                Sair da Conta
+                                Sair
                             </button>
                         </div>
                     </div>
@@ -178,43 +174,43 @@
             <!-- TAB: INÍCIO -->
             <div id="tab-home" class="tab-content fade-in space-y-8">
                 <section>
-                    <h2 class="text-[10px] font-black text-gray-400 uppercase tracking-[0.2em] mb-3 ml-1">Inspiração Diária</h2>
-                    <div class="flex gap-2 overflow-x-auto no-scrollbar pb-1" id="mood-buttons"></div>
+                    <h2 class="text-[10px] font-black text-gray-400 uppercase tracking-[0.2em] mb-3 ml-1">Como você se sente hoje?</h2>
+                    <div class="flex gap-2 overflow-x-auto no-scrollbar pb-1" id="mood-buttons">
+                        <!-- Botões preenchidos via JS -->
+                    </div>
                 </section>
 
-                <!-- CARD VERSÍCULO -->
                 <section id="verse-card" class="glass-card rounded-[2.5rem] shadow-xl p-8 text-center relative overflow-hidden border-t-8 border-amber-400 transition-all duration-300">
                     <button onclick="toggleFavoriteCurrent()" id="btn-favorite" class="absolute top-6 right-6 text-gray-200 hover:text-red-500 transition">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24"><path d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" /></svg>
                     </button>
                     
                     <div id="verse-content" class="my-8">
-                        <p class="text-xl md:text-2xl serif text-gray-800 leading-relaxed italic mb-6" id="verse-text">"..."</p>
-                        <p class="text-xs font-black text-amber-700 uppercase tracking-[0.3em]" id="verse-ref">...</p>
+                        <p class="text-xl md:text-2xl serif text-gray-800 leading-relaxed italic mb-6" id="verse-text">"Carregando sua palavra..."</p>
+                        <p class="text-xs font-black text-amber-700 uppercase tracking-[0.3em]" id="verse-ref">Aguarde...</p>
                     </div>
 
                     <div class="flex justify-center gap-5 mt-6">
-                        <button onclick="copyToClipboard()" class="btn-circle bg-gray-100 text-gray-400 hover:bg-gray-200 hover:text-gray-600">
+                        <button onclick="copyToClipboard()" class="btn-circle bg-gray-100 text-gray-400">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
                         </button>
-                        <button onclick="openShareModal()" class="btn-circle bg-green-500 text-white shadow-xl shadow-green-100 hover:bg-green-600 transform hover:scale-110">
+                        <button onclick="openShareModal()" class="btn-circle bg-green-500 text-white shadow-xl shadow-green-100">
                             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
                         </button>
-                        <button onclick="shareNative()" class="btn-circle bg-amber-500 text-white shadow-xl shadow-amber-100 hover:bg-amber-600 transform hover:scale-110">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
+                        <button onclick="shareNative()" class="btn-circle bg-amber-500 text-white shadow-xl shadow-amber-100">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
                         </button>
                     </div>
                 </section>
 
-                <!-- MURAL DE ORAÇÕES -->
                 <section class="bg-white rounded-[2.5rem] shadow-sm p-7 border border-gray-50">
                     <div class="flex justify-between items-center mb-6">
                         <h2 class="text-lg font-bold text-gray-700 serif">Mural de Orações</h2>
-                        <span class="text-[9px] text-gray-400 font-black tracking-widest uppercase bg-gray-50 px-3 py-1 rounded-full">Intimidade</span>
+                        <span class="text-[9px] text-gray-400 font-black tracking-widest uppercase bg-gray-50 px-3 py-1 rounded-full">Privado</span>
                     </div>
                     <div class="flex gap-3 mb-8">
-                        <input type="text" id="prayer-input" placeholder="O que queima no seu coração?" class="flex-1 bg-gray-50 border-none rounded-2xl p-4 text-sm outline-none focus:ring-2 focus:ring-amber-100 transition font-medium">
-                        <button onclick="addPrayer()" class="text-amber-600 hover:scale-110 transition">
+                        <input type="text" id="prayer-input" placeholder="O que queima no seu coração?" class="flex-1 bg-gray-50 border-none rounded-2xl p-4 text-sm outline-none focus:ring-2 focus:ring-amber-100 transition">
+                        <button onclick="addPrayer()" class="text-amber-600">
                             <svg class="w-9 h-9" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M12 4v16m8-8H4"></path></svg>
                         </button>
                     </div>
@@ -225,86 +221,34 @@
             <!-- TAB: MEDITAR -->
             <div id="tab-meditate" class="tab-content hidden fade-in text-center py-6">
                 <h2 class="text-3xl font-bold text-gray-700 serif mb-2">Momento de Paz</h2>
-                <p class="text-xs text-gray-400 mb-12 tracking-[0.3em] uppercase font-bold">Silêncio Interior</p>
-                
                 <div class="relative w-64 h-64 mx-auto mb-12 flex items-center justify-center">
                     <div id="breathing-bg" class="breathing-circle absolute"></div>
-                    <div class="z-10 text-6xl font-light text-gray-700 serif tracking-tighter" id="timer-display">05:00</div>
+                    <div class="z-10 text-6xl font-light text-gray-700 serif" id="timer-display">05:00</div>
                 </div>
-
                 <div class="flex justify-center gap-3 mb-12">
-                    <button onclick="setTimer(5)" class="px-6 py-2.5 rounded-full bg-white border border-gray-100 text-[10px] font-black text-gray-400 hover:border-amber-400 hover:text-amber-700 transition shadow-sm tracking-widest uppercase">5 MIN</button>
-                    <button onclick="setTimer(10)" class="px-6 py-2.5 rounded-full bg-white border border-gray-100 text-[10px] font-black text-gray-400 hover:border-amber-400 hover:text-amber-700 transition shadow-sm tracking-widest uppercase">10 MIN</button>
-                    <button onclick="setTimer(15)" class="px-6 py-2.5 rounded-full bg-white border border-gray-100 text-[10px] font-black text-gray-400 hover:border-amber-400 hover:text-amber-700 transition shadow-sm tracking-widest uppercase">15 MIN</button>
+                    <button onclick="setTimer(5)" class="px-6 py-2.5 rounded-full bg-white border border-gray-100 text-[10px] font-black">5 MIN</button>
+                    <button onclick="setTimer(15)" class="px-6 py-2.5 rounded-full bg-white border border-gray-100 text-[10px] font-black">15 MIN</button>
                 </div>
-
-                <div class="flex justify-center items-center gap-10 mb-12">
-                    <button onclick="toggleTimer()" id="btn-play-pause" class="w-24 h-24 bg-amber-600 text-white rounded-full shadow-[0_20px_50px_rgba(217,119,6,0.3)] flex items-center justify-center transition-all hover:scale-105 active:scale-95">
-                        <svg class="h-12 w-12 ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-                    </button>
-                    <button onclick="resetTimer()" class="text-gray-300 hover:text-gray-500 transition">
-                        <svg class="h-8 w-8" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
-                    </button>
-                </div>
-
-                <div class="bg-white p-8 rounded-[2.5rem] shadow-sm border border-gray-50 mx-4">
-                    <p class="text-[10px] font-black text-gray-300 uppercase tracking-[0.4em] mb-6">Fundo Ambiente</p>
-                    <div class="flex justify-center gap-10">
-                        <button onclick="toggleSound('rain')" class="sound-btn opacity-30 flex flex-col items-center gap-3">
-                            <div class="w-14 h-14 bg-blue-50 rounded-[1.2rem] flex items-center justify-center text-blue-500">
-                                <svg class="h-7 w-7" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
-                            </div>
-                            <span class="text-[10px] font-black text-gray-400">CHUVA</span>
-                        </button>
-                        <button onclick="toggleSound('off')" class="sound-btn flex flex-col items-center gap-3">
-                            <div class="w-14 h-14 bg-amber-50 rounded-[1.2rem] flex items-center justify-center text-amber-600">
-                                <svg class="h-7 w-7" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"/><path d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2"/></svg>
-                            </div>
-                            <span class="text-[10px] font-black text-amber-600">SILÊNCIO</span>
-                        </button>
-                    </div>
-                </div>
-                <audio id="audio-rain" loop preload="none"><source src="https://actions.google.com/sounds/v1/weather/rain_heavy_loud.ogg" type="audio/ogg"></audio> 
+                <button onclick="toggleTimer()" id="btn-play-pause" class="w-24 h-24 bg-amber-600 text-white rounded-full shadow-2xl mx-auto flex items-center justify-center">
+                    <svg class="h-12 w-12 ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                </button>
             </div>
 
             <!-- TAB: LEITURA -->
             <div id="tab-reading" class="tab-content hidden fade-in pb-10">
-                <div class="flex justify-between items-end mb-8">
-                    <div>
-                        <h2 class="text-3xl font-bold text-gray-700 serif">Bíblia</h2>
-                        <p class="text-xs text-gray-400 font-bold uppercase tracking-widest mt-1">Sua caminhada na fé</p>
-                    </div>
-                    <div class="text-[10px] text-amber-700 font-black bg-amber-100 px-4 py-2 rounded-full shadow-sm"><span id="reading-progress">0</span>% LIDO</div>
-                </div>
-                
-                <div class="space-y-10">
-                    <div class="bg-white rounded-[2.5rem] shadow-sm p-8 border border-gray-50">
-                        <h3 class="text-[10px] font-black text-gray-400 uppercase tracking-[0.3em] mb-6">Antigo Testamento</h3>
-                        <div class="grid grid-cols-4 gap-3" id="ot-grid"></div>
-                    </div>
-                    <div class="bg-white rounded-[2.5rem] shadow-sm p-8 border border-gray-50">
-                        <h3 class="text-[10px] font-black text-gray-400 uppercase tracking-[0.3em] mb-6">Novo Testamento</h3>
-                        <div class="grid grid-cols-4 gap-3" id="nt-grid"></div>
-                    </div>
-                </div>
+                <h2 class="text-3xl font-bold text-gray-700 serif mb-6">Escrituras</h2>
+                <div class="grid grid-cols-4 gap-3" id="ot-grid"></div>
+                <div class="mt-10 grid grid-cols-4 gap-3" id="nt-grid"></div>
             </div>
 
             <!-- TAB: GRATIDÃO -->
             <div id="tab-journal" class="tab-content hidden fade-in">
-                <div class="flex justify-between items-end mb-8">
-                    <div>
-                        <h2 class="text-3xl font-bold text-gray-700 serif">Gratidão</h2>
-                        <p class="text-xs text-gray-400 font-bold uppercase tracking-widest mt-1">Cicatrizes de alegria</p>
-                    </div>
-                </div>
-                <div class="bg-white rounded-[2.5rem] shadow-sm p-8 border border-gray-50 mb-10">
-                    <p class="text-sm text-gray-500 mb-4 ml-1 font-bold">O que alegrou sua alma hoje?</p>
-                    <div class="flex gap-4">
-                        <input type="text" id="journal-input" placeholder="Escreva aqui seu agradecimento..." class="flex-1 bg-gray-50 border-none rounded-2xl p-4 text-sm outline-none focus:ring-2 focus:ring-pink-100 transition font-medium">
-                        <button onclick="addJournalEntry()" class="text-pink-500 hover:scale-110 transition">
-                            <svg class="h-9 w-9" fill="currentColor" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
-                        </button>
-                    </div>
+                <h2 class="text-3xl font-bold text-gray-700 serif mb-8">Gratidão</h2>
+                <div class="flex gap-4 mb-10">
+                    <input type="text" id="journal-input" placeholder="Agradeça aqui..." class="flex-1 bg-white rounded-2xl p-4 shadow-sm outline-none">
+                    <button onclick="addJournalEntry()" class="text-pink-500">
+                        <svg class="h-9 w-9" fill="currentColor" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                    </button>
                 </div>
                 <div id="journal-list" class="space-y-5"></div>
             </div>
@@ -313,90 +257,40 @@
 
         <!-- BARRA DE TAREFAS BONITA -->
         <nav class="fixed bottom-0 w-full max-w-md mx-auto left-0 right-0 nav-bar-beautiful py-4 px-8 flex justify-between items-center z-50">
-            <button onclick="switchTab('home')" class="nav-btn active flex flex-col items-center gap-1.5 p-1 w-16 text-[9px] font-black uppercase tracking-tighter" data-target="home">
+            <button onclick="switchTab('home')" class="nav-btn active flex flex-col items-center gap-1.5 p-1 w-16 text-[9px] font-black uppercase" data-target="home">
                 <svg viewBox="0 0 24 24" class="h-6 w-6"><path d="M12 3L4 9v12h5v-7h6v7h5V9z"/></svg> INÍCIO
             </button>
-            <button onclick="switchTab('meditate')" class="nav-btn flex flex-col items-center gap-1.5 p-1 w-16 text-gray-300 text-[9px] font-black uppercase tracking-tighter" data-target="meditate">
+            <button onclick="switchTab('meditate')" class="nav-btn flex flex-col items-center gap-1.5 p-1 w-16 text-gray-300 text-[9px] font-black uppercase" data-target="meditate">
                 <svg viewBox="0 0 24 24" class="h-6 w-6"><path d="M12 2a10 10 0 1010 10A10 10 0 0012 2zm0 18a8 8 0 118-8 8 8 0 01-8 8zm1-13h-2v6l5.25 3.15.75-1.23-4-2.37z"/></svg> MEDITAR
             </button>
-            <button onclick="switchTab('reading')" class="nav-btn flex flex-col items-center gap-1.5 p-1 w-16 text-gray-300 text-[9px] font-black uppercase tracking-tighter" data-target="reading">
+            <button onclick="switchTab('reading')" class="nav-btn flex flex-col items-center gap-1.5 p-1 w-16 text-gray-300 text-[9px] font-black uppercase" data-target="reading">
                 <svg viewBox="0 0 24 24" class="h-6 w-6"><path d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H8V4h12v12z"/></svg> BÍBLIA
             </button>
-            <button onclick="switchTab('journal')" class="nav-btn flex flex-col items-center gap-1.5 p-1 w-16 text-gray-300 text-[9px] font-black uppercase tracking-tighter" data-target="journal">
+            <button onclick="switchTab('journal')" class="nav-btn flex flex-col items-center gap-1.5 p-1 w-16 text-gray-300 text-[9px] font-black uppercase" data-target="journal">
                 <svg viewBox="0 0 24 24" class="h-6 w-6"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg> DIÁRIO
             </button>
         </nav>
     </div>
 
-    <!-- MODAIS -->
-    <div id="bible-modal" class="fixed inset-0 bg-white z-[60] hidden flex flex-col overflow-hidden">
-        <div class="flex justify-between items-center p-6 border-b border-gray-50">
-            <h2 id="reader-title" class="text-2xl font-black text-amber-800 serif">Gênesis</h2>
-            <div class="flex items-center gap-4">
-                <button onclick="toggleBookReadStatus()" id="btn-mark-read" class="text-[9px] font-black tracking-widest px-5 py-2.5 rounded-full border-2 border-gray-100 text-gray-400 transition">CONCLUIR</button>
-                <button onclick="closeBibleModal()" class="text-gray-300"><svg class="h-7 w-7" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12"/></svg></button>
-            </div>
-        </div>
-        <div class="flex-grow overflow-y-auto p-8 bg-[#fdfbf7]" id="bible-content-area">
-            <div id="chapter-selection" class="fade-in">
-                <p class="text-[10px] font-black text-gray-300 uppercase tracking-[0.4em] mb-10 text-center">Capítulos</p>
-                <div class="grid grid-cols-5 gap-3" id="chapters-grid"></div>
-            </div>
-            <div id="chapter-text-view" class="hidden fade-in">
-                <div class="flex justify-between items-center mb-10">
-                    <button onclick="showChapterSelection()" class="text-amber-600 text-xs font-black tracking-widest flex items-center gap-2">
-                        <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path d="M15 19l-7-7 7-7"/></svg> VOLTAR
-                    </button>
-                    <span id="current-chapter-display" class="text-[10px] font-black text-gray-300 tracking-widest">CAP. 1</span>
-                </div>
-                <div id="bible-text-body" class="text-gray-800 text-xl leading-[2] serif pb-20 space-y-6"></div>
-                <div class="flex justify-center gap-5 mt-12 pb-20">
-                     <button onclick="prevChapter()" id="btn-prev-chapter" class="bg-gray-100 text-gray-500 text-[10px] font-black px-8 py-4 rounded-full tracking-widest hidden">ANTERIOR</button>
-                     <button onclick="nextChapter()" id="btn-next-chapter" class="bg-amber-100 text-amber-800 text-[10px] font-black px-8 py-4 rounded-full tracking-widest shadow-sm">PRÓXIMO</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- SHARE MODAL -->
-    <div id="share-modal" onclick="if(event.target === this) closeShareModal()" class="fixed inset-0 bg-black/95 z-[70] hidden flex flex-col items-center justify-center p-4 overflow-y-auto backdrop-blur-xl">
+    <!-- MODAIS REQUISITADOS -->
+    <div id="share-modal" onclick="if(event.target === this) closeShareModal()" class="fixed inset-0 bg-black/95 z-[70] hidden flex flex-col items-center justify-center p-4 backdrop-blur-xl">
         <div class="bg-white rounded-[3rem] p-8 w-full max-w-sm relative" onclick="event.stopPropagation()">
             <button onclick="closeShareModal()" class="absolute top-6 right-6 text-gray-300"><svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12"/></svg></button>
-            <h3 class="text-center font-black text-gray-300 mb-8 text-[10px] uppercase tracking-[0.4em]">Design do Status</h3>
             <div class="flex justify-center gap-3 mb-10">
                 <button onclick="changeCardBg('bg-gradient-1')" class="w-9 h-9 rounded-full bg-gradient-1 border-2 border-white shadow-xl"></button>
                 <button onclick="changeCardBg('bg-gradient-2')" class="w-9 h-9 rounded-full bg-gradient-2 border-2 border-white shadow-xl"></button>
                 <button onclick="changeCardBg('bg-gradient-3')" class="w-9 h-9 rounded-full bg-gradient-3 border-2 border-white shadow-xl"></button>
-                <button onclick="changeCardBg('bg-gradient-4')" class="w-9 h-9 rounded-full bg-gradient-4 border-2 border-white shadow-xl"></button>
-                <button onclick="changeCardBg('bg-gradient-5')" class="w-9 h-9 rounded-full bg-gradient-5 border-2 border-white shadow-xl"></button>
             </div>
             <div class="flex justify-center mb-10 overflow-hidden rounded-[2rem] shadow-2xl border border-gray-50">
                 <div id="status-preview-container" class="rounded-[2rem] scale-[0.7] origin-top bg-gradient-1">
                     <div class="z-10 px-10 mt-32">
-                        <p id="modal-verse-text" class="text-white text-3xl serif font-bold leading-tight drop-shadow-2xl">"..."</p>
+                        <p id="modal-verse-text" class="text-white text-3xl serif font-bold leading-tight">"..."</p>
                         <div class="w-20 h-2 bg-white mx-auto my-10 opacity-40 rounded-full"></div>
-                        <p id="modal-verse-ref" class="text-white text-sm uppercase tracking-[0.3em] font-black opacity-90">...</p>
-                    </div>
-                    <div class="absolute bottom-12 w-full text-center">
-                        <p class="text-white text-opacity-60 script-font text-4xl">Luz Diária</p>
+                        <p id="modal-verse-ref" class="text-white text-sm uppercase tracking-widest font-black">...</p>
                     </div>
                 </div>
             </div>
-            <button onclick="downloadCard()" id="btn-download" class="w-full py-5 bg-amber-600 text-white font-black text-sm tracking-widest rounded-[1.5rem] shadow-2xl hover:bg-amber-700 transition flex justify-center items-center gap-4">
-                BAIXAR IMAGEM
-            </button>
-            <button onclick="closeShareModal()" class="w-full py-4 mt-4 text-gray-400 text-[10px] font-black tracking-widest uppercase">VOLTAR</button>
-        </div>
-    </div>
-
-    <!-- FAVORITOS MODAL -->
-    <div id="favorites-modal" onclick="if(event.target === this) toggleFavoritesModal()" class="fixed inset-0 bg-black/40 z-[60] hidden flex justify-end transition-opacity backdrop-blur-sm">
-        <div class="bg-white w-[85%] max-w-sm h-full shadow-2xl p-8 overflow-y-auto transform translate-x-full transition-transform duration-300" id="favorites-content" onclick="event.stopPropagation()">
-            <div class="flex justify-between items-center mb-12">
-                <h2 class="text-2xl font-black text-amber-900 serif">Favoritos</h2>
-                <button onclick="toggleFavoritesModal()" class="text-gray-300"><svg class="h-8 w-8" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12"/></svg></button>
-            </div>
-            <ul id="favorites-list" class="space-y-6"></ul>
+            <button onclick="downloadCard()" id="btn-download" class="w-full py-5 bg-amber-600 text-white font-black text-sm tracking-widest rounded-[1.5rem]">BAIXAR IMAGEM</button>
         </div>
     </div>
 
@@ -425,290 +319,106 @@
         const db = getFirestore(app);
         const provider = new GoogleAuthProvider();
 
-        const statusTxt = document.getElementById('status');
+        // Banco de Dados Curado
+        const verses = [
+            { id: 1, text: "Tudo posso naquele que me fortalece.", ref: "Filipenses 4:13", tag: "paz" },
+            { id: 2, text: "O Senhor é o meu pastor; nada me faltará.", ref: "Salmos 23:1", tag: "paz" },
+            { id: 3, text: "Não andem ansiosos por coisa alguma.", ref: "Filipenses 4:6", tag: "ansiedade" },
+            { id: 4, text: "Dêem graças ao Senhor porque ele é bom.", ref: "Salmos 107:1", tag: "gratidão" }
+        ];
+
+        const moods = [
+            { label: "Paz", tag: "paz", color: "bg-teal-50 text-teal-700" },
+            { label: "Grato", tag: "gratidão", color: "bg-pink-50 text-pink-700" },
+            { label: "Ansioso", tag: "ansiedade", color: "bg-blue-50 text-blue-700" },
+            { label: "Todos", tag: "all", color: "bg-gray-100 text-gray-600" }
+        ];
 
         // --- GLOBAL EXPORTS ---
         window.handleLogin = async () => {
-            try {
-                if(statusTxt) statusTxt.textContent = "Conectando ao Google...";
-                await signInWithPopup(auth, provider);
-            } catch (error) {
-                console.error(error);
-                if(statusTxt) statusTxt.textContent = "Não foi possível entrar.";
-            }
+            try { await signInWithPopup(auth, provider); } catch (e) { console.error(e); }
         };
-
         window.handleLogout = async () => {
-            try {
-                await signOut(auth);
-                window.location.reload();
-            } catch (error) { console.error(error); }
+            try { await signOut(auth); window.location.reload(); } catch (e) { console.error(e); }
         };
 
-        // --- STATE ---
-        let currentUser = null;
-        let currentVerse = null;
-        let favorites = [];
-        let prayers = [];
-        let journal = [];
-        let readBooks = [];
-        let timerInterval;
-        let timeLeft = 300; 
-        let isTimerRunning = false;
-        let currentAudioElement = null;
-        let currentSound = null;
-        let activeBookId = null;
-        let activeBookName = null;
-        let activeChapter = 1;
-        let activeBookTotalChapters = 0;
-
-        const verses = [
-            { id: 1, text: "Tudo posso naquele que me fortalece.", ref: "Filipenses 4:13", tag: "força" },
-            { id: 12, text: "Seja forte e corajoso! Não se apavore nem desanime.", ref: "Josué 1:9", tag: "força" },
-            { id: 16, text: "O Senhor é a minha força e o meu escudo; nele o meu coração confia.", ref: "Salmos 28:7", tag: "força" },
-            { id: 2, text: "Entregue o seu caminho ao Senhor; confie nele, e ele agirá.", ref: "Salmos 37:5", tag: "confiança" },
-            { id: 3, text: "Não andem ansiosos por coisa alguma.", ref: "Filipenses 4:6", tag: "ansiedade" },
-            { id: 5, text: "O Senhor é o meu pastor; nada me faltará.", ref: "Salmos 23:1", tag: "paz" },
-            { id: 7, text: "Deem graças ao Senhor porque ele é bom.", ref: "Salmos 107:1", tag: "gratidão" },
-            { id: 8, text: "Mas os que esperam no Senhor renovarão as forças.", ref: "Isaías 40:31", tag: "cansaço" },
-            { id: 10, text: "Ainda que eu ande pelo vale da sombra da morte, não temerei.", ref: "Salmos 23:4", tag: "medo" },
-            { id: 11, text: "O amor é paciente, o amor é bondoso.", ref: "1 Coríntios 13:4", tag: "amor" },
-            { id: 56, text: "Porque sou eu que conheço os planos que tenho para vocês.", ref: "Jeremias 29:11", tag: "esperança" }
-        ];
-
-        const bibleData = {
-            ot: [
-                { id: 'gn', name: 'Gênesis', chapters: 50 }, { id: 'ex', name: 'Êxodo', chapters: 40 }, { id: 'lv', name: 'Levítico', chapters: 27 }, { id: 'nm', name: 'Números', chapters: 36 }, { id: 'dt', name: 'Deuteronômio', chapters: 34 },
-                { id: 'js', name: 'Josué', chapters: 24 }, { id: 'jz', name: 'Juízes', chapters: 21 }, { id: 'rt', name: 'Rute', chapters: 4 }, { id: 'sl', name: 'Salmos', chapters: 150 }, { id: 'pv', name: 'Provérbios', chapters: 31 }
-            ],
-            nt: [
-                { id: 'mt', name: 'Mateus', chapters: 28 }, { id: 'mc', name: 'Marcos', chapters: 16 }, { id: 'lc', name: 'Lucas', chapters: 24 }, { id: 'jo', name: 'João', chapters: 21 }, { id: 'at', name: 'Atos', chapters: 28 }, { id: 'ap', name: 'Apocalipse', chapters: 22 }
-            ]
-        };
-
-        const moods = [
-            { label: "Todos", tag: "all", color: "bg-gray-100 text-gray-600" },
-            { label: "Paz", tag: "paz", color: "bg-teal-50 text-teal-700" },
-            { label: "Grato", tag: "gratidão", color: "bg-pink-50 text-pink-700" },
-            { label: "Ansioso", tag: "ansiedade", color: "bg-blue-50 text-blue-700" }
-        ];
-
-        // --- CORE UI FUNCTIONS ---
-        window.switchTab = (tabId) => {
-            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
-            const target = document.getElementById(`tab-${tabId}`);
-            if(target) target.classList.remove('hidden');
-            
-            document.querySelectorAll('.nav-btn').forEach(btn => {
-                btn.classList.remove('active', 'text-amber-600');
-                btn.classList.add('text-gray-300');
-                if (btn.dataset.target === tabId) {
-                    btn.classList.add('active', 'text-amber-600');
-                    btn.classList.remove('text-gray-300');
-                }
-            });
-            window.scrollTo(0, 0);
+        // --- UI CORE ---
+        window.renderDate = () => {
+            const el = document.getElementById('current-date');
+            if(el) el.textContent = new Date().toLocaleDateString('pt-BR', { weekday: 'long', day: 'numeric', month: 'long' });
         };
 
         window.renderMoodButtons = () => {
             const container = document.getElementById('mood-buttons');
             if (container) {
-                container.innerHTML = moods.map(m => `<button onclick="filterVerse('${m.tag}')" class="${m.color} px-5 py-2.5 rounded-full text-[10px] font-black uppercase tracking-widest transition hover:scale-105 active:scale-95 shadow-sm border border-black/5 whitespace-nowrap">${m.label}</button>`).join('');
+                container.innerHTML = moods.map(m => `
+                    <button onclick="filterVerse('${m.tag}')" class="${m.color} px-5 py-2.5 rounded-full text-[10px] font-black uppercase tracking-widest transition hover:scale-105 shadow-sm border border-black/5 whitespace-nowrap">
+                        ${m.label}
+                    </button>`).join('');
+            }
+        };
+
+        window.loadRandomVerse = () => {
+            const v = verses[Math.floor(Math.random() * verses.length)];
+            const textEl = document.getElementById('verse-text');
+            const refEl = document.getElementById('verse-ref');
+            if(textEl && refEl) {
+                textEl.textContent = `"${v.text}"`;
+                refEl.textContent = v.ref;
             }
         };
 
         window.filterVerse = (tag) => {
-            let list = tag === 'all' ? verses : verses.filter(v => v.tag === tag);
-            if(list.length === 0) list = verses;
-            currentVerse = list[Math.floor(Math.random() * list.length)];
-            window.updateVerseUI();
+            const list = tag === 'all' ? verses : verses.filter(v => v.tag === tag);
+            const v = list[Math.floor(Math.random() * list.length)] || verses[0];
+            document.getElementById('verse-text').textContent = `"${v.text}"`;
+            document.getElementById('verse-ref').textContent = v.ref;
         };
 
-        window.updateVerseUI = () => {
-            document.getElementById('verse-text').textContent = `"${currentVerse.text}"`;
-            document.getElementById('verse-ref').textContent = currentVerse.ref;
-            const btn = document.getElementById('btn-favorite');
-            const isFav = favorites.some(f => f.id === currentVerse.id);
-            btn.className = isFav ? "absolute top-6 right-6 text-red-500 transition" : "absolute top-6 right-6 text-gray-200 hover:text-red-500 transition";
+        window.switchTab = (id) => {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            document.getElementById(`tab-${id}`).classList.remove('hidden');
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.target === id);
+                btn.classList.toggle('text-amber-600', btn.dataset.target === id);
+                btn.classList.toggle('text-gray-300', btn.dataset.target !== id);
+            });
         };
 
-        window.toggleUserMenu = () => { document.getElementById('user-menu').classList.toggle('hidden'); };
-        window.toggleFavoritesModal = () => {
-            const modal = document.getElementById('favorites-modal');
-            const content = document.getElementById('favorites-content');
-            if(modal.classList.contains('hidden')) { 
-                renderFavoritesList(); modal.classList.remove('hidden'); 
-                setTimeout(() => content.classList.remove('translate-x-full'), 10); 
-            } else { 
-                content.classList.add('translate-x-full'); 
-                setTimeout(() => modal.classList.add('hidden'), 300); 
-            }
-        };
-
-        function renderFavoritesList() {
-            const list = document.getElementById('favorites-list');
-            if (favorites.length === 0) list.innerHTML = '<li class="text-xs text-gray-300 font-bold uppercase tracking-widest text-center py-20">Nada salvo</li>';
-            else list.innerHTML = favorites.map(f => `<li class="bg-amber-50/50 p-5 rounded-[1.5rem] border border-amber-100/50 shadow-sm"><p class="text-gray-700 italic mb-3 text-sm leading-relaxed serif">"${f.text}"</p><span class="text-amber-700 font-black text-[9px] tracking-widest uppercase">${f.ref}</span></li>`).join('');
-        }
-
-        // BÍBLIA
-        window.openBibleReader = (bookId, bookName, totalChapters) => {
-            activeBookId = bookId; activeBookName = bookName; activeBookTotalChapters = totalChapters;
-            document.getElementById('reader-title').textContent = bookName;
-            updateReadButtonStatus();
-            const grid = document.getElementById('chapters-grid'); grid.innerHTML = '';
-            for (let i = 1; i <= totalChapters; i++) {
-                const div = document.createElement('div'); div.className = 'chapter-num'; div.textContent = i; div.onclick = () => window.loadChapterText(i); grid.appendChild(div);
-            }
-            window.showChapterSelection(); document.getElementById('bible-modal').classList.remove('hidden');
-        };
-
-        window.loadChapterText = async (chapter) => {
-            activeChapter = chapter; document.getElementById('chapter-selection').classList.add('hidden'); 
-            const textView = document.getElementById('chapter-text-view'); textView.classList.remove('hidden');
-            document.getElementById('current-chapter-display').textContent = `CAPÍTULO ${chapter}`;
-            const body = document.getElementById('bible-text-body'); body.innerHTML = '<p class="text-center text-xs font-bold text-gray-300 animate-pulse tracking-[0.2em] py-10 uppercase">Abrindo as escrituras...</p>';
-            try {
-                const url = `https://bible-api.com/${encodeURIComponent(activeBookName)}+${chapter}?translation=almeida`;
-                const response = await fetch(url);
-                const data = await response.json();
-                body.innerHTML = data.verses ? data.verses.map(v => `<p><sup class="text-amber-600 font-black mr-2 text-[10px] opacity-60">${v.verse}</sup>${v.text}</p>`).join('') : '<p>Texto indisponível.</p>';
-                document.getElementById('btn-prev-chapter').classList.toggle('hidden', chapter === 1);
-                document.getElementById('btn-next-chapter').classList.toggle('hidden', chapter === activeBookTotalChapters);
-                document.getElementById('bible-content-area').scrollTop = 0;
-            } catch (error) { body.innerHTML = '<p class="text-center text-red-300 py-10 font-bold uppercase text-xs">Erro de conexão</p>'; }
-        };
-
-        window.toggleBookReadStatus = () => {
-            if (readBooks.includes(activeBookId)) readBooks = readBooks.filter(b => b !== activeBookId); else { readBooks.push(activeBookId); window.showToast("LIVRO CONCLUÍDO!"); }
-            window.saveUserData(); updateReadButtonStatus(); window.renderBibleTracker();
-        };
-
-        function updateReadButtonStatus() {
-            const btn = document.getElementById('btn-mark-read');
-            const isRead = readBooks.includes(activeBookId);
-            btn.className = isRead ? "text-[9px] font-black uppercase px-5 py-2.5 rounded-full bg-amber-600 text-white tracking-widest shadow-lg shadow-amber-100" : "text-[9px] font-black uppercase px-5 py-2.5 rounded-full border-2 border-gray-50 text-gray-300 tracking-widest";
-            btn.textContent = isRead ? "LIDO ✓" : "CONCLUIR";
-        }
-
-        window.closeBibleModal = () => document.getElementById('bible-modal').classList.add('hidden');
-        window.showChapterSelection = () => { document.getElementById('chapter-selection').classList.remove('hidden'); document.getElementById('chapter-text-view').classList.add('hidden'); };
-        window.nextChapter = () => window.loadChapterText(activeChapter + 1);
-        window.prevChapter = () => window.loadChapterText(activeChapter - 1);
-
-        window.setTimer = (min) => { timeLeft = min * 60; updateTimerDisplay(); isTimerRunning = false; clearInterval(timerInterval); updatePlayBtn(); document.getElementById('breathing-bg').classList.remove('breathing-active'); };
-        window.toggleTimer = () => {
-            if (isTimerRunning) { clearInterval(timerInterval); isTimerRunning = false; document.getElementById('breathing-bg').classList.remove('breathing-active'); } 
-            else {
-                isTimerRunning = true; document.getElementById('breathing-bg').classList.add('breathing-active');
-                timerInterval = setInterval(() => { if (timeLeft > 0) { timeLeft--; updateTimerDisplay(); } else { clearInterval(timerInterval); isTimerRunning = false; window.showToast("TEMPO FINALIZADO"); } }, 1000);
-            }
-            updatePlayBtn();
-        };
-
-        function updateTimerDisplay() { 
-            const m = Math.floor(timeLeft / 60).toString().padStart(2, '0');
-            const s = (timeLeft % 60).toString().padStart(2, '0');
-            document.getElementById('timer-display').textContent = `${m}:${s}`;
-        }
-
-        function updatePlayBtn() { 
-            const btn = document.getElementById('btn-play-pause');
-            btn.innerHTML = isTimerRunning ? '<svg class="h-10 w-10" fill="currentColor" viewBox="0 0 24 24"><path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/></svg>' : '<svg class="h-10 w-10 ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>';
-        }
-
-        window.toggleSound = async (type) => {
-            const rain = document.getElementById('audio-rain');
-            if (currentAudioElement) { currentAudioElement.pause(); currentAudioElement.currentTime = 0; }
-            document.querySelectorAll('.sound-btn').forEach(b => b.classList.add('opacity-30'));
-            if (currentSound === type) { currentSound = null; currentAudioElement = null; return; }
-            if (type !== 'off') {
-                currentSound = type; currentAudioElement = rain;
-                const activeBtn = document.querySelector(`button[onclick="toggleSound('${type}')"]`);
-                activeBtn.classList.remove('opacity-30');
-                try { await rain.play(); } catch (e) { window.showToast("ATIVAR SOM"); }
-            } else { currentSound = null; }
-        };
-
-        // --- DATA ---
-        window.saveUserData = async () => {
-            if (!currentUser) return;
-            const path = `artifacts/luz-diaria/users/${currentUser.uid}/data/state`;
-            await setDoc(doc(db, 'artifacts', 'luz-diaria', 'users', currentUser.uid, 'profile', 'data'), { favorites, prayers, journal, readBooks, lastUpdate: new Date() }, { merge: true });
-        };
-
-        window.loadUserData = async (uid) => {
-            const docSnap = await getDoc(doc(db, 'artifacts', 'luz-diaria', 'users', uid, 'profile', 'data'));
-            if (docSnap.exists()) {
-                const data = docSnap.data();
-                favorites = data.favorites || []; prayers = data.prayers || []; journal = data.journal || []; readBooks = data.readBooks || [];
-            }
-        };
-
-        window.addPrayer = () => { const v = document.getElementById('prayer-input').value.trim(); if(v) { prayers.push({id:Date.now(), text:v, done:false}); window.saveUserData(); document.getElementById('prayer-input').value=''; renderPrayers(); } };
-        window.togglePrayer = (id) => { const p = prayers.find(x => x.id === id); if(p) { p.done = !p.done; window.saveUserData(); renderPrayers(); } };
-        window.deletePrayer = (id) => { prayers = prayers.filter(x => x.id !== id); window.saveUserData(); renderPrayers(); };
-
-        function renderPrayers() {
-            const list = document.getElementById('prayer-list');
-            list.innerHTML = prayers.length === 0 ? '<li class="text-[10px] text-gray-300 font-black uppercase tracking-widest text-center py-10 opacity-50">Nada anotado</li>' : prayers.slice().reverse().map(p => `<li class="flex items-center justify-between bg-gray-50/40 p-4 rounded-3xl border border-gray-100/50"><div class="flex items-center gap-4 overflow-hidden"><input type="checkbox" class="custom-checkbox w-6 h-6 text-amber-600 rounded-xl border-2 border-gray-200" ${p.done ? 'checked' : ''} onchange="togglePrayer(${p.id})"><label class="truncate"><span class="text-sm text-gray-700 font-bold">${p.text}</span></label></div><button onclick="deletePrayer(${p.id})" class="text-gray-200 px-2"><svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg></button></li>`).join('');
-        }
-
-        window.renderBibleTracker = () => {
-            const render = (books, id) => {
-                document.getElementById(id).innerHTML = books.map(book => {
-                    const isRead = readBooks.includes(book.id);
-                    return `<div onclick="openBibleReader('${book.id}', '${book.name}', ${book.chapters})" class="bible-book ${isRead ? 'read shadow-lg shadow-amber-100' : 'bg-gray-100/60 text-gray-400'} border border-transparent hover:border-amber-200">${book.name}</div>`;
-                }).join('');
-            };
-            render(bibleData.ot, 'ot-grid'); render(bibleData.nt, 'nt-grid');
-            document.getElementById('reading-progress').textContent = Math.round((readBooks.length / 22) * 100);
-        };
-
-        window.renderJournal = () => {
-            const list = document.getElementById('journal-list');
-            list.innerHTML = journal.length === 0 ? '<div class="text-center py-20 italic text-gray-300 font-black text-[10px] tracking-widest uppercase opacity-40">Nenhum registro</div>' : journal.slice().reverse().map(j => `<div class="bg-white p-6 rounded-[2rem] shadow-sm border-l-8 border-pink-400 mb-6 animate-fade-in"><div class="flex justify-between items-start text-[9px] text-gray-300 font-black tracking-widest uppercase mb-3"><span>${j.date}</span><button onclick="deleteJournal(${j.id})" class="hover:text-red-400 transition"><svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12"/></svg></button></div><p class="text-sm text-gray-700 italic leading-relaxed serif font-medium">"${j.text}"</p></div>`).join('');
-        };
-
-        window.addJournalEntry = () => { const v = document.getElementById('journal-input').value.trim(); if(v) { journal.push({id:Date.now(), text:v, date:new Date().toLocaleDateString('pt-BR')}); window.saveUserData(); document.getElementById('journal-input').value=''; renderJournal(); } };
-        window.deleteJournal = (id) => { journal = journal.filter(x => x.id !== id); window.saveUserData(); renderJournal(); };
-
-        // CARD UTILS
-        window.changeCardBg = (c) => { document.getElementById('status-preview-container').className = `rounded-[2rem] scale-[0.7] origin-top ${c}`; };
-        window.openShareModal = () => { document.getElementById('modal-verse-text').textContent = `"${currentVerse.text}"`; document.getElementById('modal-verse-ref').textContent = currentVerse.ref; document.getElementById('share-modal').classList.remove('hidden'); document.body.style.overflow = 'hidden'; };
-        window.closeShareModal = () => { document.getElementById('share-modal').classList.add('hidden'); document.body.style.overflow = ''; };
-        window.downloadCard = () => { 
-            const btn = document.getElementById('btn-download'); btn.innerHTML = 'CRIANDO...'; 
-            html2canvas(document.getElementById('status-preview-container'), { scale:2, useCORS:true, backgroundColor:null }).then(cv => { 
-                const a = document.createElement('a'); a.download = 'LuzDiaria_Card.png'; a.href = cv.toDataURL("image/png"); a.click(); 
-                btn.innerHTML = 'CONCLUÍDO!'; setTimeout(() => btn.innerHTML = 'BAIXAR IMAGEM', 2000); 
-            }); 
-        };
-        window.copyToClipboard = () => { navigator.clipboard.writeText(`${currentVerse.text} - ${currentVerse.ref}`).then(() => window.showToast("COPIADO!")); };
-        window.shareNative = () => { if (navigator.share) navigator.share({ title: 'Luz Diária', text: `${currentVerse.text} - ${currentVerse.ref}` }); else window.copyToClipboard(); };
-        window.showToast = (m) => { const t = document.getElementById('toast'); document.getElementById('toast-msg').textContent = m; t.classList.add('opacity-100'); t.classList.remove('opacity-0', 'pointer-events-none'); setTimeout(() => { t.classList.remove('opacity-100'); t.classList.add('opacity-0', 'pointer-events-none'); }, 3000); }
-
-        // --- AUTH OBSERVER ---
+        // --- AUTH OBSERVER (O CORAÇÃO DA INICIALIZAÇÃO) ---
         onAuthStateChanged(auth, async (user) => {
             if (user) {
-                currentUser = user;
-                statusTxt.textContent = `Paz, ${user.displayName.split(' ')[0]}!`;
-                setTimeout(async () => {
-                    document.getElementById('login-screen').classList.add('hidden');
-                    document.getElementById('app-content').classList.remove('hidden');
-                    document.getElementById('user-avatar').src = user.photoURL || "https://via.placeholder.com/32";
-                    await window.loadUserData(user.uid);
-                    const dateStr = new Date().toLocaleDateString('pt-BR', { weekday: 'long', day: 'numeric', month: 'long' });
-                    document.getElementById('current-date').textContent = dateStr;
-                    window.renderMoodButtons(); window.loadRandomVerse(); window.renderPrayers(); window.renderBibleTracker(); window.renderJournal();
-                }, 800);
+                document.getElementById('login-screen').classList.add('hidden');
+                document.getElementById('app-content').classList.remove('hidden');
+                document.getElementById('user-avatar').src = user.photoURL || "https://via.placeholder.com/32";
+                
+                // Inicializa tudo imediatamente após o login
+                window.renderDate();
+                window.renderMoodButtons();
+                window.loadRandomVerse();
+                window.switchTab('home');
             } else {
-                currentUser = null;
                 document.getElementById('login-screen').classList.remove('hidden');
                 document.getElementById('app-content').classList.add('hidden');
             }
         });
 
+        // Outras funções de ajuda
+        window.toggleUserMenu = () => document.getElementById('user-menu').classList.toggle('hidden');
+        window.closeShareModal = () => document.getElementById('share-modal').classList.add('hidden');
+        window.openShareModal = () => {
+            document.getElementById('modal-verse-text').textContent = document.getElementById('verse-text').textContent;
+            document.getElementById('modal-verse-ref').textContent = document.getElementById('verse-ref').textContent;
+            document.getElementById('share-modal').classList.remove('hidden');
+        };
+        window.showToast = (m) => { 
+            const t = document.getElementById('toast'); document.getElementById('toast-msg').textContent = m;
+            t.classList.add('opacity-100'); setTimeout(() => t.classList.remove('opacity-100'), 3000);
+        };
+        window.copyToClipboard = () => { 
+            navigator.clipboard.writeText(document.getElementById('verse-text').textContent + " - " + document.getElementById('verse-ref').textContent);
+            window.showToast("COPIADO!");
+        };
     </script>
 </body>
 </html>
