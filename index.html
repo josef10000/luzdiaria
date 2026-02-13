@@ -104,7 +104,6 @@
             margin-right: 4px;
         }
 
-        /* CORREÇÃO AQUI: Removido o background fixo do ID */
         #status-preview-container {
             width: 320px;
             height: 568px;
@@ -115,7 +114,7 @@
             align-items: center;
             padding: 2rem;
             text-align: center;
-            /* background removido para permitir que as classes funcionem */
+            /* Background removido daqui e controlado via classes */
         }
         .bg-gradient-1 { background: linear-gradient(135deg, #f6d365 0%, #fda085 100%); }
         .bg-gradient-2 { background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%); }
@@ -140,7 +139,8 @@
         <h1 class="text-4xl font-bold text-amber-800 serif mb-2">Luz Diária</h1>
         <p id="status" class="text-gray-500 mb-12 font-light">Carregando...</p>
 
-        <button id="btnLogin" class="flex items-center justify-center gap-3 bg-white border border-gray-300 text-gray-700 px-8 py-3 rounded-full shadow-sm hover:bg-gray-50 hover:shadow-md transition w-full max-w-xs font-medium">
+        <!-- Botão de Login com OnClick Direto -->
+        <button onclick="handleLogin()" id="btnLogin" class="flex items-center justify-center gap-3 bg-white border border-gray-300 text-gray-700 px-8 py-3 rounded-full shadow-sm hover:bg-gray-50 hover:shadow-md transition w-full max-w-xs font-medium">
             <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google" class="w-5 h-5">
             Entrar com Google
         </button>
@@ -166,7 +166,8 @@
                             <img id="user-avatar" src="https://via.placeholder.com/32" alt="User" class="w-8 h-8 rounded-full border border-amber-200 object-cover">
                         </button>
                         <div id="user-menu" class="absolute right-0 top-12 bg-white shadow-xl rounded-xl p-2 w-32 border border-gray-100 hidden z-50 transform origin-top-right transition-all">
-                            <button id="btnLogout" class="flex items-center gap-2 w-full text-left px-3 py-2 text-sm text-red-500 hover:bg-red-50 rounded-lg">
+                            <!-- Botão de Sair -->
+                            <button onclick="handleLogout()" id="btnLogout" class="flex items-center gap-2 w-full text-left px-3 py-2 text-sm text-red-500 hover:bg-red-50 rounded-lg">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" /></svg>
                                 Sair
                             </button>
@@ -396,6 +397,7 @@
         import { getFirestore, collection, addDoc, getDocs, query, where, setDoc, doc, deleteDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
         import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-analytics.js";
 
+        // CHAVES FORNECIDAS PELO USUÁRIO
         const firebaseConfig = {
             apiKey: "AIzaSyCanRiUCjD-yliLR1Xxc0JzSzlI-ZNPZSg",
             authDomain: "luz-diaria-a3372.firebaseapp.com",
@@ -418,12 +420,40 @@
             isFirebaseActive = true;
         } catch (e) {
             console.error("Erro Firebase Init:", e);
-            document.getElementById('status').textContent = "Erro de conexão. Verifique o console.";
+            const st = document.getElementById('status');
+            if(st) st.textContent = "Erro de conexão. Verifique as chaves.";
         }
 
+        // ELEMENTOS UI
         const btnLogin = document.getElementById('btnLogin');
         const btnLogout = document.getElementById('btnLogout');
         const statusTxt = document.getElementById('status');
+
+        // FUNÇÕES DE AUTH (EXPOSTAS PARA WINDOW PARA FUNCIONAR COM ONCLICK)
+        window.handleLogin = async () => {
+            if (!isFirebaseActive) {
+                alert("Erro: Firebase não iniciado.");
+                return;
+            }
+            try {
+                if(statusTxt) statusTxt.textContent = "Conectando...";
+                await signInWithPopup(auth, provider);
+            } catch (error) {
+                console.error("Login falhou", error);
+                if(statusTxt) statusTxt.textContent = "Erro ao entrar. Tente novamente.";
+                alert("Erro no login: " + error.message);
+            }
+        };
+
+        window.handleLogout = async () => {
+            if (!isFirebaseActive) return;
+            try {
+                await signOut(auth);
+                window.location.reload();
+            } catch (error) {
+                console.error("Logout falhou", error);
+            }
+        };
 
         let currentUser = null;
         let currentVerse = null;
@@ -608,6 +638,22 @@
 
         window.toggleTheme = () => window.showToast("Paz seja convosco.");
 
+        // NAVEGAÇÃO ENTRE ABAS
+        window.switchTab = (tabId) => {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            const target = document.getElementById(`tab-${tabId}`);
+            if(target) target.classList.remove('hidden');
+            
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('text-amber-600', 'active');
+                btn.classList.add('text-gray-400');
+                if (btn.dataset.target === tabId) {
+                    btn.classList.remove('text-gray-400');
+                    btn.classList.add('text-amber-600', 'active');
+                }
+            });
+        };
+
         // BIBLE READER
         window.renderBibleTracker = () => {
             const renderGrid = (books, containerId) => {
@@ -644,7 +690,7 @@
 
         window.updateReadButtonStatus = () => {
             const btn = document.getElementById('btn-mark-read'); const isRead = readBooks.includes(activeBookId);
-            if (isRead) { btn.classList.add('bg-amber-600', 'text-white', 'border-transparent'); btn.classList.remove('text-gray-500', 'border-gray-300'); btn.textContent = "Lido ✓"; } 
+            if (isRead) { btn.classList.add('bg-amber-600', 'text-white', 'border-transparent'); btn.classList.remove('text-gray-500', 'border-gray-300'); btn.textContent = "Lido"; } 
             else { btn.classList.remove('bg-amber-600', 'text-white', 'border-transparent'); btn.classList.add('text-gray-500', 'border-gray-300'); btn.textContent = "Marcar Lido"; }
         };
 
@@ -662,7 +708,7 @@
             const prevBtn = document.getElementById('btn-prev-chapter'); const nextBtn = document.getElementById('btn-next-chapter');
             if (activeChapter <= 1) prevBtn.classList.add('hidden'); else prevBtn.classList.remove('hidden');
             if (activeChapter >= activeBookTotalChapters) nextBtn.classList.add('hidden'); else nextBtn.classList.remove('hidden');
-            const body = document.getElementById('bible-text-body'); body.innerHTML = '<div class="text-center py-10"><i class="fas fa-spinner fa-spin text-amber-500 text-2xl"></i><p class="text-xs text-gray-400 mt-2">Buscando na nuvem...</p></div>'; document.getElementById('bible-content-area').scrollTop = 0;
+            const body = document.getElementById('bible-text-body'); body.innerHTML = '<div class="text-center py-10"><p class="text-xs text-gray-400 mt-2">Carregando...</p></div>'; document.getElementById('bible-content-area').scrollTop = 0;
             try {
                 const url = `https://bible-api.com/${encodeURIComponent(activeBookName)}+${chapter}?translation=almeida`;
                 const response = await fetch(url);
@@ -681,7 +727,7 @@
         window.renderPrayers = () => {
             const list = document.getElementById('prayer-list');
             if (prayers.length === 0) list.innerHTML = '<li class="text-xs text-center text-gray-400 italic">Nenhum pedido ainda.</li>';
-            else list.innerHTML = prayers.slice().reverse().map(p => `<li class="flex items-center justify-between bg-gray-50 p-2 rounded border border-gray-100"><div class="flex items-center gap-2 overflow-hidden"><input type="checkbox" id="p-${p.id}" class="custom-checkbox w-3 h-3 text-amber-600 rounded" ${p.done ? 'checked' : ''} onchange="togglePrayer(${p.id})"><label for="p-${p.id}" class="cursor-pointer truncate"><span class="text-gray-700">${p.text}</span></label></div><button onclick="deletePrayer(${p.id})" class="text-gray-300 hover:text-red-400 px-2"><i class="fas fa-trash-alt text-[10px]"></i></button></li>`).join('');
+            else list.innerHTML = prayers.slice().reverse().map(p => `<li class="flex items-center justify-between bg-gray-50 p-2 rounded border border-gray-100"><div class="flex items-center gap-2 overflow-hidden"><input type="checkbox" id="p-${p.id}" class="custom-checkbox w-3 h-3 text-amber-600 rounded" ${p.done ? 'checked' : ''} onchange="togglePrayer(${p.id})"><label for="p-${p.id}" class="cursor-pointer truncate"><span class="text-gray-700">${p.text}</span></label></div><button onclick="deletePrayer(${p.id})" class="text-gray-300 hover:text-red-400 px-2"><svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg></button></li>`).join('');
         };
         window.addPrayer = () => { const val = document.getElementById('prayer-input').value.trim(); if(val) { prayers.push({id:Date.now(), text:val, done:false}); window.saveUserData(); document.getElementById('prayer-input').value=''; window.renderPrayers(); } };
         window.togglePrayer = (id) => { const p = prayers.find(x => x.id === id); if(p) { p.done = !p.done; window.saveUserData(); window.renderPrayers(); } };
@@ -690,12 +736,45 @@
         window.renderJournal = () => {
             const list = document.getElementById('journal-list');
             if (journal.length === 0) list.innerHTML = '<div class="text-center py-8"><i class="fas fa-book-open text-gray-200 text-4xl mb-2"></i><p class="text-xs text-gray-400">Comece seu diário hoje.</p></div>';
-            else list.innerHTML = journal.slice().reverse().map(j => `<div class="bg-white p-3 rounded-lg shadow-sm border-l-4 border-pink-300"><div class="flex justify-between items-start"><span class="text-[10px] text-gray-400 font-bold uppercase tracking-wider">${j.date}</span><button onclick="deleteJournal(${j.id})" class="text-gray-300 hover:text-red-400"><i class="fas fa-times"></i></button></div><p class="text-sm text-gray-600 mt-1 font-serif">"${j.text}"</p></div>`).join('');
+            else list.innerHTML = journal.slice().reverse().map(j => `<div class="bg-white p-3 rounded-lg shadow-sm border-l-4 border-pink-300"><div class="flex justify-between items-start"><span class="text-[10px] text-gray-400 font-bold uppercase tracking-wider">${j.date}</span><button onclick="deleteJournal(${j.id})" class="text-gray-300 hover:text-red-400"><svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg></button></div><p class="text-sm text-gray-600 mt-1 font-serif">"${j.text}"</p></div>`).join('');
         };
         window.addJournalEntry = () => { const val = document.getElementById('journal-input').value.trim(); if(val) { const date = new Date().toLocaleDateString('pt-BR'); journal.push({id:Date.now(), text:val, date:date}); window.saveUserData(); document.getElementById('journal-input').value=''; window.renderJournal(); window.showToast("Gratidão registrada."); } };
         window.deleteJournal = (id) => { journal = journal.filter(x => x.id !== id); window.saveUserData(); window.renderJournal(); };
 
-        // UTILS
+        // MEDITATION & SOUNDS
+        window.setTimer = (min) => { timeLeft = min * 60; window.updateTimerDisplay(); isTimerRunning = false; clearInterval(timerInterval); window.updatePlayBtn(); document.getElementById('breathing-bg').classList.remove('breathing-active'); };
+        window.toggleTimer = () => {
+            if (isTimerRunning) { clearInterval(timerInterval); isTimerRunning = false; document.getElementById('breathing-bg').classList.remove('breathing-active'); } 
+            else {
+                isTimerRunning = true; document.getElementById('breathing-bg').classList.add('breathing-active');
+                timerInterval = setInterval(() => { if (timeLeft > 0) { timeLeft--; window.updateTimerDisplay(); } else { clearInterval(timerInterval); isTimerRunning = false; document.getElementById('breathing-bg').classList.remove('breathing-active'); window.showToast("Tempo finalizado."); } }, 1000);
+            }
+            window.updatePlayBtn();
+        };
+        window.resetTimer = () => { clearInterval(timerInterval); isTimerRunning = false; timeLeft = 300; window.updateTimerDisplay(); window.updatePlayBtn(); document.getElementById('breathing-bg').classList.remove('breathing-active'); };
+        window.updateTimerDisplay = () => { const m = Math.floor(timeLeft / 60).toString().padStart(2, '0'); const s = (timeLeft % 60).toString().padStart(2, '0'); document.getElementById('timer-display').textContent = `${m}:${s}`; };
+        window.updatePlayBtn = () => { 
+            const btn = document.getElementById('btn-play-pause');
+            if(isTimerRunning) {
+                btn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/></svg>`;
+            } else {
+                btn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>`;
+            }
+        };
+        
+        window.toggleSound = async (type) => {
+            const rain = document.getElementById('audio-rain');
+            if (currentAudioElement) { try { currentAudioElement.pause(); currentAudioElement.currentTime = 0; } catch (e) {} }
+            document.querySelectorAll('.sound-btn').forEach(b => b.classList.add('opacity-50'));
+            if (currentSound === type) { currentSound = null; currentAudioElement = null; return; }
+            if (type !== 'off' && rain) {
+                currentSound = type; currentAudioElement = rain;
+                const activeBtn = document.querySelector(`button[onclick="toggleSound('${type}')"]`); if(activeBtn) activeBtn.classList.remove('opacity-50');
+                try { await rain.play(); } catch (error) { if (error.name !== 'AbortError') window.showToast("Toque para ativar o som"); currentSound = null; currentAudioElement = null; document.querySelectorAll('.sound-btn').forEach(b => b.classList.add('opacity-50')); }
+            } else { currentSound = null; currentAudioElement = null; }
+        };
+
+        // CARD GENERATOR
         window.openShareModal = () => { document.getElementById('modal-verse-text').textContent = `"${currentVerse.text}"`; document.getElementById('modal-verse-ref').textContent = currentVerse.ref; document.getElementById('share-modal').classList.remove('hidden'); document.body.style.overflow = 'hidden'; };
         window.closeShareModal = () => { document.getElementById('share-modal').classList.add('hidden'); document.body.style.overflow = ''; };
         
@@ -708,11 +787,89 @@
             el.classList.add(c);
         };
         
-        window.downloadCard = () => { const btn = document.getElementById('btn-download'); btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> ...'; html2canvas(document.getElementById('status-preview-container'), { scale:2, useCORS:true, backgroundColor:null }).then(cv => { const a = document.createElement('a'); a.download = 'luz-diaria.png'; a.href = cv.toDataURL("image/png"); a.click(); btn.innerHTML = '<i class="fas fa-check"></i> Baixado!'; setTimeout(() => btn.innerHTML = '<i class="fas fa-download"></i> Baixar Imagem', 2000); }); }
+        window.downloadCard = () => { 
+            const btn = document.getElementById('btn-download'); btn.innerHTML = 'Gerando...'; 
+            html2canvas(document.getElementById('status-preview-container'), { scale:2, useCORS:true, backgroundColor:null }).then(cv => { 
+                const a = document.createElement('a'); a.download = 'luz-diaria.png'; a.href = cv.toDataURL("image/png"); a.click(); 
+                btn.innerHTML = 'Baixado!'; setTimeout(() => btn.innerHTML = 'Baixar Imagem', 2000); 
+            }); 
+        };
         window.copyToClipboard = () => { navigator.clipboard.writeText(`${currentVerse.text} - ${currentVerse.ref}`).then(() => window.showToast("Copiado!")); };
         window.shareNative = () => { if (navigator.share) navigator.share({ title: 'Luz Diária', text: `${currentVerse.text} - ${currentVerse.ref}` }); else window.copyToClipboard(); };
         window.showToast = (m) => { const t = document.getElementById('toast'); document.getElementById('toast-msg').textContent = m; t.classList.remove('opacity-0', 'pointer-events-none'); setTimeout(() => t.classList.add('opacity-0', 'pointer-events-none'), 3000); }
         window.toggleTheme = () => { window.showToast("Paz seja convosco."); }
+        
+        // UI Helpers
+        window.toggleUserMenu = () => {
+            const menu = document.getElementById('user-menu');
+            if (menu.classList.contains('hidden')) {
+                menu.classList.remove('hidden');
+            } else {
+                menu.classList.add('hidden');
+            }
+        };
+
+        // Fechar menu ao clicar fora
+        document.addEventListener('click', (e) => {
+            const menu = document.getElementById('user-menu');
+            const btn = document.getElementById('user-profile')?.parentNode;
+            if (menu && !menu.classList.contains('hidden') && !e.target.closest('#user-profile') && !e.target.closest('#user-menu')) {
+                menu.classList.add('hidden');
+            }
+        });
+
+        // --- AUTH & DATA LOGIC ---
+        if (isFirebaseActive) {
+            onAuthStateChanged(auth, async (user) => {
+                if (user) {
+                    currentUser = user;
+                    statusTxt.textContent = `Olá, ${user.displayName.split(' ')[0]}!`;
+                    setTimeout(async () => {
+                        document.getElementById('login-screen').classList.add('hidden');
+                        document.getElementById('app-content').classList.remove('hidden');
+                        const avatar = document.getElementById('user-avatar');
+                        if(avatar) avatar.src = user.photoURL || "https://via.placeholder.com/32";
+                        await window.loadUserData(user.uid);
+                        window.renderPrayers(); window.renderBibleTracker(); window.renderJournal(); window.loadRandomVerse();
+                    }, 800);
+                } else {
+                    currentUser = null;
+                    document.getElementById('login-screen').classList.remove('hidden');
+                    document.getElementById('app-content').classList.add('hidden');
+                    statusTxt.textContent = "Seu momento de paz.";
+                }
+            });
+        }
+
+        window.loadUserData = async (uid) => {
+            try {
+                const docRef = doc(db, "users", uid);
+                const docSnap = await getDoc(docRef);
+                if (docSnap.exists()) {
+                    const data = docSnap.data();
+                    favorites = data.favorites || []; prayers = data.prayers || []; journal = data.journal || []; readBooks = data.readBooks || [];
+                    localStorage.setItem('dl_favorites', JSON.stringify(favorites));
+                } else {
+                    window.saveUserData();
+                }
+            } catch (e) { console.error(e); }
+        };
+
+        window.saveUserData = async () => {
+            if (!currentUser) return;
+            try {
+                await setDoc(doc(db, "users", currentUser.uid), { favorites, prayers, journal, readBooks, lastUpdate: new Date() }, { merge: true });
+            } catch (e) { console.error(e); }
+        };
+
+        // Inicialização
+        window.renderDate();
+        window.renderMoodButtons();
+        // Enter key handlers
+        const pInput = document.getElementById('prayer-input'); if(pInput) pInput.addEventListener('keypress', (e) => { if(e.key==='Enter') window.addPrayer(); });
+        const jInput = document.getElementById('journal-input'); if(jInput) jInput.addEventListener('keypress', (e) => { if(e.key==='Enter') window.addJournalEntry(); });
+
     </script>
 </body>
 </html>
+
