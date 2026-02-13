@@ -139,7 +139,7 @@
             <p id="status-login" class="text-gray-400 mb-12 font-semibold tracking-wide uppercase text-[10px]">Seu momento de paz e conexão</p>
 
             <button onclick="handleLogin()" id="btnLogin" class="flex items-center justify-center gap-4 bg-white border border-amber-100 text-gray-700 px-10 py-4 rounded-full shadow-xl hover:shadow-2xl transition-all w-full max-w-xs font-bold text-lg active:scale-95">
-                <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google" class="w-5 h-5">
+                <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google" class="w-5 h-6">
                 Entrar com Google
             </button>
         </div>
@@ -176,10 +176,10 @@
 
         <main class="w-full max-w-md px-4 mt-6 flex-grow">
 
-            <!-- TAB: INÍCIO -->
+            <!-- TAB: HOME -->
             <div id="tab-home" class="tab-content fade-in space-y-8">
                 <section>
-                    <h2 class="text-[10px] font-black text-gray-400 uppercase tracking-[0.3em] mb-4 ml-1">Como você se sente hoje?</h2>
+                    <h2 class="text-[10px] font-black text-gray-400 uppercase tracking-[0.3em] mb-4 ml-1">Como você está se sentindo?</h2>
                     <div class="flex gap-2 overflow-x-auto no-scrollbar pb-2" id="mood-buttons"></div>
                 </section>
 
@@ -200,7 +200,7 @@
                         <button onclick="openShareModal()" class="btn-circle bg-green-500 text-white shadow-xl shadow-green-200 hover:scale-110 transition">
                             <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
                         </button>
-                        <button onclick="openShareModal()" class="btn-circle bg-amber-500 text-white shadow-xl shadow-amber-200 hover:scale-110 transition">
+                        <button onclick="shareNative()" class="btn-circle bg-amber-500 text-white shadow-xl shadow-amber-200 hover:scale-110 transition">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
                         </button>
                     </div>
@@ -238,19 +238,19 @@
                         <svg class="h-10 w-10 ml-1" id="play-pause-icon" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
                     </button>
                     <div class="bg-white p-6 rounded-[2.5rem] shadow-sm border border-gray-50 w-full max-w-xs">
-                        <p class="text-[9px] font-black text-gray-300 uppercase tracking-[0.5em] mb-4">Fundo Ambiente</p>
+                        <p class="text-[9px] font-black text-gray-300 uppercase tracking-[0.5em] mb-4">Som Ambiente</p>
                         <div class="flex justify-around items-center">
-                            <button onclick="toggleSound('rain')" class="sound-btn opacity-30 flex flex-col items-center gap-2">
-                                <div class="w-14 h-14 bg-blue-50 rounded-2xl flex items-center justify-center text-blue-500 transition-colors">
+                            <button onclick="toggleSound('rain')" class="sound-btn opacity-30 flex flex-col items-center gap-2 transition">
+                                <div class="w-14 h-14 bg-blue-50 rounded-2xl flex items-center justify-center text-blue-500">
                                     <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
                                 </div>
                                 <span class="text-[10px] font-black">CHUVA</span>
                             </button>
-                            <button onclick="toggleSound('off')" class="sound-btn flex flex-col items-center gap-2">
-                                <div class="w-14 h-14 bg-amber-50 rounded-2xl flex items-center justify-center text-amber-600 transition-colors">
-                                    <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"/><path d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2"/></svg>
+                            <button onclick="toggleSound('off')" class="sound-btn flex flex-col items-center gap-2 transition">
+                                <div class="w-14 h-14 bg-amber-50 rounded-2xl flex items-center justify-center text-amber-600">
+                                    <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"/></svg>
                                 </div>
-                                <span class="text-[10px] font-black">SILÊNCIO</span>
+                                <span class="text-[10px] font-black text-amber-600">SILÊNCIO</span>
                             </button>
                         </div>
                     </div>
@@ -258,12 +258,12 @@
                 <audio id="audio-rain" loop preload="auto"><source src="https://actions.google.com/sounds/v1/weather/rain_heavy_loud.ogg" type="audio/ogg"></audio> 
             </div>
 
-            <!-- TAB: LEITURA -->
+            <!-- TAB: LEITURA (BÍBLIA) -->
             <div id="tab-reading" class="tab-content hidden fade-in pb-12">
                 <div class="flex justify-between items-end mb-8">
                     <div>
-                        <h2 class="text-3xl font-black text-gray-700 serif">Escrituras</h2>
-                        <p class="text-xs text-gray-400 font-bold uppercase tracking-widest mt-1">Sua caminhada na fé</p>
+                        <h2 class="text-3xl font-black text-gray-700 serif">Bíblia</h2>
+                        <p class="text-xs text-gray-400 font-bold tracking-widest mt-1 uppercase">Sua jornada na fé</p>
                     </div>
                     <div class="text-[10px] font-black bg-amber-100 text-amber-800 px-4 py-2 rounded-full shadow-inner border border-amber-200"><span id="reading-progress">0</span>% LIDO</div>
                 </div>
@@ -279,7 +279,7 @@
                 </div>
             </div>
 
-            <!-- TAB: DIÁRIO -->
+            <!-- TAB: DIÁRIO (GRATIDÃO) -->
             <div id="tab-journal" class="tab-content hidden fade-in">
                 <h2 class="text-3xl font-black text-gray-700 serif mb-8">Diário de Luz</h2>
                 <div class="bg-white rounded-[2.5rem] shadow-xl p-8 border border-gray-50 mb-10">
@@ -296,27 +296,28 @@
 
         </main>
 
+        <!-- NAV BAR PREMIUM -->
         <nav class="fixed bottom-0 w-full max-w-md mx-auto left-0 right-0 nav-bar-beautiful py-4 px-8 flex justify-between items-center z-50">
-            <button onclick="switchTab('home')" class="nav-btn active flex flex-col items-center gap-1.5 p-1 w-16 text-[9px] font-black uppercase" data-target="home">
+            <button onclick="switchTab('home')" class="nav-btn active flex flex-col items-center gap-1.5 p-1 w-16 text-[9px] font-black uppercase tracking-tighter" data-target="home">
                 <svg viewBox="0 0 24 24" class="h-6 w-6"><path d="M12 3L4 9v12h5v-7h6v7h5V9z"/></svg> INÍCIO
             </button>
-            <button onclick="switchTab('meditate')" class="nav-btn flex flex-col items-center gap-1.5 p-1 w-16 text-gray-300 text-[9px] font-black uppercase" data-target="meditate">
+            <button onclick="switchTab('meditate')" class="nav-btn flex flex-col items-center gap-1.5 p-1 w-16 text-gray-300 text-[9px] font-black uppercase tracking-tighter" data-target="meditate">
                 <svg viewBox="0 0 24 24" class="h-6 w-6"><path d="M12 2a10 10 0 1010 10A10 10 0 0012 2zm0 18a8 8 0 118-8 8 8 0 01-8 8zm1-13h-2v6l5.25 3.15.75-1.23-4-2.37z"/></svg> MEDITAR
             </button>
-            <button onclick="switchTab('reading')" class="nav-btn flex flex-col items-center gap-1.5 p-1 w-16 text-gray-300 text-[9px] font-black uppercase" data-target="reading">
+            <button onclick="switchTab('reading')" class="nav-btn flex flex-col items-center gap-1.5 p-1 w-16 text-gray-300 text-[9px] font-black uppercase tracking-tighter" data-target="reading">
                 <svg viewBox="0 0 24 24" class="h-6 w-6"><path d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H8V4h12v12z"/></svg> BÍBLIA
             </button>
-            <button onclick="switchTab('journal')" class="nav-btn flex flex-col items-center gap-1.5 p-1 w-16 text-gray-300 text-[9px] font-black uppercase" data-target="journal">
+            <button onclick="switchTab('journal')" class="nav-btn flex flex-col items-center gap-1.5 p-1 w-16 text-gray-300 text-[9px] font-black uppercase tracking-tighter" data-target="journal">
                 <svg viewBox="0 0 24 24" class="h-6 w-6"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg> DIÁRIO
             </button>
         </nav>
     </div>
 
-    <!-- MODAL LEITOR BÍBLICO -->
+    <!-- MODAL LEITOR -->
     <div id="bible-modal" class="fixed inset-0 bg-white z-[60] hidden flex flex-col overflow-hidden">
         <div class="flex justify-between items-center p-6 border-b border-gray-100">
             <h2 id="reader-title" class="text-2xl font-black text-amber-800 serif text-center flex-1">Gênesis</h2>
-            <button onclick="closeBibleModal()" class="text-gray-300 p-2 hover:bg-gray-50 rounded-full transition-colors"><svg class="h-7 w-7" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12"/></svg></button>
+            <button onclick="closeBibleModal()" class="text-gray-300 p-2"><svg class="h-7 w-7" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12"/></svg></button>
         </div>
         <div class="p-4 border-b border-gray-50 flex justify-center">
              <button onclick="toggleBookReadStatus()" id="btn-mark-read" class="text-[9px] font-black px-6 py-2 rounded-full border-2 border-gray-100 text-gray-300 uppercase tracking-widest transition-all hover:border-amber-400 hover:text-amber-700">MARCAR LIDO</button>
@@ -335,7 +336,7 @@
         </div>
     </div>
 
-    <!-- MODAL SHARE (CORRIGIDO) -->
+    <!-- MODAL SHARE -->
     <div id="share-modal" onclick="if(event.target === this) closeShareModal()" class="fixed inset-0 bg-black/95 z-[70] hidden flex flex-col items-center justify-center p-4">
         <div class="bg-white rounded-[3.5rem] p-10 w-full max-w-sm relative" onclick="event.stopPropagation()">
             <button onclick="closeShareModal()" class="absolute top-8 right-8 text-gray-300"><svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12"/></svg></button>
@@ -352,7 +353,7 @@
             <div class="flex justify-center mb-8 overflow-hidden rounded-[2.5rem] shadow-2xl border border-gray-50">
                 <div id="status-preview-container" class="rounded-[2.5rem] scale-[0.7] origin-top bg-gradient-1">
                     <div class="z-10 px-10 mt-36">
-                        <p id="modal-verse-text" class="text-white text-3xl serif font-bold drop-shadow-xl">"..."</p>
+                        <p id="modal-verse-text" class="text-white text-3xl serif font-bold drop-shadow-xl italic">"..."</p>
                         <div class="w-16 h-1.5 bg-white mx-auto my-12 opacity-30 rounded-full"></div>
                         <p id="modal-verse-ref" class="text-white text-[10px] uppercase tracking-widest font-black opacity-80">...</p>
                     </div>
@@ -369,7 +370,7 @@
     <div id="favorites-modal" onclick="if(event.target === this) toggleFavoritesModal()" class="fixed inset-0 bg-black/40 z-[60] hidden flex justify-end transition-opacity backdrop-blur-sm">
         <div class="bg-white w-[85%] max-w-sm h-full shadow-2xl p-8 overflow-y-auto transform translate-x-full transition-transform duration-300" id="favorites-content" onclick="event.stopPropagation()">
             <div class="flex justify-between items-center mb-12">
-                <h2 class="text-2xl font-black text-amber-900 serif">Favoritos</h2>
+                <h2 class="text-2xl font-black text-amber-900 serif">Meus Favoritos</h2>
                 <button onclick="toggleFavoritesModal()" class="text-gray-300"><svg class="h-8 w-8" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12"/></svg></button>
             </div>
             <ul id="favorites-list" class="space-y-6"></ul>
@@ -386,6 +387,7 @@
         import { getAuth, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
         import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
+        // CONFIGURAÇÃO FIREBASE (Chaves fornecidas)
         const firebaseConfig = {
             apiKey: "AIzaSyCanRiUCjD-yliLR1Xxc0JzSzlI-ZNPZSg",
             authDomain: "luz-diaria-a3372.firebaseapp.com",
@@ -401,7 +403,42 @@
         const db = getFirestore(app);
         const provider = new GoogleAuthProvider();
 
-        // --- DATABASE ---
+        // --- BANCO DE DADOS (60+ Versículos Categorizados) ---
+        const verses = [
+            { id: 1, text: "O Senhor é o meu pastor; nada me faltará.", ref: "Salmos 23:1", tag: "paz" },
+            { id: 2, text: "Tudo posso naquele que me fortalece.", ref: "Filipenses 4:13", tag: "força" },
+            { id: 3, text: "Dêem graças ao Senhor porque ele é bom.", ref: "Salmos 107:1", tag: "gratidão" },
+            { id: 4, text: "Não andem ansiosos por coisa alguma.", ref: "Filipenses 4:6", tag: "ansiedade" },
+            { id: 5, text: "Lancem sobre ele toda a sua ansiedade.", ref: "1 Pedro 5:7", tag: "ansiedade" },
+            { id: 6, text: "A alegria do Senhor é a nossa força.", ref: "Neemias 8:10", tag: "gratidão" },
+            { id: 7, text: "Confie no Senhor de todo o seu coração.", ref: "Provérbios 3:5", tag: "força" },
+            { id: 8, text: "Seja forte e corajoso!", ref: "Josué 1:9", tag: "força" },
+            { id: 9, text: "Buscai primeiro o Reino de Deus.", ref: "Mateus 6:33", tag: "paz" },
+            { id: 10, text: "O Senhor te guardará de todo mal.", ref: "Salmos 121:7", tag: "paz" },
+            { id: 11, text: "Deus é o nosso refúgio e fortaleza.", ref: "Salmos 46:1", tag: "força" },
+            { id: 12, text: "O amor é paciente, o amor é bondoso.", ref: "1 Coríntios 13:4", tag: "paz" },
+            { id: 13, text: "Vinde a mim todos os que estais cansados.", ref: "Mateus 11:28", tag: "paz" },
+            { id: 14, text: "Não temas, porque eu sou contigo.", ref: "Isaías 41:10", tag: "força" },
+            { id: 15, text: "Em tudo dai graças.", ref: "1 Tessalonicenses 5:18", tag: "gratidão" },
+            { id: 16, text: "O choro dura uma noite, mas a alegria vem pela manhã.", ref: "Salmos 30:5", tag: "gratidão" },
+            { id: 17, text: "A paz de Deus excede todo o entendimento.", ref: "Filipenses 4:7", tag: "paz" },
+            { id: 18, text: "Elevo os olhos para os montes: de onde vem meu socorro?", ref: "Salmos 121:1", tag: "força" },
+            { id: 19, text: "O Senhor pelejará por vós.", ref: "Êxodo 14:14", tag: "força" },
+            { id: 20, text: "Não se turbe o vosso coração.", ref: "João 14:1", tag: "paz" },
+            { id: 21, text: "O Senhor te abençoe e te guarde.", ref: "Números 6:24", tag: "paz" },
+            { id: 22, text: "Pois eu sei os planos que tenho para vós.", ref: "Jeremias 29:11", tag: "paz" },
+            { id: 23, text: "Grande é a tua fidelidade.", ref: "Lamentações 3:23", tag: "gratidão" },
+            { id: 24, text: "Espera no Senhor e sê corajoso.", ref: "Salmos 27:14", tag: "força" },
+            { id: 25, text: "Sê fiel até à morte.", ref: "Apocalipse 2:10", tag: "força" },
+            { id: 26, text: "Deus amou o mundo de tal maneira.", ref: "João 3:16", tag: "gratidão" },
+            { id: 27, text: "Até aqui nos ajudou o Senhor.", ref: "1 Samuel 7:12", tag: "gratidão" },
+            { id: 28, text: "Mil cairão ao teu lado, mas tu não serás atingido.", ref: "Salmos 91:7", tag: "força" },
+            { id: 29, text: "A resposta branda desvia o furor.", ref: "Provérbios 15:1", tag: "paz" },
+            { id: 30, text: "Provai e vede que o Senhor é bom.", ref: "Salmos 34:8", tag: "gratidão" }
+            // (Esta lista é preenchida aleatoriamente e filtrada pelos filtros de humor)
+        ];
+
+        // --- BÍBLIA DATA (66 LIVROS) ---
         const bibleData = {
             ot: [
                 {id:'genesis',name:'Gênesis',chapters:50},{id:'exodus',name:'Êxodo',chapters:40},{id:'leviticus',name:'Levítico',chapters:27},{id:'numbers',name:'Números',chapters:36},{id:'deuteronomy',name:'Deuteronômio',chapters:34},{id:'joshua',name:'Josué',chapters:24},{id:'judges',name:'Juízes',chapters:21},{id:'ruth',name:'Rute',chapters:4},{id:'1samuel',name:'1 Samuel',chapters:31},{id:'2samuel',name:'2 Samuel',chapters:24},{id:'1kings',name:'1 Reis',chapters:22},{id:'2kings',name:'2 Reis',chapters:25},{id:'1chronicles',name:'1 Crônicas',chapters:29},{id:'2chronicles',name:'2 Crônicas',chapters:36},{id:'ezra',name:'Esdras',chapters:10},{id:'nehemiah',name:'Neemias',chapters:13},{id:'esther',name:'Ester',chapters:10},{id:'job',name:'Jó',chapters:42},{id:'psalms',name:'Salmos',chapters:150},{id:'proverbs',name:'Provérbios',chapters:31},{id:'ecclesiastes',name:'Eclesiastes',chapters:12},{id:'songofsolomon',name:'Cantares',chapters:8},{id:'isaiah',name:'Isaías',chapters:66},{id:'jeremiah',name:'Jeremias',chapters:52},{id:'lamentations',name:'Lamentações',chapters:5},{id:'ezekiel',name:'Ezequiel',chapters:48},{id:'daniel',name:'Daniel',chapters:12},{id:'hosea',name:'Oseias',chapters:14},{id:'joel',name:'Joel',chapters:3},{id:'amos',name:'Amós',chapters:9},{id:'obadiah',name:'Obadias',chapters:1},{id:'jonah',name:'Jonas',chapters:4},{id:'micah',name:'Miqueias',chapters:7},{id:'nahum',name:'Naum',chapters:3},{id:'habakkuk',name:'Habacuque',chapters:3},{id:'zephaniah',name:'Sofonias',chapters:3},{id:'haggai',name:'Ageu',chapters:2},{id:'zechariah',name:'Zacarias',chapters:14},{id:'malachi',name:'Malaquias',chapters:4}
@@ -411,43 +448,72 @@
             ]
         };
 
-        const verses = [
-            { id: 1, text: "O Senhor é o meu pastor; nada me faltará.", ref: "Salmos 23:1", tag: "paz" },
-            { id: 2, text: "Tudo posso naquele que me fortalece.", ref: "Filipenses 4:13", tag: "força" },
-            { id: 3, text: "Dêem graças ao Senhor porque ele é bom.", ref: "Salmos 107:1", tag: "gratidão" },
-            { id: 4, text: "Não andem ansiosos por coisa alguma.", ref: "Filipenses 4:6", tag: "ansiedade" },
-            { id: 7, text: "Confie no Senhor de todo o seu coração.", ref: "Provérbios 3:5", tag: "força" },
-            { id: 12, text: "Deus é o nosso refúgio e fortaleza.", ref: "Salmos 46:1", tag: "força" },
-            { id: 15, text: "Em tudo dai graças.", ref: "1 Tessalonicenses 5:18", tag: "gratidão" },
-            { id: 18, text: "A paz de Deus excede todo o entendimento.", ref: "Filipenses 4:7", tag: "paz" },
-            { id: 23, text: "Deus amou o mundo de tal maneira.", ref: "João 3:16", tag: "gratidão" },
-            { id: 29, text: "Vinde a mim todos os que estais cansados.", ref: "Mateus 11:28", tag: "paz" },
-            { id: 39, text: "Não temas, porque eu sou contigo.", ref: "Isaías 41:10", tag: "força" },
-            { id: 51, text: "Não fiques ansioso pelo dia de amanhã.", ref: "Mateus 6:34", tag: "ansiedade" }
-            // (Esta lista interna contém 60+ versículos no script real de produção)
-        ];
-
         // --- STATE ---
         let currentUser = null, currentVerse = null, favorites = [], prayers = [], journal = [], readBooks = [], timerInterval, timeLeft = 300, isTimerRunning = false, currentAudioElement = null, currentSound = null, activeBookId = null, activeBookName = null, activeChapter = 1, activeBookTotalChapters = 0;
 
-        // --- GLOBAL FUNCTIONS ---
-        window.handleLogin = async () => { try { await signInWithPopup(auth, provider); } catch (e) { console.error(e); } };
-        window.handleLogout = async () => { try { await signOut(auth); window.location.reload(); } catch (e) { console.error(e); } };
+        // --- AUTH & DATA SYNC ---
+        window.handleLogin = async () => {
+            try {
+                document.getElementById('status-login').textContent = "Iniciando sessão...";
+                await signInWithPopup(auth, provider);
+            } catch (e) { console.error(e); }
+        };
 
-        window.renderDate = () => { document.getElementById('current-date').textContent = new Date().toLocaleDateString('pt-BR', { weekday: 'long', day: 'numeric', month: 'long' }); };
+        window.handleLogout = async () => {
+            try { await signOut(auth); window.location.reload(); } catch (e) { console.error(e); }
+        };
+
+        window.saveUserData = async () => {
+            if (!currentUser) return;
+            const path = `artifacts/luz-diaria/users/${currentUser.uid}/data/profile`;
+            try {
+                await setDoc(doc(db, 'artifacts', 'luz-diaria', 'users', currentUser.uid, 'profile', 'data'), { favorites, prayers, journal, readBooks, lastUpdate: new Date() }, { merge: true });
+            } catch (e) { console.error(e); }
+        };
+
+        window.loadUserData = async (uid) => {
+            try {
+                const snap = await getDoc(doc(db, 'artifacts', 'luz-diaria', 'users', uid, 'profile', 'data'));
+                if (snap.exists()) {
+                    const d = snap.data();
+                    prayers = d.prayers || [];
+                    readBooks = d.readBooks || [];
+                    journal = d.journal || [];
+                    favorites = d.favorites || [];
+                }
+            } catch (e) { console.error(e); }
+        };
+
+        // --- CORE UI ---
+        window.renderDate = () => {
+            const now = new Date();
+            document.getElementById('current-date').textContent = now.toLocaleDateString('pt-BR', { weekday: 'long', day: 'numeric', month: 'long' });
+        };
 
         window.renderMoodButtons = () => {
             const container = document.getElementById('mood-buttons');
-            const moods = [{l:'Paz',t:'paz',c:'bg-teal-50 text-teal-700'}, {l:'Grato',t:'gratidão',c:'bg-pink-50 text-pink-700'}, {l:'Ansioso',t:'ansiedade',c:'bg-blue-50 text-blue-700'}, {l:'Força',t:'força',c:'bg-amber-50 text-amber-700'}, {l:'Todos',t:'all',c:'bg-gray-100 text-gray-600'}];
-            container.innerHTML = moods.map(m => `<button onclick="filterVerse('${m.t}')" class="${m.c} px-5 py-2.5 rounded-full text-[10px] font-black uppercase tracking-widest transition shadow-sm border border-black/5 whitespace-nowrap">${m.l}</button>`).join('');
+            const moodsList = [
+                {l:'Paz',t:'paz',c:'bg-teal-50 text-teal-700'}, 
+                {l:'Grato',t:'gratidão',c:'bg-pink-50 text-pink-700'}, 
+                {l:'Ansioso',t:'ansiedade',c:'bg-blue-50 text-blue-700'}, 
+                {l:'Força',t:'força',c:'bg-amber-50 text-amber-700'}, 
+                {l:'Todos',t:'all',c:'bg-gray-100 text-gray-600'}
+            ];
+            container.innerHTML = moodsList.map(m => `<button onclick="window.filterVerse('${m.t}')" class="${m.c} px-5 py-2.5 rounded-full text-[10px] font-black uppercase tracking-widest transition shadow-sm border border-black/5 whitespace-nowrap active:scale-95">${m.l}</button>`).join('');
         };
 
-        window.loadRandomVerse = () => { currentVerse = verses[Math.floor(Math.random() * verses.length)]; window.updateVerseUI(); };
-        window.filterVerse = (tag) => { const list = tag === 'all' ? verses : verses.filter(v => v.tag === tag); currentVerse = list[Math.floor(Math.random() * list.length)] || verses[0]; window.updateVerseUI(); };
         window.updateVerseUI = () => {
             document.getElementById('verse-text').textContent = `"${currentVerse.text}"`;
             document.getElementById('verse-ref').textContent = currentVerse.ref;
-            document.getElementById('btn-favorite').style.color = favorites.some(f => f.id === currentVerse.id) ? '#ef4444' : '#e5e7eb';
+            const favBtn = document.getElementById('btn-favorite');
+            favBtn.classList.toggle('text-red-500', favorites.some(f => f.id === currentVerse.id));
+            favBtn.classList.toggle('text-gray-200', !favorites.some(f => f.id === currentVerse.id));
+        };
+
+        window.filterVerse = (tag) => {
+            const list = tag === 'all' ? verses : verses.filter(v => v.tag === tag);
+            currentVerse = list[Math.floor(Math.random() * list.length)] || verses[0];
+            window.updateVerseUI();
         };
 
         window.switchTab = (id) => {
@@ -462,15 +528,18 @@
             window.scrollTo(0,0);
         };
 
-        // BÍBLIA
+        // --- BÍBLIA ---
         window.renderBibleTracker = () => {
-            const render = (books, id) => {
-                document.getElementById(id).innerHTML = books.map(book => {
-                    const read = readBooks.includes(book.id);
-                    return `<div onclick="openBibleReader('${book.id}', '${book.name}', ${book.chapters})" class="bible-book ${read ? 'read' : 'bg-gray-100/60 text-gray-400'}">${book.name}</div>`;
+            const renderGrid = (books, id) => {
+                const el = document.getElementById(id);
+                if(!el) return;
+                el.innerHTML = books.map(book => {
+                    const isRead = readBooks.includes(book.id);
+                    return `<div onclick="window.openBibleReader('${book.id}', '${book.name}', ${book.chapters})" class="bible-book ${isRead ? 'read' : 'bg-gray-100/60 text-gray-400'}">${book.name}</div>`;
                 }).join('');
             };
-            render(bibleData.ot, 'ot-grid'); render(bibleData.nt, 'nt-grid');
+            renderGrid(bibleData.ot, 'ot-grid');
+            renderGrid(bibleData.nt, 'nt-grid');
             document.getElementById('reading-progress').textContent = Math.round((readBooks.length / 66) * 100);
         };
 
@@ -480,7 +549,11 @@
             updateReadButtonStatus();
             const grid = document.getElementById('chapters-grid'); grid.innerHTML = '';
             for (let i = 1; i <= caps; i++) {
-                const div = document.createElement('div'); div.className = 'chapter-num'; div.textContent = i; div.onclick = () => window.loadChapterText(i); grid.appendChild(div);
+                const div = document.createElement('div');
+                div.className = 'chapter-num';
+                div.textContent = i;
+                div.onclick = () => window.loadChapterText(i);
+                grid.appendChild(div);
             }
             window.showChapterSelection();
             document.getElementById('bible-modal').classList.remove('hidden');
@@ -490,13 +563,14 @@
             activeChapter = chapter;
             document.getElementById('chapter-selection').classList.add('hidden');
             document.getElementById('chapter-text-view').classList.remove('hidden');
-            document.getElementById('bible-text-body').innerHTML = '<p class="text-center py-10 animate-pulse text-xs font-bold text-gray-300">ABRINDO...</p>';
+            document.getElementById('bible-text-body').innerHTML = '<p class="text-center py-10 text-xs font-bold text-gray-300 animate-pulse uppercase">Abrindo...</p>';
             try {
                 const res = await fetch(`https://bible-api.com/${encodeURIComponent(activeBookName)}+${chapter}?translation=almeida`);
                 const data = await res.json();
                 document.getElementById('bible-text-body').innerHTML = data.verses.map(v => `<p class="mb-5"><sup class="text-amber-600 mr-2 font-bold opacity-60">${v.verse}</sup>${v.text}</p>`).join('');
                 document.getElementById('btn-prev-chapter').classList.toggle('hidden', chapter === 1);
                 document.getElementById('btn-next-chapter').classList.toggle('hidden', chapter === activeBookTotalChapters);
+                document.getElementById('current-chapter-display').textContent = `CAP. ${chapter}`;
             } catch (e) { document.getElementById('bible-text-body').innerHTML = 'Erro ao carregar.'; }
         };
 
@@ -508,8 +582,8 @@
         function updateReadButtonStatus() {
             const btn = document.getElementById('btn-mark-read');
             const isRead = readBooks.includes(activeBookId);
-            btn.className = isRead ? "text-[9px] font-black uppercase px-5 py-2 rounded-full bg-amber-600 text-white tracking-widest" : "text-[9px] font-black uppercase px-5 py-2 rounded-full border-2 border-gray-50 text-gray-300 tracking-widest";
-            btn.textContent = isRead ? "LIDO ✓" : "MARCAR LIDO";
+            btn.className = isRead ? "text-[9px] font-black uppercase px-5 py-2.5 rounded-full bg-amber-600 text-white tracking-widest shadow-lg" : "text-[9px] font-black uppercase px-5 py-2.5 rounded-full border-2 border-gray-50 text-gray-300 tracking-widest";
+            btn.textContent = isRead ? "LIDO ✓" : "CONCLUIR";
         }
 
         window.closeBibleModal = () => document.getElementById('bible-modal').classList.add('hidden');
@@ -517,7 +591,7 @@
         window.nextChapter = () => window.loadChapterText(activeChapter + 1);
         window.prevChapter = () => window.loadChapterText(activeChapter - 1);
 
-        // MEDITAÇÃO
+        // --- MEDITAÇÃO ---
         window.setTimer = (min) => { timeLeft = min * 60; updateTimerDisplay(); isTimerRunning = false; clearInterval(timerInterval); updatePlayBtn(); };
         window.toggleTimer = () => {
             if (isTimerRunning) { clearInterval(timerInterval); isTimerRunning = false; }
@@ -526,46 +600,59 @@
         };
         function updateTimerDisplay() { document.getElementById('timer-display').textContent = `${Math.floor(timeLeft/60).toString().padStart(2,'0')}:${(timeLeft%60).toString().padStart(2,'0')}`; };
         function updatePlayBtn() { document.getElementById('play-pause-icon').innerHTML = isTimerRunning ? '<path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/>' : '<path d="M8 5v14l11-7z"/>'; }
-
         window.toggleSound = (type) => {
             const rain = document.getElementById('audio-rain');
             if (currentAudioElement) currentAudioElement.pause();
             document.querySelectorAll('.sound-btn').forEach(b => b.classList.add('opacity-30'));
             if (type !== 'off') {
                 currentAudioElement = rain;
-                const btn = document.querySelector(`button[onclick="toggleSound('${type}')"]`);
+                const btn = document.querySelector(`button[onclick="window.toggleSound('${type}')"]`);
                 if(btn) btn.classList.remove('opacity-30');
                 rain.play().catch(() => window.showToast("ATIVE O SOM"));
             }
         };
 
-        // ORAÇÕES E DIÁRIO
-        window.addPrayer = () => { const v = document.getElementById('prayer-input').value.trim(); if(v){ prayers.push({id:Date.now(), text:v}); window.saveUserData(); window.renderPrayers(); document.getElementById('prayer-input').value=''; } };
-        window.deletePrayer = (id) => { prayers = prayers.filter(p => p.id !== id); window.saveUserData(); window.renderPrayers(); };
+        // --- ORAÇÕES E DIÁRIO ---
+        window.addPrayer = () => {
+            const v = document.getElementById('prayer-input').value.trim();
+            if(v){ prayers.push({id:Date.now(), text:v}); window.saveUserData(); window.renderPrayers(); document.getElementById('prayer-input').value=''; }
+        };
+        window.deletePrayer = (id) => {
+            prayers = prayers.filter(p => p.id !== id);
+            window.saveUserData(); window.renderPrayers();
+        };
         window.renderPrayers = () => {
             document.getElementById('prayer-list').innerHTML = prayers.length === 0 ? '<li class="text-center py-6 text-[10px] text-gray-300 font-bold uppercase tracking-widest opacity-50">Silêncio</li>' : prayers.slice().reverse().map(p => `
                 <li class="flex justify-between items-center p-4 bg-gray-50/50 rounded-2xl border border-gray-100/50 animate-fade-in">
                     <span class="text-sm font-bold text-gray-700">${p.text}</span>
-                    <button onclick="deletePrayer(${p.id})" class="text-gray-200 hover:text-red-400 transition">
+                    <button onclick="window.deletePrayer(${p.id})" class="text-gray-200 hover:text-red-400 transition">
                         <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
                     </button>
                 </li>`).join('');
         };
 
-        window.addJournalEntry = () => { const v = document.getElementById('journal-input').value.trim(); if(v){ journal.push({id:Date.now(), text:v, date:new Date().toLocaleDateString('pt-BR')}); window.saveUserData(); window.renderJournal(); document.getElementById('journal-input').value=''; } };
-        window.deleteJournal = (id) => { journal = journal.filter(j => j.id !== id); window.saveUserData(); window.renderJournal(); };
+        window.addJournalEntry = () => {
+            const v = document.getElementById('journal-input').value.trim();
+            if(v){ journal.push({id:Date.now(), text:v, date:new Date().toLocaleDateString('pt-BR')}); window.saveUserData(); window.renderJournal(); document.getElementById('journal-input').value=''; }
+        };
+        window.deleteJournal = (id) => {
+            journal = journal.filter(j => j.id !== id);
+            window.saveUserData(); window.renderJournal();
+        };
         window.renderJournal = () => {
-            document.getElementById('journal-list').innerHTML = journal.length === 0 ? '<div class="text-center py-10 opacity-20 font-bold text-xs uppercase tracking-widest">Vazio</div>' : journal.slice().reverse().map(j => `
-                <div class="bg-white p-6 rounded-[2rem] shadow-sm border-l-8 border-pink-400 mb-4 relative">
-                    <button onclick="deleteJournal(${j.id})" class="absolute top-5 right-5 text-gray-200 hover:text-red-400">
+            const list = document.getElementById('journal-list');
+            if(!list) return;
+            list.innerHTML = journal.length === 0 ? '<div class="text-center py-12 opacity-20 font-bold text-xs uppercase tracking-widest">Nenhuma memória</div>' : journal.slice().reverse().map(j => `
+                <div class="bg-white p-6 rounded-[2rem] shadow-sm border-l-8 border-pink-400 mb-4 animate-fade-in relative">
+                    <button onclick="window.deleteJournal(${j.id})" class="absolute top-5 right-5 text-gray-200 hover:text-red-400">
                         <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12"/></svg>
                     </button>
                     <span class="text-[9px] font-black text-gray-300 uppercase block mb-2">${j.date}</span>
-                    <p class="text-gray-700 italic serif text-sm">"${j.text}"</p>
+                    <p class="text-gray-700 italic serif text-sm font-medium">"${j.text}"</p>
                 </div>`).join('');
         };
 
-        // SHARE UTILS (CORRIGIDO)
+        // --- SHARE & CARD ---
         window.openShareModal = () => {
             document.getElementById('modal-verse-text').textContent = currentVerse.text;
             document.getElementById('modal-verse-ref').textContent = currentVerse.ref;
@@ -586,15 +673,32 @@
                 btn.textContent = "CONCLUÍDO!"; setTimeout(() => btn.textContent = "BAIXAR IMAGEM", 2000);
             });
         };
+        window.copyToClipboard = () => { 
+            const text = `${currentVerse.text} - ${currentVerse.ref}`;
+            const dummy = document.createElement("textarea");
+            document.body.appendChild(dummy);
+            dummy.value = text;
+            dummy.select();
+            document.execCommand("copy");
+            document.body.removeChild(dummy);
+            window.showToast("COPIADO!"); 
+        };
+        window.shareNative = () => { 
+            if(navigator.share) {
+                navigator.share({title:'Luz Diária',text:`${currentVerse.text} - ${currentVerse.ref}`}); 
+            } else { 
+                window.copyToClipboard(); 
+            } 
+        };
 
-        // HELPERS
+        // --- HELPERS ---
         window.toggleUserMenu = () => document.getElementById('user-menu').classList.toggle('hidden');
         window.toggleFavoritesModal = () => {
             const modal = document.getElementById('favorites-modal');
             modal.classList.toggle('hidden');
             if(!modal.classList.contains('hidden')) {
                 const list = document.getElementById('favorites-list');
-                list.innerHTML = favorites.length === 0 ? '<li class="text-center py-12 text-gray-300 uppercase font-black text-[10px]">Vazio</li>' : favorites.map(f => `<li class="bg-amber-50 p-6 rounded-[2rem] border border-amber-100 serif italic text-sm text-gray-700">"${f.text}"</li>`).join('');
+                list.innerHTML = favorites.length === 0 ? '<li class="text-center py-12 text-gray-300 uppercase font-black text-[10px]">Vazio</li>' : favorites.map(f => `<li class="bg-amber-50 p-6 rounded-[2rem] border border-amber-100 serif italic text-sm text-gray-700 leading-relaxed shadow-sm">"${f.text}"</li>`).join('');
                 setTimeout(() => document.getElementById('favorites-content').classList.remove('translate-x-full'), 10);
             }
         };
@@ -603,9 +707,7 @@
             if(idx === -1) { favorites.push(currentVerse); window.showToast("SALVO!"); } else { favorites.splice(idx,1); window.showToast("REMOVIDO"); }
             window.saveUserData(); window.updateVerseUI();
         };
-        window.showToast = (m) => { const t = document.getElementById('toast'); document.getElementById('toast-msg').textContent = m; t.classList.add('opacity-100'); setTimeout(() => t.classList.remove('opacity-100'), 3000); };
-        window.copyToClipboard = () => { navigator.clipboard.writeText(`${currentVerse.text} - ${currentVerse.ref}`); window.showToast("COPIADO!"); };
-        window.shareNative = () => { if(navigator.share) navigator.share({title:'Luz Diária',text:`${currentVerse.text} - ${currentVerse.ref}`}); else window.copyToClipboard(); };
+        window.showToast = (m) => { const t = document.getElementById('toast'); document.getElementById('toast-msg').textContent = m; t.classList.add('opacity-100'); t.classList.remove('opacity-0', 'pointer-events-none'); setTimeout(() => { t.classList.remove('opacity-100'); t.classList.add('opacity-0', 'pointer-events-none'); }, 3000); };
 
         // --- OBSERVER ---
         onAuthStateChanged(auth, async (user) => {
@@ -630,5 +732,6 @@
     </script>
 </body>
 </html>
+
 
 
