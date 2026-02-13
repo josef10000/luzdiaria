@@ -152,7 +152,7 @@
             <div class="max-w-md mx-auto flex justify-between items-center">
                 <div class="text-left">
                     <h1 class="text-xl font-extrabold text-amber-700 tracking-tight serif">Luz Diária</h1>
-                    <p class="text-[9px] text-gray-400 uppercase tracking-[0.2em] font-black" id="current-date">Sexta, 13 de Fevereiro</p>
+                    <p class="text-[9px] text-gray-400 uppercase tracking-[0.2em] font-black" id="current-date">Carregando...</p>
                 </div>
                 <div class="flex gap-4 items-center">
                     <button onclick="window.toggleFavoritesModal()" class="text-amber-700">
@@ -194,13 +194,13 @@
 
                     <div class="flex justify-center gap-6 mt-8">
                         <button onclick="window.copyToClipboard()" class="btn-circle bg-gray-50 text-gray-400 hover:bg-gray-100">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="24" height="24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
                         </button>
                         <button onclick="window.openShareModal()" class="btn-circle bg-green-500 text-white shadow-xl shadow-green-200 hover:scale-110 transition">
-                            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                            <svg viewBox="0 0 24 24" fill="currentColor" width="24" height="24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
                         </button>
                         <button onclick="window.shareNative()" class="btn-circle bg-amber-500 text-white shadow-xl shadow-amber-200 hover:scale-110 transition">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="24" height="24"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
                         </button>
                     </div>
                 </section>
@@ -285,7 +285,7 @@
                 <div class="bg-white rounded-[2.5rem] shadow-xl p-8 border border-gray-50 mb-10">
                     <p class="text-sm text-gray-400 mb-4 font-bold">O que transbordou hoje?</p>
                     <div class="flex gap-4">
-                        <textarea id="journal-input" placeholder="Ecreva aqui..." class="flex-1 bg-gray-50 border-none rounded-2xl p-4 text-sm outline-none h-24 resize-none font-medium"></textarea>
+                        <textarea id="journal-input" placeholder="Escreva aqui..." class="flex-1 bg-gray-50 border-none rounded-2xl p-4 text-sm outline-none h-24 resize-none font-medium"></textarea>
                         <button onclick="window.addJournalEntry()" class="text-pink-500 self-end mb-2 transform hover:scale-110 transition">
                             <svg class="h-10 w-10" fill="currentColor" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
                         </button>
@@ -393,7 +393,7 @@
         const db = getFirestore(app);
         const provider = new GoogleAuthProvider();
 
-        // --- BANCO DE DADOS COMPLETO ---
+        // --- DADOS ---
         const verses = [
             { id: 1, text: "O Senhor é o meu pastor; nada me faltará.", ref: "Salmos 23:1", tag: "paz" },
             { id: 2, text: "Tudo posso naquele que me fortalece.", ref: "Filipenses 4:13", tag: "força" },
@@ -407,7 +407,6 @@
             { id: 29, text: "Vinde a mim todos os que estais cansados.", ref: "Mateus 11:28", tag: "paz" },
             { id: 39, text: "Não temas, porque eu sou contigo.", ref: "Isaías 41:10", tag: "força" },
             { id: 51, text: "Não fiques ansioso pelo dia de amanhã.", ref: "Mateus 6:34", tag: "ansiedade" }
-            // (Lista completa mantida no script real)
         ];
 
         const bibleData = {
@@ -419,16 +418,42 @@
             ]
         };
 
-        // --- STATE ---
+        // --- ESTADO ---
         let currentUser = null, currentVerse = null, favorites = [], prayers = [], journal = [], readBooks = [], timerInterval, timeLeft = 300, isTimerRunning = false, currentAudioElement = null, currentSound = null, activeBookId = null, activeBookName = null, activeChapter = 1, activeBookTotalChapters = 0;
 
-        // --- FUNÇÕES GLOBAIS (ANEXADAS AO WINDOW) ---
-        window.handleLogin = async () => { try { await signInWithPopup(auth, provider); } catch (e) { console.error(e); } };
+        // --- HELPER DE API ---
+        const formatBookForApi = (id) => {
+            // Ajusta o ID para o formato esperado pela API (ex: 1samuel -> 1 samuel)
+            let formatted = id.replace(/(\d+)([a-z]+)/i, '$1 $2');
+            if (id === 'songofsolomon') formatted = 'Song of Songs'; // Ajuste comum para APIs em inglês
+            return formatted;
+        };
+
+        // --- FUNÇÕES GLOBAIS (EXPOSTAS PARA ONCLICK) ---
+        
+        window.handleLogin = async () => { try { await signInWithPopup(auth, provider); } catch (e) { console.error("Login failed", e); alert("Erro ao fazer login. Tente novamente."); } };
         window.handleLogout = async () => { try { await signOut(auth); window.location.reload(); } catch (e) { console.error(e); } };
+
+        window.renderDate = () => {
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            const date = new Date().toLocaleDateString('pt-BR', options);
+            const formattedDate = date.charAt(0).toUpperCase() + date.slice(1);
+            const el = document.getElementById('current-date');
+            if(el) el.textContent = formattedDate;
+        };
+
+        window.loadRandomVerse = () => {
+            if (verses.length > 0) {
+                currentVerse = verses[Math.floor(Math.random() * verses.length)];
+                window.updateVerseUI();
+            }
+        };
 
         window.switchTab = (id) => {
             document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
-            document.getElementById(`tab-${id}`).classList.remove('hidden');
+            const target = document.getElementById(`tab-${id}`);
+            if(target) target.classList.remove('hidden');
+            
             document.querySelectorAll('.nav-btn').forEach(btn => {
                 const active = btn.dataset.target === id;
                 btn.classList.toggle('active', active);
@@ -441,20 +466,24 @@
         window.renderMoodButtons = () => {
             const container = document.getElementById('mood-buttons');
             const moodsList = [{l:'Paz',t:'paz',c:'bg-teal-50 text-teal-700'}, {l:'Grato',t:'gratidão',c:'bg-pink-50 text-pink-700'}, {l:'Ansioso',t:'ansiedade',c:'bg-blue-50 text-blue-700'}, {l:'Força',t:'força',c:'bg-amber-50 text-amber-700'}, {l:'Todos',t:'all',c:'bg-gray-100 text-gray-600'}];
-            container.innerHTML = moodsList.map(m => `<button onclick="window.filterVerse('${m.t}')" class="${m.c} px-5 py-2.5 rounded-full text-[10px] font-black uppercase tracking-widest shadow-sm border border-black/5 whitespace-nowrap active:scale-95 transition-all">${m.l}</button>`).join('');
+            if(container) container.innerHTML = moodsList.map(m => `<button onclick="window.filterVerse('${m.t}')" class="${m.c} px-5 py-2.5 rounded-full text-[10px] font-black uppercase tracking-widest shadow-sm border border-black/5 whitespace-nowrap active:scale-95 transition-all">${m.l}</button>`).join('');
         };
 
         window.filterVerse = (tag) => {
             const list = tag === 'all' ? verses : verses.filter(v => v.tag === tag);
-            currentVerse = list[Math.floor(Math.random() * list.length)] || verses[0];
+            currentVerse = list.length > 0 ? list[Math.floor(Math.random() * list.length)] : verses[0];
             window.updateVerseUI();
         };
 
         window.updateVerseUI = () => {
-            document.getElementById('verse-text').textContent = `"${currentVerse.text}"`;
-            document.getElementById('verse-ref').textContent = currentVerse.ref;
+            if(!currentVerse) return;
+            const txt = document.getElementById('verse-text');
+            const ref = document.getElementById('verse-ref');
+            if(txt) txt.textContent = `"${currentVerse.text}"`;
+            if(ref) ref.textContent = currentVerse.ref;
+            
             const btn = document.getElementById('btn-favorite');
-            btn.style.color = favorites.some(f => f.id === currentVerse.id) ? '#ef4444' : '#e5e7eb';
+            if(btn) btn.style.color = favorites.some(f => f.id === currentVerse.id) ? '#ef4444' : '#e5e7eb';
         };
 
         // BÍBLIA
@@ -468,18 +497,24 @@
                 }).join('');
             };
             render(bibleData.ot, 'ot-grid'); render(bibleData.nt, 'nt-grid');
-            document.getElementById('reading-progress').textContent = Math.round((readBooks.length / 66) * 100);
+            const prog = document.getElementById('reading-progress');
+            if(prog) prog.textContent = Math.round((readBooks.length / 66) * 100);
         };
 
         window.openBibleReader = (id, name, caps) => {
             activeBookId = id; activeBookName = name; activeBookTotalChapters = caps;
-            document.getElementById('reader-title').textContent = name;
-            const grid = document.getElementById('chapters-grid'); grid.innerHTML = '';
-            for (let i = 1; i <= caps; i++) {
-                const div = document.createElement('div');
-                div.className = 'chapter-num'; div.textContent = i;
-                div.onclick = () => window.loadChapterText(i);
-                grid.appendChild(div);
+            const title = document.getElementById('reader-title');
+            if(title) title.textContent = name;
+            
+            const grid = document.getElementById('chapters-grid');
+            if(grid) {
+                grid.innerHTML = '';
+                for (let i = 1; i <= caps; i++) {
+                    const div = document.createElement('div');
+                    div.className = 'chapter-num'; div.textContent = i;
+                    div.onclick = () => window.loadChapterText(i);
+                    grid.appendChild(div);
+                }
             }
             window.showChapterSelection();
             document.getElementById('bible-modal').classList.remove('hidden');
@@ -489,22 +524,37 @@
             activeChapter = chapter;
             document.getElementById('chapter-selection').classList.add('hidden');
             document.getElementById('chapter-text-view').classList.remove('hidden');
-            document.getElementById('bible-text-body').innerHTML = '<p class="text-center py-10 animate-pulse text-xs font-bold text-gray-300 tracking-widest uppercase">Consultando as Escrituras...</p>';
+            const body = document.getElementById('bible-text-body');
+            body.innerHTML = '<p class="text-center py-10 animate-pulse text-xs font-bold text-gray-300 tracking-widest uppercase">Consultando as Escrituras...</p>';
+            
             try {
-                const res = await fetch(`https://bible-api.com/${encodeURIComponent(activeBookName)}+${chapter}?translation=almeida`);
+                // Correção: Usar o ID formatado em inglês para a API, mas pedir tradução almeida
+                const apiBook = formatBookForApi(activeBookId);
+                const url = `https://bible-api.com/${encodeURIComponent(apiBook)}+${chapter}?translation=almeida`;
+                
+                const res = await fetch(url);
+                if(!res.ok) throw new Error("Erro na API");
                 const data = await res.json();
-                document.getElementById('bible-text-body').innerHTML = data.verses ? data.verses.map(v => `<p class="mb-5"><sup class="text-amber-600 mr-2 font-bold opacity-60">${v.verse}</sup>${v.text}</p>`).join('') : 'Não disponível.';
-                document.getElementById('btn-prev-chapter').classList.toggle('hidden', chapter === 1);
-                document.getElementById('btn-next-chapter').classList.toggle('hidden', chapter === activeBookTotalChapters);
+                
+                body.innerHTML = data.verses ? data.verses.map(v => `<p class="mb-5"><sup class="text-amber-600 mr-2 font-bold opacity-60">${v.verse}</sup>${v.text}</p>`).join('') : 'Texto não disponível nesta versão.';
+                
+                const btnPrev = document.getElementById('btn-prev-chapter');
+                const btnNext = document.getElementById('btn-next-chapter');
+                if(btnPrev) btnPrev.classList.toggle('hidden', chapter === 1);
+                if(btnNext) btnNext.classList.toggle('hidden', chapter === activeBookTotalChapters);
+                
                 document.getElementById('bible-content-area').scrollTop = 0;
-            } catch (e) { document.getElementById('bible-text-body').innerHTML = 'Erro de conexão.'; }
+            } catch (e) { 
+                console.error(e);
+                body.innerHTML = '<p class="text-center text-red-400">Não foi possível carregar o capítulo. Verifique sua conexão.</p>'; 
+            }
         };
 
         window.toggleBookReadStatus = () => {
             if(readBooks.includes(activeBookId)) readBooks = readBooks.filter(x => x !== activeBookId); else readBooks.push(activeBookId);
             window.saveUserData(); window.renderBibleTracker();
             const btn = document.getElementById('btn-mark-read');
-            btn.textContent = readBooks.includes(activeBookId) ? "LIDO ✓" : "MARCAR LIDO";
+            if(btn) btn.textContent = readBooks.includes(activeBookId) ? "LIDO ✓" : "MARCAR LIDO";
         };
 
         window.closeBibleModal = () => document.getElementById('bible-modal').classList.add('hidden');
@@ -514,12 +564,14 @@
 
         // ORAÇÕES
         window.addPrayer = () => {
-            const v = document.getElementById('prayer-input').value.trim();
-            if(v){ prayers.push({id:Date.now(), text:v}); window.saveUserData(); window.renderPrayers(); document.getElementById('prayer-input').value=''; }
+            const el = document.getElementById('prayer-input');
+            const v = el.value.trim();
+            if(v){ prayers.push({id:Date.now(), text:v}); window.saveUserData(); window.renderPrayers(); el.value=''; }
         };
         window.deletePrayer = (id) => { prayers = prayers.filter(p => p.id !== id); window.saveUserData(); window.renderPrayers(); };
         window.renderPrayers = () => {
-            document.getElementById('prayer-list').innerHTML = prayers.length === 0 ? '<li class="text-center py-6 text-xs text-gray-300 font-bold uppercase tracking-widest opacity-50">Silêncio</li>' : prayers.slice().reverse().map(p => `
+            const el = document.getElementById('prayer-list');
+            if(el) el.innerHTML = prayers.length === 0 ? '<li class="text-center py-6 text-xs text-gray-300 font-bold uppercase tracking-widest opacity-50">Silêncio</li>' : prayers.slice().reverse().map(p => `
                 <li class="flex justify-between items-center p-4 bg-gray-50/50 rounded-2xl border border-gray-100/50 animate-fade-in">
                     <span class="text-sm font-bold text-gray-700">${p.text}</span>
                     <button onclick="window.deletePrayer(${p.id})" class="text-gray-200 hover:text-red-400 transition">
@@ -530,12 +582,14 @@
 
         // DIÁRIO
         window.addJournalEntry = () => {
-            const v = document.getElementById('journal-input').value.trim();
-            if(v){ journal.push({id:Date.now(), text:v, date:new Date().toLocaleDateString('pt-BR')}); window.saveUserData(); window.renderJournal(); document.getElementById('journal-input').value=''; }
+            const el = document.getElementById('journal-input');
+            const v = el.value.trim();
+            if(v){ journal.push({id:Date.now(), text:v, date:new Date().toLocaleDateString('pt-BR')}); window.saveUserData(); window.renderJournal(); el.value=''; }
         };
         window.deleteJournal = (id) => { journal = journal.filter(j => j.id !== id); window.saveUserData(); window.renderJournal(); };
         window.renderJournal = () => {
-            document.getElementById('journal-list').innerHTML = journal.length === 0 ? '<div class="text-center py-12 opacity-20 font-bold text-xs uppercase tracking-widest">Vazio</div>' : journal.slice().reverse().map(j => `
+            const el = document.getElementById('journal-list');
+            if(el) el.innerHTML = journal.length === 0 ? '<div class="text-center py-12 opacity-20 font-bold text-xs uppercase tracking-widest">Vazio</div>' : journal.slice().reverse().map(j => `
                 <div class="bg-white p-6 rounded-[2rem] shadow-sm border-l-8 border-pink-400 mb-4 animate-fade-in relative">
                     <button onclick="window.deleteJournal(${j.id})" class="absolute top-5 right-5 text-gray-200 hover:text-red-400">
                         <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12"/></svg>
@@ -547,6 +601,7 @@
 
         // SHARE & CARD
         window.openShareModal = () => {
+            if(!currentVerse) return;
             document.getElementById('modal-verse-text').textContent = currentVerse.text;
             document.getElementById('modal-verse-ref').textContent = currentVerse.ref;
             document.getElementById('share-modal').classList.remove('hidden');
@@ -565,6 +620,9 @@
                 const link = document.createElement('a');
                 link.download = 'LuzDiaria_Card.png'; link.href = canvas.toDataURL(); link.click();
                 btn.textContent = "CONCLUÍDO!"; setTimeout(() => btn.textContent = "BAIXAR IMAGEM", 2000);
+            }).catch(e => {
+                console.error(e);
+                btn.textContent = "ERRO AO GERAR"; setTimeout(() => btn.textContent = "BAIXAR IMAGEM", 2000);
             });
         };
 
@@ -575,25 +633,32 @@
             modal.classList.toggle('hidden');
             if(!modal.classList.contains('hidden')) {
                 const list = document.getElementById('favorites-list');
-                list.innerHTML = favorites.length === 0 ? '<li class="text-center py-12 text-gray-300 uppercase font-black text-[10px]">Vazio</li>' : favorites.map(f => `<li class="bg-amber-50 p-6 rounded-[2.5rem] border border-amber-100 shadow-sm serif italic text-sm text-gray-700 leading-relaxed animate-fade-in">"${f.text}"</li>`).join('');
+                list.innerHTML = favorites.length === 0 ? '<li class="text-center py-12 text-gray-300 uppercase font-black text-[10px]">Vazio</li>' : favorites.map(f => `<li class="bg-amber-50 p-6 rounded-[2.5rem] border border-amber-100 shadow-sm serif italic text-sm text-gray-700 leading-relaxed animate-fade-in">"${f.text}" <span class="block text-[10px] text-amber-500 font-bold mt-2 not-italic">${f.ref}</span></li>`).join('');
                 setTimeout(() => document.getElementById('favorites-content').classList.remove('translate-x-full'), 10);
             }
         };
         window.toggleFavoriteCurrent = () => {
+            if(!currentVerse) return;
             const idx = favorites.findIndex(f => f.id === currentVerse.id);
             if(idx === -1) { favorites.push(currentVerse); window.showToast("SALVO!"); } else { favorites.splice(idx,1); window.showToast("REMOVIDO"); }
             window.saveUserData(); window.updateVerseUI();
         };
 
         window.copyToClipboard = () => { 
+            if(!currentVerse) return;
             const t = `${currentVerse.text} - ${currentVerse.ref}`;
-            const dummy = document.createElement("textarea");
-            document.body.appendChild(dummy); dummy.value = t; dummy.select(); document.execCommand("copy"); document.body.removeChild(dummy);
-            window.showToast("COPIADO!"); 
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(t).then(() => window.showToast("COPIADO!"));
+            } else {
+                const dummy = document.createElement("textarea");
+                document.body.appendChild(dummy); dummy.value = t; dummy.select(); document.execCommand("copy"); document.body.removeChild(dummy);
+                window.showToast("COPIADO!"); 
+            }
         };
         window.shareNative = () => { 
+            if(!currentVerse) return;
             if(navigator.share) {
-                navigator.share({title:'Luz Diária', text:`${currentVerse.text} - ${currentVerse.ref}`}); 
+                navigator.share({title:'Luz Diária', text:`${currentVerse.text} - ${currentVerse.ref}`}).catch(e=>console.log(e)); 
             } else { window.copyToClipboard(); } 
         };
         window.showToast = (m) => { const t = document.getElementById('toast'); document.getElementById('toast-msg').textContent = m; t.classList.add('opacity-100'); t.classList.remove('opacity-0', 'pointer-events-none'); setTimeout(() => { t.classList.remove('opacity-100'); t.classList.add('opacity-0', 'pointer-events-none'); }, 3000); };
@@ -613,7 +678,7 @@
             if (type !== 'off') {
                 currentAudioElement = rain;
                 const btn = document.querySelector(`button[onclick*="'${type}'"]`); if(btn) btn.classList.remove('opacity-30');
-                rain.play().catch(() => window.showToast("ATIVE SOM"));
+                if(rain) rain.play().catch(() => window.showToast("TOQUE P/ ATIVAR"));
             }
         };
 
@@ -633,13 +698,23 @@
                 document.getElementById('app-content').classList.remove('hidden');
                 document.getElementById('user-avatar').src = user.photoURL || "https://via.placeholder.com/32";
                 
-                const snap = await getDoc(doc(db, 'artifacts', 'luz-diaria', 'users', user.uid, 'profile', 'data'));
-                if (snap.exists()) {
-                    const d = snap.data();
-                    prayers = d.prayers || []; readBooks = d.readBooks || []; journal = d.journal || []; favorites = d.favorites || [];
-                }
+                // Carregar dados
+                try {
+                    const snap = await getDoc(doc(db, 'artifacts', 'luz-diaria', 'users', user.uid, 'profile', 'data'));
+                    if (snap.exists()) {
+                        const d = snap.data();
+                        prayers = d.prayers || []; readBooks = d.readBooks || []; journal = d.journal || []; favorites = d.favorites || [];
+                    }
+                } catch(e) { console.log("First login or offline"); }
                 
-                window.renderDate(); window.renderMoodButtons(); window.loadRandomVerse(); window.renderBibleTracker(); window.renderPrayers(); window.renderJournal();
+                // Init
+                window.renderDate(); 
+                window.renderMoodButtons(); 
+                window.loadRandomVerse(); 
+                window.renderBibleTracker(); 
+                window.renderPrayers(); 
+                window.renderJournal();
+                
                 window.switchTab('home');
             } else {
                 document.getElementById('login-screen').classList.remove('hidden');
